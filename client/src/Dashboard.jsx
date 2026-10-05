@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Dashboard.css";
 
-function Dashboard({ onSkillAssessment, onMySkills }) {
+function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap }) {
 
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,7 +85,10 @@ function Dashboard({ onSkillAssessment, onMySkills }) {
             🧠 My Skills
           </button>
 
-          <button className="menu-item">
+          <button
+            className="menu-item"
+            onClick={onLearningRoadmap}
+          >
             🗺️ Learning Roadmap
           </button>
 

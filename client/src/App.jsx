@@ -4,6 +4,7 @@ import "./App.css";
 import Dashboard from "./Dashboard";
 import SkillAssessment from "./SkillAssessment";
 import MySkills from "./MySkills";
+import LearningRoadmap from "./LearningRoadmap";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -111,6 +112,14 @@ function App() {
       );
     }
 
+    if (currentPage === "learningRoadmap") {
+      return (
+        <LearningRoadmap
+          onBack={() => setCurrentPage("dashboard")}
+        />
+      );
+    }
+
     return (
       <Dashboard
         onSkillAssessment={() =>
@@ -118,6 +127,9 @@ function App() {
         }
         onMySkills={() =>
           setCurrentPage("mySkills")
+        }
+        onLearningRoadmap={() =>
+          setCurrentPage("learningRoadmap")
         }
       />
     );
