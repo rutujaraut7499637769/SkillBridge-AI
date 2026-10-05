@@ -5,7 +5,7 @@ import Dashboard from "./Dashboard";
 import SkillAssessment from "./SkillAssessment";
 import MySkills from "./MySkills";
 import LearningRoadmap from "./LearningRoadmap";
-
+import Quiz from "./Quiz";
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -120,6 +120,14 @@ function App() {
       );
     }
 
+    if (currentPage === "quiz") {
+      return (
+        <Quiz
+          onBack={() => setCurrentPage("dashboard")}
+        />
+      );
+    }
+
     return (
       <Dashboard
         onSkillAssessment={() =>
@@ -130,6 +138,9 @@ function App() {
         }
         onLearningRoadmap={() =>
           setCurrentPage("learningRoadmap")
+        }
+        onQuiz={() =>
+          setCurrentPage("quiz")
         }
       />
     );
