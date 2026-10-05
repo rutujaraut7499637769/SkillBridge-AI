@@ -687,16 +687,14 @@ function Quiz({ onBack }) {
     ? quizBank[selectedSkill]
     : [];
 
-  const handleStartQuiz = () => {
-    setCurrentQuestion(0);
-    setAnswers([]);
-    setQuizCompleted(false);
-    setQuizStarted(true);
-  };
+const handleStartQuiz = () => {
+  setCurrentQuestion(0);
+  setAnswers([]);
+  setQuizCompleted(false);
+  setQuizStarted(true);
+};
 
-  
-
-  const handlePrevious = const handleAnswer = (answerIndex) => {
+const handleAnswer = (answerIndex) => {
   const updatedAnswers = [...answers];
   updatedAnswers[currentQuestion] = answerIndex;
   setAnswers(updatedAnswers);
@@ -737,204 +735,124 @@ const handleNext = () => {
   } else {
     handleSubmitQuiz();
   }
-};() => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-    }
-  };
+};
 
-  const calculateScore = () => {
-    return questions.reduce((score, question, index) => {
-      return score + (
-        answers[index] === question.answer ? 1 : 0
-      );
-    }, 0);
-  };
+const handlePrevious = () => {
+  if (currentQuestion > 0) {
+    setCurrentQuestion(currentQuestion - 1);
+  }
+};
 
-  const score = calculateScore();
+const calculateScore = () => {
+  return questions.reduce((score, question, index) => {
+    return score + (
+      answers[index] === question.answer ? 1 : 0
+    );
+  }, 0);
+};
 
-  const percentage =
-    questions.length > 0
-      ? Math.round((score / questions.length) * 100)
-      : 0;
+const score = calculateScore();
 
-  const getLevel = () => {
-    if (percentage >= 80) return "Advanced";
-    if (percentage >= 60) return "Strong";
-    if (percentage >= 40) return "Average";
-    return "Needs Improvement";
-  };
+const percentage =
+  questions.length > 0
+    ? Math.round((score / questions.length) * 100)
+    : 0;
 
-  const getLevelClass = () => {
-    if (percentage >= 80) return "advanced";
-    if (percentage >= 60) return "strong";
-    if (percentage >= 40) return "average";
-    return "needs-improvement";
-  };
+const getLevel = () => {
+  if (percentage >= 80) return "Advanced";
+  if (percentage >= 60) return "Strong";
+  if (percentage >= 40) return "Average";
+  return "Needs Improvement";
+};
 
-  const resetQuiz = () => {
-    setQuizStarted(false);
-    setQuizCompleted(false);
-    setCurrentQuestion(0);
-    setAnswers([]);
-  };
+const getLevelClass = () => {
+  if (percentage >= 80) return "advanced";
+  if (percentage >= 60) return "strong";
+  if (percentage >= 40) return "average";
+  return "needs-improvement";
+};
+
+const resetQuiz = () => {
+  setQuizStarted(false);
+  setQuizCompleted(false);
+  setCurrentQuestion(0);
+  setAnswers([]);
+};
 
 if (!quizStarted) {
-    return (
-      <div className="quiz-page">
-        <div className="quiz-container">
+  return (
+    <div className="quiz-page">
+      <div className="quiz-container">
 
-          <div className="quiz-header">
+        <div className="quiz-header">
 
-            <button
-              className="quiz-back"
-              onClick={onBack}
-              aria-label="Back"
-            >
-              ←
-            </button>
+          <button
+            className="quiz-back"
+            onClick={onBack}
+            aria-label="Back"
+          >
+            ←
+          </button>
 
-            <span className="quiz-label">
-              SKILLBRIDGE AI • SKILL PRACTICE
-            </span>
+          <span className="quiz-label">
+            SKILLBRIDGE AI • SKILL PRACTICE
+          </span>
 
-            <h1>Test Your Knowledge</h1>
+          <h1>Test Your Knowledge</h1>
 
-            <p>
-              Choose a skill and challenge yourself with a
-              competency-focused quiz.
-            </p>
-
-          </div>
-
-          <div className="quiz-selection">
-
-            <div className="quiz-selection-header">
-              <h2>Select a Skill</h2>
-
-              <p>
-                Choose the technology you want to practice.
-              </p>
-            </div>
-
-            <div className="skill-grid">
-
-              {skills.map((skill) => (
-                <button
-                  key={skill}
-                  className={`skill-option ${
-                    selectedSkill === skill ? "selected" : ""
-                  }`}
-                  onClick={() => setSelectedSkill(skill)}
-                >
-                  <span>{skill}</span>
-
-                  <small>
-                    {quizBank[skill].length} Questions
-                  </small>
-                </button>
-              ))}
-
-            </div>
-
-            <button
-              className="start-quiz-button"
-              disabled={!selectedSkill}
-              onClick={handleStartQuiz}
-            >
-              Start Quiz
-            </button>
-
-          </div>
+          <p>
+            Choose a skill and challenge yourself with a
+            competency-focused quiz.
+          </p>
 
         </div>
-      </div>
-    );
-  }
 
-  if (quizCompleted) {
-    return (
-      <div className="quiz-page">
+        <div className="quiz-selection">
 
-        <div className="quiz-container">
-
-          <div className="quiz-header">
-
-            <button
-              className="quiz-back"
-              onClick={onBack}
-              aria-label="Back"
-            >
-              ←
-            </button>
-
-            <span className="quiz-label">
-              SKILLBRIDGE AI • QUIZ RESULT
-            </span>
-
-            <h1>Quiz Completed</h1>
+          <div className="quiz-selection-header">
+            <h2>Select a Skill</h2>
 
             <p>
-              Here is your performance for {selectedSkill}.
+              Choose the technology you want to practice.
             </p>
-
           </div>
 
-          <div className="quiz-result">
+          <div className="skill-grid">
 
-            <div className="result-score">
-              <span>{percentage}%</span>
-              <small>Overall Score</small>
-            </div>
-
-            <div className="result-details">
-
-              <h2>{getLevel()}</h2>
-
-              <p>
-                You answered{" "}
-                <strong>
-                  {score} out of {questions.length}
-                </strong>{" "}
-                questions correctly.
-              </p>
-
-              <div
-                className={`result-level ${getLevelClass()}`}
+            {skills.map((skill) => (
+              <button
+                key={skill}
+                className={`skill-option ${
+                  selectedSkill === skill ? "selected" : ""
+                }`}
+                onClick={() => setSelectedSkill(skill)}
               >
-                {getLevel()}
-              </div>
+                <span>{skill}</span>
 
-            </div>
-
-          </div>
-
-          <div className="result-actions">
-
-            <button
-              className="secondary-quiz-button"
-              onClick={resetQuiz}
-            >
-              Choose Another Skill
-            </button>
-
-            <button
-              className="primary-quiz-button"
-              onClick={handleStartQuiz}
-            >
-              Try Again
-            </button>
+                <small>
+                  {quizBank[skill].length} Questions
+                </small>
+              </button>
+            ))}
 
           </div>
+
+          <button
+            className="start-quiz-button"
+            disabled={!selectedSkill}
+            onClick={handleStartQuiz}
+          >
+            Start Quiz
+          </button>
 
         </div>
 
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  const question = questions[currentQuestion];
-
+if (quizCompleted) {
   return (
     <div className="quiz-page">
 
@@ -951,110 +869,60 @@ if (!quizStarted) {
           </button>
 
           <span className="quiz-label">
-            SKILLBRIDGE AI • {selectedSkill.toUpperCase()}
+            SKILLBRIDGE AI • QUIZ RESULT
           </span>
 
-          <h1>{selectedSkill} Quiz</h1>
+          <h1>Quiz Completed</h1>
 
           <p>
-            Answer each question carefully to measure your
-            current understanding.
+            Here is your performance for {selectedSkill}.
           </p>
 
         </div>
 
-        <div className="quiz-progress-section">
+        <div className="quiz-result">
 
-          <div className="quiz-progress-info">
-
-            <span>
-              Question {currentQuestion + 1} of {questions.length}
-            </span>
-
-            <span>
-              {Math.round(
-                ((currentQuestion + 1) / questions.length) * 100
-              )}%
-            </span>
-
+          <div className="result-score">
+            <span>{percentage}%</span>
+            <small>Overall Score</small>
           </div>
 
-          <div className="quiz-progress-bar">
+          <div className="result-details">
+
+            <h2>{getLevel()}</h2>
+
+            <p>
+              You answered{" "}
+              <strong>
+                {score} out of {questions.length}
+              </strong>{" "}
+              questions correctly.
+            </p>
 
             <div
-              className="quiz-progress-fill"
-              style={{
-                width: `${
-                  ((currentQuestion + 1) / questions.length) * 100
-                }%`
-              }}
-            ></div>
+              className={`result-level ${getLevelClass()}`}
+            >
+              {getLevel()}
+            </div>
 
           </div>
 
         </div>
 
-        <div className="question-card">
-
-          <div className="question-number">
-            QUESTION{" "}
-            {String(currentQuestion + 1).padStart(2, "0")}
-          </div>
-
-          <h2>
-            {question.question}
-          </h2>
-
-          <div className="answer-options">
-
-            {question.options.map((option, index) => (
-
-              <button
-                key={option}
-                className={`answer-option ${
-                  answers[currentQuestion] === index
-                    ? "selected"
-                    : ""
-                }`}
-                onClick={() => handleAnswer(index)}
-              >
-
-                <span className="option-letter">
-                  {String.fromCharCode(65 + index)}
-                </span>
-
-                <span className="option-text">
-                  {option}
-                </span>
-
-              </button>
-
-            ))}
-
-          </div>
-
-        </div>
-
-        <div className="quiz-navigation">
+        <div className="result-actions">
 
           <button
             className="secondary-quiz-button"
-            onClick={handlePrevious}
-            disabled={currentQuestion === 0}
+            onClick={resetQuiz}
           >
-            ← Previous
+            Choose Another Skill
           </button>
 
           <button
             className="primary-quiz-button"
-            onClick={handleNext}
-            disabled={
-              answers[currentQuestion] === undefined
-            }
+            onClick={handleStartQuiz}
           >
-            {currentQuestion === questions.length - 1
-              ? "Submit Quiz"
-              : "Next Question →"}
+            Try Again
           </button>
 
         </div>
@@ -1063,6 +931,138 @@ if (!quizStarted) {
 
     </div>
   );
+}
+
+const question = questions[currentQuestion];
+
+return (
+  <div className="quiz-page">
+
+    <div className="quiz-container">
+
+      <div className="quiz-header">
+
+        <button
+          className="quiz-back"
+          onClick={onBack}
+          aria-label="Back"
+        >
+          ←
+        </button>
+
+        <span className="quiz-label">
+          SKILLBRIDGE AI • {selectedSkill.toUpperCase()}
+        </span>
+
+        <h1>{selectedSkill} Quiz</h1>
+
+        <p>
+          Answer each question carefully to measure your
+          current understanding.
+        </p>
+
+      </div>
+
+      <div className="quiz-progress-section">
+
+        <div className="quiz-progress-info">
+
+          <span>
+            Question {currentQuestion + 1} of {questions.length}
+          </span>
+
+          <span>
+            {Math.round(
+              ((currentQuestion + 1) / questions.length) * 100
+            )}%
+          </span>
+
+        </div>
+
+        <div className="quiz-progress-bar">
+
+          <div
+            className="quiz-progress-fill"
+            style={{
+              width: `${
+                ((currentQuestion + 1) / questions.length) * 100
+              }%`
+            }}
+          ></div>
+
+        </div>
+
+      </div>
+
+      <div className="question-card">
+
+        <div className="question-number">
+          QUESTION{" "}
+          {String(currentQuestion + 1).padStart(2, "0")}
+        </div>
+
+        <h2>
+          {question.question}
+        </h2>
+
+        <div className="answer-options">
+
+          {question.options.map((option, index) => (
+
+            <button
+              key={option}
+              className={`answer-option ${
+                answers[currentQuestion] === index
+                  ? "selected"
+                  : ""
+              }`}
+              onClick={() => handleAnswer(index)}
+            >
+
+              <span className="option-letter">
+                {String.fromCharCode(65 + index)}
+              </span>
+
+              <span className="option-text">
+                {option}
+              </span>
+
+            </button>
+
+          ))}
+
+        </div>
+
+      </div>
+
+      <div className="quiz-navigation">
+
+        <button
+          className="secondary-quiz-button"
+          onClick={handlePrevious}
+          disabled={currentQuestion === 0}
+        >
+          ← Previous
+        </button>
+
+        <button
+          className="primary-quiz-button"
+          onClick={handleNext}
+          disabled={
+            answers[currentQuestion] === undefined
+          }
+        >
+          {currentQuestion === questions.length - 1
+            ? "Submit Quiz"
+            : "Next Question →"}
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+);
 }
 
 export default Quiz;
