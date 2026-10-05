@@ -3,11 +3,13 @@ import axios from "axios";
 import "./App.css";
 import Dashboard from "./Dashboard";
 import SkillAssessment from "./SkillAssessment";
+import MySkills from "./MySkills";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-const [currentPage, setCurrentPage] = useState("dashboard");
+  const [currentPage, setCurrentPage] = useState("dashboard");
+
   // Signup
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -50,6 +52,7 @@ const [currentPage, setCurrentPage] = useState("dashboard");
       setConfirmPassword("");
 
       setIsLogin(true);
+
     } catch (error) {
       alert(
         error.response?.data?.message ||
@@ -77,7 +80,10 @@ const [currentPage, setCurrentPage] = useState("dashboard");
         "token",
         response.data.token
       );
+
       setIsLoggedIn(true);
+      setCurrentPage("dashboard");
+
     } catch (error) {
       alert(
         error.response?.data?.message ||
@@ -86,21 +92,37 @@ const [currentPage, setCurrentPage] = useState("dashboard");
     }
   };
 
+  // Logged-in pages
   if (isLoggedIn) {
-  if (currentPage === "assessment") {
+
+    if (currentPage === "assessment") {
+      return (
+        <SkillAssessment
+          onBack={() => setCurrentPage("dashboard")}
+        />
+      );
+    }
+
+    if (currentPage === "mySkills") {
+      return (
+        <MySkills
+          onBack={() => setCurrentPage("dashboard")}
+        />
+      );
+    }
+
     return (
-      <SkillAssessment
-        onBack={() => setCurrentPage("dashboard")}
+      <Dashboard
+        onSkillAssessment={() =>
+          setCurrentPage("assessment")
+        }
+        onMySkills={() =>
+          setCurrentPage("mySkills")
+        }
       />
     );
   }
 
-  return (
-    <Dashboard
-      onSkillAssessment={() => setCurrentPage("assessment")}
-    />
-  );
-}
   return (
     <div className="auth-page">
 
@@ -108,13 +130,17 @@ const [currentPage, setCurrentPage] = useState("dashboard");
 
         {/* Brand */}
         <div className="brand">
-          <div className="brand-icon">SB</div>
+
+          <div className="brand-icon">
+            SB
+          </div>
 
           <h1>SkillBridge-AI</h1>
 
           <p>
             Learn smarter. Build stronger skills.
           </p>
+
         </div>
 
         {/* Login / Signup Tabs */}
@@ -202,12 +228,15 @@ const [currentPage, setCurrentPage] = useState("dashboard");
             </button>
 
             <p className="switch-text">
+
               Don't have an account?{" "}
+
               <span
                 onClick={() => setIsLogin(false)}
               >
                 Sign Up
               </span>
+
             </p>
 
           </form>
@@ -322,15 +351,19 @@ const [currentPage, setCurrentPage] = useState("dashboard");
             </button>
 
             <p className="switch-text">
+
               Already have an account?{" "}
+
               <span
                 onClick={() => setIsLogin(true)}
               >
                 Login
               </span>
+
             </p>
 
           </form>
+
         )}
 
       </div>
