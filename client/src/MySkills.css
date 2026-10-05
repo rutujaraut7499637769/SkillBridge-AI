@@ -10,59 +10,62 @@
   margin: 0 auto;
 }
 
-/* Header */
+
+/* =========================
+   PAGE HEADER
+========================= */
 
 .my-skills-header {
-  margin-bottom: 34px;
+  margin-bottom: 40px;
 }
 
 .dashboard-back {
   border: none;
   background: transparent;
   color: #2563eb;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 400;
   padding: 0;
   cursor: pointer;
-  margin-bottom: 24px;
+  margin-bottom: 25px;
+  line-height: 1;
+  transition: 0.2s ease;
 }
 
 .dashboard-back:hover {
   color: #1d4ed8;
-  transform: translateX(-2px);
-}
-
-.page-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  transform: translateX(-3px);
 }
 
 .page-label {
+  display: block;
   color: #2563eb;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 1.4px;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
 }
 
-.page-heading h1 {
-  margin: 7px 0 7px;
+.my-skills-header h1 {
+  margin: 0 0 8px;
   color: #111827;
   font-size: 34px;
   font-weight: 750;
   letter-spacing: -0.8px;
 }
 
-.page-heading p {
+.page-description {
   margin: 0;
-  color: #6b7280;
-  font-size: 14px;
+  color: #64748b;
+  font-size: 13px;
   line-height: 1.6;
   max-width: 650px;
 }
 
 
-/* Summary */
+/* =========================
+   SUMMARY
+========================= */
 
 .skills-summary {
   display: grid;
@@ -111,7 +114,9 @@
 }
 
 
-/* Skills section */
+/* =========================
+   COMPETENCY SECTION
+========================= */
 
 .skills-section {
   background: #ffffff;
@@ -152,7 +157,9 @@
 }
 
 
-/* Skill cards */
+/* =========================
+   SKILL CARDS
+========================= */
 
 .my-skills-grid {
   display: grid;
@@ -201,7 +208,7 @@
 }
 
 
-/* Level badges */
+/* Level colors */
 
 .skill-level.advanced {
   background: #ecfdf3;
@@ -224,7 +231,9 @@
 }
 
 
-/* Score */
+/* =========================
+   SCORE
+========================= */
 
 .skill-score-row {
   display: flex;
@@ -255,7 +264,9 @@
 }
 
 
-/* Progress */
+/* =========================
+   PROGRESS
+========================= */
 
 .skill-progress-track {
   width: 100%;
@@ -288,7 +299,9 @@
 }
 
 
-/* Card footer */
+/* =========================
+   FOOTER
+========================= */
 
 .skill-card-footer {
   display: flex;
@@ -300,7 +313,9 @@
 }
 
 
-/* Insight */
+/* =========================
+   INSIGHT
+========================= */
 
 .skills-insight {
   margin-top: 22px;
@@ -339,7 +354,9 @@
 }
 
 
-/* Loading */
+/* =========================
+   LOADING
+========================= */
 
 .skills-loading {
   min-height: 300px;
@@ -374,7 +391,9 @@
 }
 
 
-/* Empty */
+/* =========================
+   EMPTY STATE
+========================= */
 
 .skills-empty {
   background: #ffffff;
@@ -427,7 +446,9 @@
 }
 
 
-/* Responsive */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 850px) {
 
@@ -446,7 +467,7 @@
 
 @media (max-width: 600px) {
 
-  .page-heading h1 {
+  .my-skills-header h1 {
     font-size: 28px;
   }
 

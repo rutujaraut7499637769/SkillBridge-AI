@@ -73,28 +73,27 @@ function MySkills({ onBack }) {
 
       <div className="my-skills-container">
 
-        {/* Header */}
+        {/* PAGE HEADER */}
         <div className="my-skills-header">
 
           <button
             className="dashboard-back"
             onClick={onBack}
+            aria-label="Back"
           >
-            ← 
+            ←
           </button>
 
-          <div className="page-heading">
-            <div>
-              <span className="page-label">COMPETENCY OVERVIEW</span>
+          <span className="page-label">
+            SKILLBRIDGE AI • PERSONALIZED LEARNING
+          </span>
 
-              <h1>My Skills</h1>
+          <h1>Your Skill Profile</h1>
 
-              <p>
-                Track your current competency levels and identify
-                the skills that need improvement.
-              </p>
-            </div>
-          </div>
+          <p className="page-description">
+            Understand your strengths, track your competency,
+            and focus on what to learn next.
+          </p>
 
         </div>
 
@@ -102,28 +101,37 @@ function MySkills({ onBack }) {
         {loading ? (
 
           <div className="skills-loading">
+
             <div className="loading-spinner"></div>
-            <p>Analyzing your skill profile...</p>
+
+            <p>
+              Analyzing your skill profile...
+            </p>
+
           </div>
 
         ) : latestSkills.length === 0 ? (
 
           <div className="skills-empty">
 
-            <div className="empty-icon">◎</div>
+            <div className="empty-icon">
+              ◎
+            </div>
 
-            <h2>Build Your Skill Profile</h2>
+            <h2>
+              Build Your Skill Profile
+            </h2>
 
             <p>
-              Complete your first skill assessment to start building
-              your personalized competency profile.
+              Complete your first skill assessment to start
+              building your personalized competency profile.
             </p>
 
             <button
               className="empty-action"
               onClick={onBack}
             >
-              Go to Dashboard →
+              Go to Assessment →
             </button>
 
           </div>
@@ -131,41 +139,63 @@ function MySkills({ onBack }) {
         ) : (
 
           <>
-            {/* Summary */}
+
+            {/* SUMMARY */}
             <div className="skills-summary">
 
               <div className="summary-card">
 
-                <div className="summary-icon">◎</div>
-
-                <div>
-                  <span>Average Competency</span>
-                  <strong>{averageScore}%</strong>
+                <div className="summary-icon">
+                  ◎
                 </div>
 
-              </div>
-
-
-              <div className="summary-card">
-
-                <div className="summary-icon">✓</div>
-
                 <div>
-                  <span>Skills Assessed</span>
-                  <strong>{latestSkills.length}</strong>
-                </div>
+                  <span>
+                    Average Competency
+                  </span>
 
-              </div>
-
-
-              <div className="summary-card">
-
-                <div className="summary-icon">★</div>
-
-                <div>
-                  <span>Strongest Skill</span>
                   <strong>
-                    {strongestSkill ? strongestSkill.skill : "—"}
+                    {averageScore}%
+                  </strong>
+                </div>
+
+              </div>
+
+
+              <div className="summary-card">
+
+                <div className="summary-icon">
+                  ✓
+                </div>
+
+                <div>
+                  <span>
+                    Skills Assessed
+                  </span>
+
+                  <strong>
+                    {latestSkills.length}
+                  </strong>
+                </div>
+
+              </div>
+
+
+              <div className="summary-card">
+
+                <div className="summary-icon">
+                  ★
+                </div>
+
+                <div>
+                  <span>
+                    Strongest Skill
+                  </span>
+
+                  <strong>
+                    {strongestSkill
+                      ? strongestSkill.skill
+                      : "—"}
                   </strong>
                 </div>
 
@@ -174,13 +204,16 @@ function MySkills({ onBack }) {
             </div>
 
 
-            {/* Skills */}
+            {/* COMPETENCY PROFILE */}
             <div className="skills-section">
 
               <div className="skills-section-header">
 
                 <div>
-                  <h2>Competency Profile</h2>
+                  <h2>
+                    Competency Profile
+                  </h2>
+
                   <p>
                     Your latest assessment results across different skills.
                   </p>
@@ -205,11 +238,15 @@ function MySkills({ onBack }) {
                     <div className="skill-card-header">
 
                       <div className="skill-title">
-                        <h3>{assessment.skill}</h3>
+
+                        <h3>
+                          {assessment.skill}
+                        </h3>
 
                         <span className="assessment-date">
-                          Assessed
+                          Latest assessment
                         </span>
+
                       </div>
 
                       <span
@@ -226,6 +263,7 @@ function MySkills({ onBack }) {
                     <div className="skill-score-row">
 
                       <div>
+
                         <span className="score-label">
                           Competency Score
                         </span>
@@ -233,6 +271,7 @@ function MySkills({ onBack }) {
                         <strong className="skill-percentage">
                           {assessment.percentage}%
                         </strong>
+
                       </div>
 
                       <span className="question-score">
@@ -268,7 +307,9 @@ function MySkills({ onBack }) {
                           : "Needs focused learning"}
                       </span>
 
-                      <span>Latest result</span>
+                      <span>
+                        Latest result
+                      </span>
 
                     </div>
 
@@ -281,23 +322,30 @@ function MySkills({ onBack }) {
             </div>
 
 
-            {/* Insight */}
+            {/* INSIGHT */}
             <div className="skills-insight">
 
-              <div className="insight-icon">✦</div>
+              <div className="insight-icon">
+                ✦
+              </div>
 
               <div>
-                <h3>SkillBridge Insight</h3>
+
+                <h3>
+                  SkillBridge Insight
+                </h3>
 
                 <p>
                   Your competency profile will be used to identify
                   skill gaps and generate a personalized learning roadmap.
                 </p>
+
               </div>
 
             </div>
 
           </>
+
         )}
 
       </div>
