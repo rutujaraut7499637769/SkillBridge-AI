@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import "./Quiz.css";
 
 const quizBank = {
@@ -693,21 +694,50 @@ function Quiz({ onBack }) {
     setQuizStarted(true);
   };
 
-  const handleAnswer = (answerIndex) => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[currentQuestion] = answerIndex;
-    setAnswers(updatedAnswers);
-  };
+  
 
-  const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setQuizCompleted(true);
-    }
-  };
+  const handlePrevious = const handleAnswer = (answerIndex) => {
+  const updatedAnswers = [...answers];
+  updatedAnswers[currentQuestion] = answerIndex;
+  setAnswers(updatedAnswers);
+};
 
-  const handlePrevious = () => {
+const handleSubmitQuiz = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    await axios.post(
+      "http://localhost:5000/quiz/result",
+      {
+        skill: selectedSkill,
+        score,
+        totalQuestions: questions.length,
+        percentage,
+        level: getLevel()
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    setQuizCompleted(true);
+
+  } catch (error) {
+    console.error("Quiz result save error:", error);
+
+    alert("Failed to save quiz result. Please try again.");
+  }
+};
+
+const handleNext = () => {
+  if (currentQuestion < questions.length - 1) {
+    setCurrentQuestion(currentQuestion + 1);
+  } else {
+    handleSubmitQuiz();
+  }
+};() => {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
     }
