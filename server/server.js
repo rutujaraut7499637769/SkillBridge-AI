@@ -76,24 +76,27 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user.password
+    );
 
-if (!isPasswordCorrect) {
-  return res.status(401).json({
-    message: "Invalid password"
-  });
-}
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        message: "Invalid password"
+      });
+    }
 
     const token = jwt.sign(
-  { userId: user._id },
-  process.env.JWT_SECRET,
-  { expiresIn: "1h" }
-);
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
-res.json({
-  message: "Login successful",
-  token
-});
+    res.json({
+      message: "Login successful",
+      token
+    });
 
   } catch (error) {
     res.status(500).json({
@@ -118,6 +121,7 @@ app.get("/profile", authMiddleware, async (req, res) => {
     });
   }
 });
+
 app.post("/assessment", authMiddleware, async (req, res) => {
   try {
     const {
@@ -143,6 +147,49 @@ app.post("/assessment", authMiddleware, async (req, res) => {
     });
 
   } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
+
+
+// Get latest assessment result for logged-in user
+app.get("/assessment/latest", authMiddleware, async (req, res) => {
+  try {
+    const result = await AssessmentResult.findOne({
+      userId: req.user.userId
+    }).sort({ createdAt: -1 });
+
+    if (!result) {
+      return res.status(404).json({
+        message: "No assessment result found"
+      });
+    }
+
+    res.status(200).json(result);
+
+  } catch (error) {
+    console.log("Error fetching latest assessment:", error);
+
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
+
+// Get all assessment results for logged-in user
+app.get("/assessment/all", authMiddleware, async (req, res) => {
+  try {
+    const results = await AssessmentResult.find({
+      userId: req.user.userId
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json(results);
+
+  } catch (error) {
+    console.log("Error fetching assessment results:", error);
+
     res.status(500).json({
       message: error.message
     });

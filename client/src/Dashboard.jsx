@@ -1,7 +1,59 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./Dashboard.css";
-import SkillAssessment from "./SkillAssessment";
 
 function Dashboard({ onSkillAssessment }) {
+
+  const [assessments, setAssessments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAssessments();
+  }, []);
+
+  const fetchAssessments = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.get(
+        "http://localhost:5000/assessment/all",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      setAssessments(response.data);
+
+    } catch (error) {
+      console.log("Error fetching assessments:", error);
+      setAssessments([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Latest assessment
+  const latestAssessment = assessments.length > 0
+    ? assessments[0]
+    : null;
+
+  // Overall progress
+  const overallProgress = assessments.length > 0
+    ? Math.round(
+        assessments.reduce(
+          (total, assessment) => total + assessment.percentage,
+          0
+        ) / assessments.length
+      )
+    : 0;
+
   return (
     <div className="dashboard">
 
@@ -54,10 +106,13 @@ function Dashboard({ onSkillAssessment }) {
 
       </aside>
 
+
       {/* Main Content */}
       <main className="dashboard-main">
 
+        {/* Header */}
         <div className="dashboard-header">
+
           <div>
             <h1>Welcome back 👋</h1>
 
@@ -69,49 +124,184 @@ function Dashboard({ onSkillAssessment }) {
           <div className="profile-circle">
             R
           </div>
+
         </div>
+
 
         {/* Overview Cards */}
         <div className="overview-grid">
 
+          {/* Overall Progress */}
           <div className="overview-card">
+
             <span>Overall Progress</span>
-            <h2>0%</h2>
-            <p>Start your first assessment</p>
+
+            <h2>
+              {loading ? "..." : `${overallProgress}%`}
+            </h2>
+
+            <p>
+              {assessments.length > 0
+                ? "Based on assessed skills"
+                : "Start your first assessment"}
+            </p>
+
           </div>
 
+
+          {/* Skills Assessed */}
           <div className="overview-card">
+
             <span>Skills Assessed</span>
-            <h2>0</h2>
-            <p>No assessment completed</p>
+
+            <h2>
+              {loading ? "..." : assessments.length}
+            </h2>
+
+            <p>
+              {assessments.length > 0
+                ? "Skill assessments completed"
+                : "No assessment completed"}
+            </p>
+
           </div>
 
+
+          {/* Latest Level */}
           <div className="overview-card">
-            <span>Learning Streak</span>
-            <h2>0 Days</h2>
-            <p>Start learning today</p>
+
+            <span>Latest Skill Level</span>
+
+            <h2>
+              {loading
+                ? "..."
+                : latestAssessment
+                ? latestAssessment.level
+                : "—"}
+            </h2>
+
+            <p>
+              {latestAssessment
+                ? `${latestAssessment.skill} • ${latestAssessment.percentage}%`
+                : "Complete an assessment"}
+            </p>
+
           </div>
 
         </div>
 
-        {/* Assessment Section */}
+
+        {/* Skill Performance */}
         <div className="dashboard-section">
 
-          <h2>Start Your Skill Assessment</h2>
+          <div className="section-heading">
+
+            <div>
+              <h2>Skill Performance</h2>
+
+              <p>
+                Your latest performance across assessed skills.
+              </p>
+            </div>
+
+          </div>
+
+
+          {loading ? (
+
+            <p>Loading assessment results...</p>
+
+          ) : assessments.length === 0 ? (
+
+            <div className="empty-state">
+
+              <h3>No skills assessed yet</h3>
+
+              <p>
+                Complete your first skill assessment to see
+                your competency level here.
+              </p>
+
+              <button
+                className="primary-button"
+                onClick={onSkillAssessment}
+              >
+                Start Assessment
+              </button>
+
+            </div>
+
+          ) : (
+
+            <div className="skills-list">
+
+              {assessments.map((assessment) => (
+
+                <div
+                  className="skill-row"
+                  key={assessment._id}
+                >
+
+                  <div className="skill-info">
+
+                    <h3>{assessment.skill}</h3>
+
+                    <span>
+                      {assessment.level}
+                    </span>
+
+                  </div>
+
+
+                  <div className="skill-progress">
+
+                    <div className="progress-track">
+
+                      <div
+                        className="progress-fill"
+                        style={{
+                          width: `${assessment.percentage}%`
+                        }}
+                      ></div>
+
+                    </div>
+
+                    <strong>
+                      {assessment.percentage}%
+                    </strong>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          )}
+
+        </div>
+
+
+        {/* Start Assessment */}
+        <div className="dashboard-section">
+
+          <h2>Improve Your Skills</h2>
 
           <p>
-            Take an assessment to identify your strengths,
-            competency gaps and personalized learning path.
+            Take skill assessments to identify your strengths,
+            competency gaps and build your personalized learning path.
           </p>
 
           <button
             className="primary-button"
             onClick={onSkillAssessment}
           >
-            Start Assessment
+            Start Skill Assessment
           </button>
 
         </div>
+
 
         {/* Recommended Learning */}
         <div className="dashboard-section">
@@ -120,7 +310,7 @@ function Dashboard({ onSkillAssessment }) {
 
           <p>
             Your personalized recommendations will appear
-            here after completing the assessment.
+            here after the AI competency-gap analysis is implemented.
           </p>
 
         </div>
