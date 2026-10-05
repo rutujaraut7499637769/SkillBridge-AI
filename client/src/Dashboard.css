@@ -2,9 +2,12 @@
   min-height: 100vh;
   display: flex;
   background: #f4f7fb;
+  color: #172554;
 }
 
-/* Sidebar */
+/* =========================
+   Sidebar
+========================= */
 
 .sidebar {
   width: 250px;
@@ -14,6 +17,8 @@
   padding: 25px 18px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .sidebar-brand {
@@ -32,10 +37,12 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .sidebar-brand h2 {
   font-size: 18px;
+  margin: 0;
 }
 
 .sidebar-menu {
@@ -54,6 +61,7 @@
   text-align: left;
   font-size: 14px;
   cursor: pointer;
+  transition: 0.2s ease;
 }
 
 .menu-item:hover,
@@ -70,14 +78,24 @@
   background: #1e3a8a;
   color: white;
   cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s ease;
 }
 
-/* Main */
+.logout-button:hover {
+  background: #2563eb;
+}
+
+/* =========================
+   Main
+========================= */
 
 .dashboard-main {
   flex: 1;
   padding: 35px;
   overflow-y: auto;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .dashboard-header {
@@ -90,11 +108,12 @@
 .dashboard-header h1 {
   color: #172554;
   font-size: 28px;
-  margin-bottom: 6px;
+  margin: 0 0 6px;
 }
 
 .dashboard-header p {
   color: #6b7280;
+  margin: 0;
 }
 
 .profile-circle {
@@ -107,9 +126,12 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  flex-shrink: 0;
 }
 
-/* Overview */
+/* =========================
+   Overview Cards
+========================= */
 
 .overview-grid {
   display: grid;
@@ -123,6 +145,7 @@
   padding: 22px;
   border-radius: 14px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
 }
 
 .overview-card span {
@@ -139,9 +162,12 @@
 .overview-card p {
   color: #6b7280;
   font-size: 13px;
+  margin: 0;
 }
 
-/* Sections */
+/* =========================
+   Dashboard Sections
+========================= */
 
 .dashboard-section {
   background: white;
@@ -149,18 +175,129 @@
   border-radius: 14px;
   margin-bottom: 20px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
 }
 
 .dashboard-section h2 {
   color: #172554;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
+  font-size: 20px;
 }
 
 .dashboard-section p {
   color: #6b7280;
   line-height: 1.6;
+  margin: 0 0 18px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.section-heading p {
+  margin-bottom: 0;
+}
+
+/* =========================
+   Skill Performance
+========================= */
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.skill-row {
+  width: 100%;
+  padding: 17px 18px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.skill-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 12px;
+}
+
+.skill-info h3 {
+  margin: 0;
+  color: #172554;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.skill-info span {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.skill-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.progress-track {
+  flex: 1;
+  height: 9px;
+  background: #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 20px;
+  transition: width 0.5s ease;
+}
+
+.skill-progress strong {
+  min-width: 45px;
+  text-align: right;
+  color: #172554;
+  font-size: 14px;
+}
+
+/* =========================
+   Empty State
+========================= */
+
+.empty-state {
+  padding: 30px;
+  text-align: center;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+}
+
+.empty-state h3 {
+  color: #172554;
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.empty-state p {
   margin-bottom: 18px;
 }
+
+/* =========================
+   Buttons
+========================= */
 
 .primary-button {
   padding: 12px 20px;
@@ -170,17 +307,25 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
+  transition: 0.2s ease;
 }
 
 .primary-button:hover {
   background: #1d4ed8;
+  transform: translateY(-1px);
 }
 
-/* Mobile */
+/* =========================
+   Mobile
+========================= */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .sidebar {
-    width: 200px;
+    width: 220px;
+  }
+
+  .dashboard-main {
+    padding: 25px;
   }
 
   .overview-grid {
@@ -195,5 +340,19 @@
 
   .dashboard-main {
     padding: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 23px;
+  }
+
+  .skill-info {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skill-progress {
+    gap: 10px;
   }
 }
