@@ -1,542 +1,85 @@
-/* ============================= */
-/* PROGRESS PAGE */
-/* ============================= */
+/* ================================
+   PROGRESS PAGE
+================================ */
 
 .progress-page {
   min-height: 100vh;
   background: #f7f8fc;
-  padding: 40px 60px 60px;
-  color: #1f2937;
+  padding: 32px 40px 50px;
   box-sizing: border-box;
+  color: #1f2937;
 }
 
 
-/* ============================= */
-/* HEADER */
-/* ============================= */
+/* ================================
+   HEADER
+================================ */
 
 .progress-header {
-  max-width: 1180px;
-  margin: 0 auto 32px;
-
   display: flex;
   align-items: center;
   gap: 24px;
-}
-
-.back-button {
-  border: 1px solid #e2e5eb;
-  background: #ffffff;
-  color: #374151;
-
-  padding: 10px 17px;
-  border-radius: 10px;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.back-button:hover {
-  background: #f1f3f7;
-  transform: translateX(-2px);
+  margin-bottom: 30px;
 }
 
 .progress-header h1 {
   margin: 0;
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 700;
-  letter-spacing: -0.5px;
   color: #111827;
 }
 
 .progress-header p {
-  margin: 6px 0 0;
+  margin: 7px 0 0;
   color: #6b7280;
-  font-size: 14px;
-}
-
-
-/* ============================= */
-/* COMMON LABEL */
-/* ============================= */
-
-.section-label {
-  display: block;
-  margin-bottom: 7px;
-
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-
-  color: #667085;
-}
-
-
-/* ============================= */
-/* STREAK SECTION */
-/* ============================= */
-
-.streak-section {
-  max-width: 1180px;
-  margin: 0 auto 30px;
-
-  display: block;
-
-  background: #ffffff;
-
-  border: 1px solid #e7e9ee;
-  border-radius: 18px;
-
-  padding: 30px;
-
-  box-sizing: border-box;
-
-  box-shadow:
-    0 4px 16px rgba(16, 24, 40, 0.05);
-}
-
-
-/* TOP PART */
-
-.streak-main {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.streak-icon {
-  width: 58px;
-  height: 58px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 15px;
-
-  background: #fff4e8;
-
-  font-size: 28px;
-}
-
-.streak-main h2 {
-  margin: 0;
-
-  font-size: 30px;
-  font-weight: 700;
-
-  color: #111827;
-}
-
-.streak-main p {
-  margin: 5px 0 0;
-
-  font-size: 14px;
-  color: #667085;
-}
-
-
-/* STATS */
-
-.streak-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-  gap: 16px;
-
-  margin-top: 28px;
-}
-
-.streak-stat {
-  padding: 20px;
-
-  border: 1px solid #eaecf0;
-  border-radius: 13px;
-
-  background: #fafbfc;
-}
-
-.streak-stat span {
-  display: block;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  color: #667085;
-}
-
-.streak-stat strong {
-  display: inline-block;
-
-  margin-top: 8px;
-
-  font-size: 27px;
-  font-weight: 700;
-
-  color: #111827;
-}
-
-.streak-stat small {
-  margin-left: 5px;
-
-  font-size: 13px;
-  color: #98a2b3;
-}
-
-
-/* ============================= */
-/* WEEKLY ACTIVITY */
-/* ============================= */
-
-.weekly-activity {
-  margin-top: 28px;
-
-  padding-top: 25px;
-
-  border-top: 1px solid #eaecf0;
-}
-
-.weekly-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  margin-bottom: 20px;
-}
-
-.weekly-header h3 {
-  margin: 0;
-
-  font-size: 16px;
-  font-weight: 700;
-
-  color: #1f2937;
-}
-
-.weekly-header span {
-  font-size: 12px;
-  color: #98a2b3;
-}
-
-
-/* DAYS */
-
-.week-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-
-  gap: 12px;
-}
-
-.day-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 9px;
-
-  padding: 13px 5px;
-
-  border-radius: 12px;
-}
-
-.day-name {
-  font-size: 12px;
-  font-weight: 600;
-
-  color: #98a2b3;
-}
-
-.day-circle {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  border: 1px solid #e4e7ec;
-
-  background: #f9fafb;
-
-  color: #98a2b3;
-
   font-size: 15px;
-  font-weight: 700;
-
-  transition: all 0.2s ease;
 }
 
-
-/* COMPLETED DAY */
-
-.day-item.completed {
-  background: #f8fafc;
+.back-button {
+  border: none;
+  background: #ffffff;
+  color: #374151;
+  padding: 11px 17px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
 }
 
-.day-item.completed .day-name {
-  color: #344054;
-}
-
-.day-item.completed .day-circle {
+.back-button:hover {
   background: #111827;
-  border-color: #111827;
   color: #ffffff;
 }
 
 
-/* ============================= */
-/* LEARNING OVERVIEW */
-/* ============================= */
+/* ================================
+   COMMON LABEL
+================================ */
 
-.progress-overview {
-  max-width: 1180px;
-  margin: 0 auto 30px;
-
-  background: #ffffff;
-
-  border: 1px solid #e7e9ee;
-  border-radius: 18px;
-
-  padding: 30px;
-
-  box-sizing: border-box;
-
-  box-shadow:
-    0 4px 16px rgba(16, 24, 40, 0.04);
-}
-
-.progress-title h2 {
-  margin: 0;
-
-  font-size: 23px;
-  font-weight: 700;
-
-  color: #111827;
-}
-
-.progress-title p {
-  margin: 7px 0 0;
-
-  max-width: 650px;
-
-  font-size: 14px;
-  line-height: 1.6;
-
-  color: #667085;
-}
-
-
-/* CARDS */
-
-.progress-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 18px;
-
-  margin-top: 25px;
-}
-
-.progress-card {
-  padding: 22px;
-
-  border: 1px solid #eaecf0;
-  border-radius: 14px;
-
-  background: #fafbfc;
-
-  transition: all 0.2s ease;
-}
-
-.progress-card:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 5px 15px rgba(16, 24, 40, 0.06);
-}
-
-.progress-card span {
+.section-label {
   display: block;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  color: #667085;
-}
-
-.progress-card strong {
-  display: block;
-
-  margin-top: 9px;
-
-  font-size: 28px;
+  font-size: 11px;
   font-weight: 700;
-
-  color: #111827;
-}
-
-.progress-card p {
-  margin: 5px 0 0;
-
-  font-size: 12px;
-
-  color: #98a2b3;
+  letter-spacing: 1.2px;
+  color: #6b7280;
+  margin-bottom: 7px;
 }
 
 
-/* ============================= */
-/* MOTIVATION MESSAGE */
-/* ============================= */
-
-.progress-message {
-  max-width: 1180px;
-  margin: 0 auto;
-
-  display: flex;
-  align-items: center;
-
-  gap: 17px;
-
-  padding: 22px 25px;
-
-  background: #ffffff;
-
-  border: 1px solid #e7e9ee;
-  border-radius: 16px;
-
-  box-sizing: border-box;
-}
-
-.message-icon {
-  width: 42px;
-  height: 42px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 11px;
-
-  background: #f2f4f7;
-
-  font-size: 20px;
-}
-
-.progress-message h3 {
-  margin: 0;
-
-  font-size: 15px;
-  font-weight: 700;
-
-  color: #1f2937;
-}
-
-.progress-message p {
-  margin: 5px 0 0;
-
-  font-size: 13px;
-
-  color: #667085;
-}
-
-
-/* ============================= */
-/* RESPONSIVE */
-/* ============================= */
-
-@media (max-width: 900px) {
-
-  .progress-page {
-    padding: 30px 25px 45px;
-  }
-
-  .progress-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .streak-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-
-@media (max-width: 600px) {
-
-  .progress-page {
-    padding: 22px 16px 35px;
-  }
-
-  .progress-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .progress-header h1 {
-    font-size: 26px;
-  }
-
-  .streak-section,
-  .progress-overview {
-    padding: 22px;
-  }
-
-  .streak-main {
-    align-items: flex-start;
-  }
-
-  .streak-main h2 {
-    font-size: 26px;
-  }
-
-  .streak-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .weekly-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .week-days {
-    gap: 4px;
-  }
-
-  .day-circle {
-    width: 32px;
-    height: 32px;
-    font-size: 13px;
-  }
-
-  .day-name {
-    font-size: 10px;
-  }
-}
-
-/* ============================= */
-/* DAILY STREAK */
-/* ============================= */
+/* ================================
+   STREAK SECTION
+================================ */
 
 .streak-section {
-  display: block !important;
   width: 100%;
   box-sizing: border-box;
-
   background: #ffffff;
-  border: 1px solid #e6e8ec;
+  border: 1px solid #e5e7eb;
   border-radius: 18px;
-
-  padding: 28px 30px;
+  padding: 30px;
   margin-bottom: 30px;
-
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
@@ -547,200 +90,629 @@
 }
 
 .streak-icon {
-  width: 56px;
-  height: 56px;
-
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: #fff4e8;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #fff4e8;
-  border-radius: 14px;
-
-  font-size: 27px;
+  font-size: 29px;
+  flex-shrink: 0;
 }
 
 .streak-main h2 {
-  margin: 3px 0 0;
-
-  font-size: 28px;
-  font-weight: 700;
-
-  color: #17191c;
+  margin: 0;
+  font-size: 30px;
+  color: #111827;
 }
 
 .streak-main p {
   margin: 5px 0 0;
-
+  color: #6b7280;
   font-size: 14px;
-  color: #737780;
-}
-
-.section-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-
-  color: #7a7f87;
 }
 
 
-/* STREAK STATS */
+/* ================================
+   STREAK STATS
+================================ */
 
 .streak-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-
-  margin-top: 25px;
+  display: flex;
+  gap: 18px;
+  margin-top: 28px;
 }
 
 .streak-stat {
+  flex: 1;
+  background: #f8f9fc;
+  border: 1px solid #eef0f4;
+  border-radius: 14px;
   padding: 18px 20px;
-
-  background: #fafbfc;
-  border: 1px solid #eaecf0;
-  border-radius: 13px;
 }
 
 .streak-stat span {
   display: block;
-
+  color: #6b7280;
   font-size: 13px;
-  font-weight: 600;
-
-  color: #6f747c;
+  margin-bottom: 7px;
 }
 
 .streak-stat strong {
   font-size: 27px;
-  font-weight: 700;
-
-  color: #17191c;
-
-  margin-top: 6px;
-  display: inline-block;
+  color: #111827;
 }
 
 .streak-stat small {
   margin-left: 5px;
-
+  color: #6b7280;
   font-size: 12px;
-  color: #8b9098;
 }
 
 
-/* WEEKLY ACTIVITY */
+/* ================================
+   WEEKLY ACTIVITY
+================================ */
 
 .weekly-activity {
-  margin-top: 26px;
-  padding-top: 23px;
-
-  border-top: 1px solid #eceef1;
+  margin-top: 28px;
+  padding-top: 25px;
+  border-top: 1px solid #eeeeee;
 }
 
 .weekly-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
-  margin-bottom: 18px;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .weekly-header h3 {
   margin: 0;
-
-  font-size: 15px;
-  font-weight: 700;
-
-  color: #25282d;
+  font-size: 17px;
+  color: #111827;
 }
 
 .weekly-header span {
   font-size: 12px;
-  color: #969ba3;
+  color: #6b7280;
 }
 
 .week-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 12px;
 }
 
 .day-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-
-  padding: 10px 4px;
+  text-align: center;
 }
 
 .day-name {
-  font-size: 11px;
-  font-weight: 600;
-
-  color: #999ea6;
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 9px;
 }
 
 .day-circle {
-  width: 36px;
-  height: 36px;
-
+  width: 38px;
+  height: 38px;
+  margin: auto;
+  border-radius: 50%;
+  border: 1px solid #dfe3e8;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 50%;
-
-  background: #f5f6f7;
-  border: 1px solid #e3e5e8;
-
-  color: transparent;
-
-  font-size: 14px;
-  font-weight: 700;
-}
-
-
-/* COMPLETED DAY */
-
-.day-item.completed .day-name {
-  color: #34383e;
+  font-size: 15px;
+  color: #ffffff;
+  transition: 0.2s ease;
 }
 
 .day-item.completed .day-circle {
-  background: #1f2937;
-  border-color: #1f2937;
-
-  color: #ffffff;
+  background: #111827;
+  border-color: #111827;
 }
 
 
-/* MOBILE */
+/* ================================
+   LEARNING OVERVIEW
+================================ */
 
-@media (max-width: 600px) {
+.progress-overview {
+  margin-bottom: 30px;
+}
 
-  .streak-section {
-    padding: 22px;
+.progress-title {
+  margin-bottom: 20px;
+}
+
+.progress-title h2 {
+  margin: 0;
+  font-size: 23px;
+  color: #111827;
+}
+
+.progress-title p {
+  margin: 6px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.progress-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.progress-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 23px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.035);
+}
+
+.progress-card span {
+  display: block;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.progress-card strong {
+  display: block;
+  font-size: 29px;
+  color: #111827;
+}
+
+.progress-card p {
+  margin: 6px 0 0;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+
+/* ================================
+   COMMON SECTION
+================================ */
+
+.progress-section {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 28px 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.035);
+}
+
+.progress-section-header {
+  margin-bottom: 22px;
+}
+
+.progress-section-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #111827;
+}
+
+.progress-section-header p {
+  margin: 6px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* ================================
+   LATEST SKILL
+================================ */
+
+.latest-skill-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fc;
+  border: 1px solid #eef0f4;
+  border-radius: 15px;
+  padding: 20px 22px;
+}
+
+.latest-skill-card h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.latest-skill-card span {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #eeeeee;
+  color: #4b5563;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.latest-score {
+  text-align: right;
+}
+
+.latest-score strong {
+  display: block;
+  font-size: 30px;
+  color: #111827;
+}
+
+.latest-score small {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+
+/* ================================
+   SKILL PERFORMANCE
+================================ */
+
+.progress-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.progress-skill-row {
+  padding-bottom: 18px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.progress-skill-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.progress-skill-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.progress-skill-info h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  color: #111827;
+}
+
+.progress-skill-info span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.progress-skill-info strong {
+  font-size: 15px;
+  color: #111827;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: #eceef2;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #111827;
+  border-radius: 20px;
+  transition: width 0.4s ease;
+}
+
+
+/* ================================
+   ASSESSMENT HISTORY
+================================ */
+
+.assessment-history {
+  display: flex;
+  flex-direction: column;
+}
+
+.assessment-history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.assessment-history-row:first-child {
+  padding-top: 0;
+}
+
+.assessment-history-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.assessment-history-row h3 {
+  margin: 0 0 5px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.assessment-history-row span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.history-score strong {
+  font-size: 17px;
+  color: #111827;
+}
+
+
+/* ================================
+   EMPTY STATE
+================================ */
+
+.empty-state {
+  text-align: center;
+  padding: 30px 20px;
+  background: #f8f9fc;
+  border-radius: 14px;
+}
+
+.empty-state h3 {
+  margin: 0 0 7px;
+  font-size: 16px;
+  color: #111827;
+}
+
+.empty-state p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+
+/* ================================
+   MOTIVATION
+================================ */
+
+.progress-message {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px 28px;
+  margin-bottom: 20px;
+}
+
+.message-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 13px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  flex-shrink: 0;
+}
+
+.progress-message h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #111827;
+}
+
+.progress-message p {
+  margin: 5px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+  .progress-page {
+    padding: 25px 22px 40px;
+  }
+
+  .progress-cards {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .progress-page {
+    padding: 20px 15px 35px;
+  }
+
+  .progress-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .progress-header h1 {
+    font-size: 27px;
+  }
+
+  .streak-section,
+  .progress-section {
+    padding: 22px 18px;
   }
 
   .streak-stats {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 
   .weekly-header {
     align-items: flex-start;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
   }
 
   .week-days {
-    gap: 3px;
+    gap: 5px;
   }
 
   .day-circle {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
   }
+
+  .latest-skill-card {
+    gap: 15px;
+  }
+
+  .progress-message {
+    padding: 20px;
+  }
+
+}
+
+/* ================================
+   SKILL PERFORMANCE CARDS
+================================ */
+
+.skill-performance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.skill-performance-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 21px;
+  transition: 0.2s ease;
+}
+
+.skill-performance-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+}
+
+.skill-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.skill-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skill-mini-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #f1f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.skill-card-title h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  color: #111827;
+}
+
+.skill-card-title span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.skill-score strong {
+  font-size: 23px;
+  color: #111827;
+}
+
+.skill-level-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 11px;
+}
+
+.skill-level-row > span:first-child {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.skill-level-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.skill-progress-wrapper {
+  width: 100%;
+}
+
+.skill-progress-track {
+  width: 100%;
+  height: 7px;
+  background: #eceef2;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.skill-progress-fill {
+  height: 100%;
+  background: #111827;
+  border-radius: 20px;
+  transition: width 0.5s ease;
+}
+
+.skill-card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.skill-card-footer span {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.skill-card-footer span:last-child {
+  color: #4b5563;
+  font-weight: 600;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  .skill-performance-grid {
+    grid-template-columns: 1fr;
+  }
+
 }
