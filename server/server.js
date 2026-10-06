@@ -9,6 +9,7 @@ const cors = require("cors");
 const User = require("./models/User");
 const AssessmentResult = require("./models/AssessmentResult");
 const QuizResult = require("./models/QuizResult");
+const LearningActivity = require("./models/LearningActivity");
 const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express();
@@ -160,6 +161,43 @@ app.get("/profile", authMiddleware, async (req, res) => {
 
 
 // ===============================
+// SAVE LEARNING ACTIVITY
+// ===============================
+
+const recordLearningActivity = async (userId) => {
+  try {
+    const today = new Date().toLocaleDateString(
+      "en-CA",
+      {
+        timeZone: "Asia/Kolkata"
+      }
+    );
+
+    await LearningActivity.findOneAndUpdate(
+      {
+        userId,
+        date: today
+      },
+      {
+        userId,
+        date: today
+      },
+      {
+        upsert: true,
+        new: true
+      }
+    );
+
+  } catch (error) {
+    console.error(
+      "Learning activity error:",
+      error
+    );
+  }
+};
+
+
+// ===============================
 // SAVE ASSESSMENT RESULT
 // ===============================
 
@@ -181,6 +219,9 @@ app.post("/assessment", authMiddleware, async (req, res) => {
       percentage,
       level
     });
+
+    // Record learning activity
+    await recordLearningActivity(req.user.userId);
 
     res.status(201).json({
       message: "Assessment result saved successfully",
@@ -232,13 +273,19 @@ app.post("/quiz/result", authMiddleware, async (req, res) => {
 
     await quizResult.save();
 
+    // Record learning activity
+    await recordLearningActivity(req.user.userId);
+
     res.status(201).json({
       message: "Quiz result saved successfully",
       result: quizResult
     });
 
   } catch (error) {
-    console.error("Quiz result error:", error);
+    console.error(
+      "Quiz result error:",
+      error
+    );
 
     res.status(500).json({
       message: "Failed to save quiz result"
@@ -251,82 +298,222 @@ app.post("/quiz/result", authMiddleware, async (req, res) => {
 // GET LATEST ASSESSMENT RESULT
 // ===============================
 
-app.get("/assessment/latest", authMiddleware, async (req, res) => {
-  try {
-    const result = await AssessmentResult.findOne({
-      userId: req.user.userId
-    }).sort({ createdAt: -1 });
+app.get(
+  "/assessment/latest",
+  authMiddleware,
+  async (req, res) => {
+    try {
+      const result = await AssessmentResult.findOne({
+        userId: req.user.userId
+      }).sort({ createdAt: -1 });
 
-    if (!result) {
-      return res.status(404).json({
-        message: "No assessment result found"
+      if (!result) {
+        return res.status(404).json({
+          message: "No assessment result found"
+        });
+      }
+
+      res.status(200).json(result);
+
+    } catch (error) {
+      console.log(
+        "Error fetching latest assessment:",
+        error
+      );
+
+      res.status(500).json({
+        message: error.message
       });
     }
-
-    res.status(200).json(result);
-
-  } catch (error) {
-    console.log(
-      "Error fetching latest assessment:",
-      error
-    );
-
-    res.status(500).json({
-      message: error.message
-    });
   }
-});
+);
 
 
 // ===============================
 // GET ALL ASSESSMENT RESULTS
 // ===============================
 
-app.get("/assessment/all", authMiddleware, async (req, res) => {
-  try {
-    const results = await AssessmentResult.find({
-      userId: req.user.userId
-    }).sort({ createdAt: -1 });
+app.get(
+  "/assessment/all",
+  authMiddleware,
+  async (req, res) => {
+    try {
+      const results = await AssessmentResult.find({
+        userId: req.user.userId
+      }).sort({ createdAt: -1 });
 
-    res.status(200).json(results);
+      res.status(200).json(results);
 
-  } catch (error) {
-    console.log(
-      "Error fetching assessment results:",
-      error
-    );
+    } catch (error) {
+      console.log(
+        "Error fetching assessment results:",
+        error
+      );
 
-    res.status(500).json({
-      message: error.message
-    });
+      res.status(500).json({
+        message: error.message
+      });
+    }
   }
-});
+);
+
+
 // ===============================
 // GET ALL QUIZ RESULTS
 // ===============================
 
-app.get("/quiz/results", authMiddleware, async (req, res) => {
-  try {
-    const results = await QuizResult.find({
-      userId: req.user.userId
-    }).sort({ createdAt: -1 });
+app.get(
+  "/quiz/results",
+  authMiddleware,
+  async (req, res) => {
+    try {
+      const results = await QuizResult.find({
+        userId: req.user.userId
+      }).sort({ createdAt: -1 });
 
-    res.status(200).json(results);
+      res.status(200).json(results);
 
-  } catch (error) {
-    console.log(
-      "Error fetching quiz results:",
-      error
-    );
+    } catch (error) {
+      console.log(
+        "Error fetching quiz results:",
+        error
+      );
 
-    res.status(500).json({
-      message: error.message
-    });
+      res.status(500).json({
+        message: error.message
+      });
+    }
   }
-});
+);
+
 
 // ===============================
-// START SERVER
+// GET DAILY STREAK
+// ===============================
+
+app.get(
+  "/activity/streak",
+  authMiddleware,
+  async (req, res) => {
+    try {
+      const activities = await LearningActivity
+        .find({
+          userId: req.user.userId
+        })
+        .sort({ date: -1 });
+
+      const dates = activities.map(
+        (activity) => activity.date
+      );
+
+      if (dates.length === 0) {
+        return res.json({
+          currentStreak: 0,
+          longestStreak: 0,
+          activityDates: []
+        });
+      }
+
+      // Remove duplicate dates
+      const uniqueDates = [
+        ...new Set(dates)
+      ];
+
+      // ===============================
+      // CURRENT STREAK
+      // ===============================
+
+      const today = new Date().toLocaleDateString(
+        "en-CA",
+        {
+          timeZone: "Asia/Kolkata"
+        }
+      );
+
+      let currentStreak = 0;
+
+      let checkDate = new Date(today);
+
+      while (true) {
+        const dateString =
+          checkDate.toLocaleDateString(
+            "en-CA",
+            {
+              timeZone: "Asia/Kolkata"
+            }
+          );
+
+        if (uniqueDates.includes(dateString)) {
+          currentStreak++;
+
+          checkDate.setDate(
+            checkDate.getDate() - 1
+          );
+
+        } else {
+          break;
+        }
+      }
+
+
+      // ===============================
+      // LONGEST STREAK
+      // ===============================
+
+      const sortedDates = [...uniqueDates].sort();
+
+      let longestStreak = 1;
+      let currentLongest = 1;
+
+      for (let i = 1; i < sortedDates.length; i++) {
+        const previousDate =
+          new Date(sortedDates[i - 1]);
+
+        const currentDate =
+          new Date(sortedDates[i]);
+
+        const difference =
+          (
+            currentDate - previousDate
+          ) /
+          (1000 * 60 * 60 * 24);
+
+        if (difference === 1) {
+          currentLongest++;
+
+          longestStreak = Math.max(
+            longestStreak,
+            currentLongest
+          );
+
+        } else {
+          currentLongest = 1;
+        }
+      }
+
+
+      res.json({
+        currentStreak,
+        longestStreak,
+        activityDates: uniqueDates
+      });
+
+    } catch (error) {
+      console.error(
+        "Streak error:",
+        error
+      );
+
+      res.status(500).json({
+        message: "Failed to calculate streak"
+      });
+    }
+  }
+);
+
+
+// ===============================
+// SERVER
 // ===============================
 
 app.listen(5000, () => {
