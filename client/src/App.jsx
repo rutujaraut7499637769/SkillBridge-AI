@@ -7,7 +7,7 @@ import SkillAssessment from "./SkillAssessment";
 import MySkills from "./MySkills";
 import LearningRoadmap from "./LearningRoadmap";
 import Quiz from "./Quiz";
-import Progress from "./Progress";
+import Progress from "./progressTemp";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
