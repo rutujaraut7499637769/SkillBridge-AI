@@ -301,7 +301,29 @@ app.get("/assessment/all", authMiddleware, async (req, res) => {
     });
   }
 });
+// ===============================
+// GET ALL QUIZ RESULTS
+// ===============================
 
+app.get("/quiz/results", authMiddleware, async (req, res) => {
+  try {
+    const results = await QuizResult.find({
+      userId: req.user.userId
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json(results);
+
+  } catch (error) {
+    console.log(
+      "Error fetching quiz results:",
+      error
+    );
+
+    res.status(500).json({
+      message: error.message
+    });
+  }
+});
 
 // ===============================
 // START SERVER
