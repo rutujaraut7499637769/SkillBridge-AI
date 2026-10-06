@@ -2,9 +2,9 @@ import { useState } from "react";
 import "./SkillAssessment.css";
 import AssessmentQuestions from "./AssessmentQuestions";
 
-function SkillAssessment({onBack}) {
+function SkillAssessment({ onBack }) {
   const [selectedSkill, setSelectedSkill] = useState("");
-  const[assessmentStarted, setAssessmentStarted] = useState(false);
+  const [assessmentStarted, setAssessmentStarted] = useState(false);
 
   const skills = [
     "HTML",
@@ -20,13 +20,13 @@ function SkillAssessment({onBack}) {
   ];
 
   if (assessmentStarted) {
-  return (
-    <AssessmentQuestions
-      skill={selectedSkill}
-      onBack={() => setAssessmentStarted(false)}
-    />
-  );
-}
+    return (
+      <AssessmentQuestions
+        skill={selectedSkill}
+        onBack={() => setAssessmentStarted(false)}
+      />
+    );
+  }
   return (
     <div className="assessment-page">
 
@@ -40,7 +40,7 @@ function SkillAssessment({onBack}) {
       </div>
 
       <div className="assessment-card">
-<button
+        <button
           className="back-button"
           onClick={onBack}
         >
