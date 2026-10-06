@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
+
 import Dashboard from "./Dashboard";
 import SkillAssessment from "./SkillAssessment";
 import MySkills from "./MySkills";
 import LearningRoadmap from "./LearningRoadmap";
 import Quiz from "./Quiz";
+import Progress from "./Progress";
+
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -128,6 +131,14 @@ function App() {
       );
     }
 
+    if (currentPage === "progress") {
+      return (
+        <Progress
+          onBack={() => setCurrentPage("dashboard")}
+        />
+      );
+    }
+
     return (
       <Dashboard
         onSkillAssessment={() =>
@@ -141,6 +152,9 @@ function App() {
         }
         onQuiz={() =>
           setCurrentPage("quiz")
+        }
+        onProgress={() =>
+          setCurrentPage("progress")
         }
       />
     );
