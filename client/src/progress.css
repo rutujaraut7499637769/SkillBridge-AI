@@ -6,7 +6,6 @@
   color: #1f2937;
 }
 
-/* HEADER */
 
 .progress-header {
   display: flex;
@@ -54,8 +53,6 @@
   color: #6b7280;
   margin-bottom: 7px;
 }
-
-/* DAILY STREAK */
 
 .streak-section {
   width: 100%;
@@ -129,8 +126,6 @@
   color: #6b7280;
   font-size: 12px;
 }
-
-/* WEEKLY ACTIVITY */
 
 .weekly-activity {
   margin-top: 28px;
@@ -248,8 +243,6 @@
   font-size: 12px;
 }
 
-/* COMMON SECTION */
-
 .progress-section {
   background: #ffffff;
   border: 1px solid #e5e7eb;
@@ -275,7 +268,6 @@
   font-size: 14px;
 }
 
-/* LATEST SKILL */
 
 .latest-skill-card {
   display: flex;
@@ -318,7 +310,6 @@
   font-size: 12px;
 }
 
-/* OLD SKILL PROGRESS */
 
 .progress-skills-list {
   display: flex;
@@ -471,8 +462,6 @@
   overflow: hidden;
 }
 
-/* IMPORTANT: PERFORMANCE COLORS */
-
 .skill-progress-fill {
   height: 100%;
   border-radius: 20px;
@@ -506,8 +495,6 @@
   color: #4b5563;
   font-weight: 600;
 }
-
-/* ASSESSMENT HISTORY */
 
 .assessment-history {
   display: flex;
@@ -547,7 +534,6 @@
   color: #111827;
 }
 
-/* EMPTY STATE */
 
 .empty-state {
   text-align: center;
@@ -568,7 +554,6 @@
   font-size: 13px;
 }
 
-/* MESSAGE */
 
 .progress-message {
   display: flex;
@@ -605,7 +590,6 @@
   font-size: 13px;
 }
 
-/* RESPONSIVE */
 
 @media (max-width: 900px) {
   .progress-page {
