@@ -31,6 +31,26 @@ const quizResultSchema = new mongoose.Schema(
     level: {
       type: String,
       required: true
+    },
+
+    weakTopics: {
+      type: [
+        {
+          topic: String,
+          percentage: Number
+        }
+      ],
+      default: []
+    },
+
+    strongTopics: {
+      type: [
+        {
+          topic: String,
+          percentage: Number
+        }
+      ],
+      default: []
     }
   },
   {
