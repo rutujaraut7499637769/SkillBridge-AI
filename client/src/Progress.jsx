@@ -84,9 +84,7 @@ function Progress({ onBack }) {
         )
       : 0;
 
-  /*
-    Personalized Learning Recommendations
-  */
+  
 
   const getRecommendations = (assessment) => {
     const skill = assessment.skill;
@@ -331,7 +329,6 @@ function Progress({ onBack }) {
       </header>
 
 
-      {/* DAILY STREAK */}
 
       <section className="streak-section">
 
@@ -445,7 +442,6 @@ function Progress({ onBack }) {
       </section>
 
 
-      {/* LEARNING OVERVIEW */}
 
       <section className="progress-overview">
 
@@ -598,7 +594,7 @@ function Progress({ onBack }) {
       </section>
 
 
-      {/* SKILL PERFORMANCE */}
+    
 
       <section className="progress-section">
 
@@ -755,9 +751,6 @@ function Progress({ onBack }) {
 
       </section>
 
-
-      {/* PERSONALIZED LEARNING RECOMMENDATIONS */}
-
       <section className="progress-section">
 
         <div className="progress-section-header">
@@ -886,7 +879,6 @@ function Progress({ onBack }) {
 
       </section>
 
-{/* QUIZ PERFORMANCE */}
 
       <section className="progress-section">
 
@@ -973,9 +965,6 @@ function Progress({ onBack }) {
         )}
 
       </section>
-
-
-      {/* RECENT ACTIVITY */}
 
       <section className="progress-section">
 
