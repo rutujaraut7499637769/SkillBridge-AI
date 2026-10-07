@@ -73,7 +73,6 @@ function MySkills({ onBack, onLearningRoadmap }) {
 
       <div className="my-skills-container">
 
-        {/* PAGE HEADER */}
         <div className="my-skills-header">
 
           <button
@@ -139,8 +138,6 @@ function MySkills({ onBack, onLearningRoadmap }) {
         ) : (
 
           <>
-
-            {/* SUMMARY */}
             <div className="skills-summary">
 
               <div className="summary-card">
