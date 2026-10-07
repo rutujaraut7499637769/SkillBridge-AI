@@ -6,6 +6,8 @@
   color: #1f2937;
 }
 
+/* HEADER */
+
 .progress-header {
   display: flex;
   align-items: center;
@@ -52,6 +54,8 @@
   color: #6b7280;
   margin-bottom: 7px;
 }
+
+/* DAILY STREAK */
 
 .streak-section {
   width: 100%;
@@ -126,6 +130,7 @@
   font-size: 12px;
 }
 
+/* WEEKLY ACTIVITY */
 
 .weekly-activity {
   margin-top: 28px;
@@ -188,6 +193,7 @@
   border-color: #111827;
 }
 
+/* LEARNING OVERVIEW */
 
 .progress-overview {
   margin-bottom: 30px;
@@ -242,10 +248,7 @@
   font-size: 12px;
 }
 
-
-/* ================================
-   COMMON SECTION
-================================ */
+/* COMMON SECTION */
 
 .progress-section {
   background: #ffffff;
@@ -272,6 +275,7 @@
   font-size: 14px;
 }
 
+/* LATEST SKILL */
 
 .latest-skill-card {
   display: flex;
@@ -314,6 +318,7 @@
   font-size: 12px;
 }
 
+/* OLD SKILL PROGRESS */
 
 .progress-skills-list {
   display: flex;
@@ -369,164 +374,7 @@
   transition: width 0.4s ease;
 }
 
-
-.assessment-history {
-  display: flex;
-  flex-direction: column;
-}
-
-.assessment-history-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-  border-bottom: 1px solid #eeeeee;
-}
-
-.assessment-history-row:first-child {
-  padding-top: 0;
-}
-
-.assessment-history-row:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.assessment-history-row h3 {
-  margin: 0 0 5px;
-  font-size: 15px;
-  color: #111827;
-}
-
-.assessment-history-row span {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.history-score strong {
-  font-size: 17px;
-  color: #111827;
-}
-
-
-.empty-state {
-  text-align: center;
-  padding: 30px 20px;
-  background: #f8f9fc;
-  border-radius: 14px;
-}
-
-.empty-state h3 {
-  margin: 0 0 7px;
-  font-size: 16px;
-  color: #111827;
-}
-
-.empty-state p {
-  margin: 0;
-  color: #6b7280;
-  font-size: 13px;
-}
-
-
-.progress-message {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 18px;
-  padding: 24px 28px;
-  margin-bottom: 20px;
-}
-
-.message-icon {
-  width: 45px;
-  height: 45px;
-  border-radius: 13px;
-  background: #f3f4f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 21px;
-  flex-shrink: 0;
-}
-
-.progress-message h3 {
-  margin: 0;
-  font-size: 17px;
-  color: #111827;
-}
-
-.progress-message p {
-  margin: 5px 0 0;
-  color: #6b7280;
-  font-size: 13px;
-}
-
-
-@media (max-width: 900px) {
-
-  .progress-page {
-    padding: 25px 22px 40px;
-  }
-
-  .progress-cards {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-
-@media (max-width: 650px) {
-
-  .progress-page {
-    padding: 20px 15px 35px;
-  }
-
-  .progress-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .progress-header h1 {
-    font-size: 27px;
-  }
-
-  .streak-section,
-  .progress-section {
-    padding: 22px 18px;
-  }
-
-  .streak-stats {
-    flex-direction: column;
-  }
-
-  .weekly-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .week-days {
-    gap: 5px;
-  }
-
-  .day-circle {
-    width: 34px;
-    height: 34px;
-  }
-
-  .latest-skill-card {
-    gap: 15px;
-  }
-
-  .progress-message {
-    padding: 20px;
-  }
-
-}
+/* SKILL PERFORMANCE */
 
 .skill-performance-grid {
   display: grid;
@@ -623,11 +471,24 @@
   overflow: hidden;
 }
 
+/* IMPORTANT: PERFORMANCE COLORS */
+
 .skill-progress-fill {
   height: 100%;
-  background: #111827;
   border-radius: 20px;
   transition: width 0.5s ease;
+}
+
+.skill-progress-fill.strong {
+  background: #22c55e !important;
+}
+
+.skill-progress-fill.good {
+  background: #f59e0b !important;
+}
+
+.skill-progress-fill.needs-improvement {
+  background: #ef4444 !important;
 }
 
 .skill-card-footer {
@@ -646,46 +507,214 @@
   font-weight: 600;
 }
 
+/* ASSESSMENT HISTORY */
 
+.assessment-history {
+  display: flex;
+  flex-direction: column;
+}
+
+.assessment-history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.assessment-history-row:first-child {
+  padding-top: 0;
+}
+
+.assessment-history-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.assessment-history-row h3 {
+  margin: 0 0 5px;
+  font-size: 15px;
+  color: #111827;
+}
+
+.assessment-history-row span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.history-score strong {
+  font-size: 17px;
+  color: #111827;
+}
+
+/* EMPTY STATE */
+
+.empty-state {
+  text-align: center;
+  padding: 30px 20px;
+  background: #f8f9fc;
+  border-radius: 14px;
+}
+
+.empty-state h3 {
+  margin: 0 0 7px;
+  font-size: 16px;
+  color: #111827;
+}
+
+.empty-state p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* MESSAGE */
+
+.progress-message {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px 28px;
+  margin-bottom: 20px;
+}
+
+.message-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 13px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  flex-shrink: 0;
+}
+
+.progress-message h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #111827;
+}
+
+.progress-message p {
+  margin: 5px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .progress-page {
+    padding: 25px 22px 40px;
+  }
+
+  .progress-cards {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media (max-width: 700px) {
-
   .skill-performance-grid {
     grid-template-columns: 1fr;
   }
-
-}
-.skill-progress-fill {
-  height: 100%;
-  border-radius: 20px;
-  transition: width 0.5s ease;
 }
 
-.skill-progress-fill.strong {
-  background: #22c55e;
+@media (max-width: 650px) {
+  .progress-page {
+    padding: 20px 15px 35px;
+  }
+
+  .progress-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .progress-header h1 {
+    font-size: 27px;
+  }
+
+  .streak-section,
+  .progress-section {
+    padding: 22px 18px;
+  }
+
+  .streak-stats {
+    flex-direction: column;
+  }
+
+  .weekly-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .week-days {
+    gap: 5px;
+  }
+
+  .day-circle {
+    width: 34px;
+    height: 34px;
+  }
+
+  .latest-skill-card {
+    gap: 15px;
+  }
+
+  .progress-message {
+    padding: 20px;
+  }
+}
+.quiz-performance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-.skill-progress-fill.good {
-  background: #f59e0b;
+.quiz-performance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 0;
+  border-bottom: 1px solid #eeeeee;
 }
 
-.skill-progress-fill.needs-improvement {
-  background: #ef4444;
-
-.skill-progress-fill {
-  height: 100%;
-  border-radius: 20px;
-  transition: width 0.5s ease;
+.quiz-performance-row:first-child {
+  padding-top: 0;
 }
 
-.skill-progress-fill.strong {
-  background: #22c55e !important;
+.quiz-performance-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-.skill-progress-fill.good {
-  background: #f59e0b !important;
+.quiz-performance-row h3 {
+  margin: 0 0 5px;
+  font-size: 15px;
+  color: #111827;
 }
 
-.skill-progress-fill.needs-improvement {
-  background: #ef4444 !important;
+.quiz-performance-row span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.quiz-performance-score {
+  text-align: right;
+}
+
+.quiz-performance-score strong {
+  display: block;
+  font-size: 19px;
+  color: #111827;
+}
+
+.quiz-performance-score small {
+  font-size: 11px;
+  color: #6b7280;
 }

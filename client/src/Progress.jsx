@@ -3,7 +3,6 @@ import axios from "axios";
 import "./Progress.css";
 
 function Progress({ onBack }) {
-
   const [streak, setStreak] = useState({
     currentStreak: 0,
     longestStreak: 0,
@@ -11,6 +10,7 @@ function Progress({ onBack }) {
   });
 
   const [assessments, setAssessments] = useState([]);
+  const [quizResults, setQuizResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,21 +25,30 @@ function Progress({ onBack }) {
         Authorization: `Bearer ${token}`
       };
 
-      const [streakResponse, assessmentResponse] =
-        await Promise.all([
-          axios.get(
-            "http://localhost:5000/activity/streak",
-            { headers }
-          ),
+      const [
+        streakResponse,
+        assessmentResponse,
+        quizResponse
+      ] = await Promise.all([
+        axios.get(
+          "http://localhost:5000/activity/streak",
+          { headers }
+        ),
 
-          axios.get(
-            "http://localhost:5000/assessment/all",
-            { headers }
-          )
-        ]);
+        axios.get(
+          "http://localhost:5000/assessment/all",
+          { headers }
+        ),
+
+        axios.get(
+          "http://localhost:5000/quiz/results",
+          { headers }
+        )
+      ]);
 
       setStreak(streakResponse.data);
       setAssessments(assessmentResponse.data);
+      setQuizResults(quizResponse.data);
 
     } catch (error) {
       console.error("Progress data error:", error);
@@ -48,12 +57,15 @@ function Progress({ onBack }) {
     }
   };
 
-
   const latestAssessment =
     assessments.length > 0
       ? assessments[0]
       : null;
 
+  const latestQuiz =
+    quizResults.length > 0
+      ? quizResults[0]
+      : null;
 
   const overallProgress =
     assessments.length > 0
@@ -66,18 +78,24 @@ function Progress({ onBack }) {
         )
       : 0;
 
+  const averageQuizScore =
+    quizResults.length > 0
+      ? Math.round(
+          quizResults.reduce(
+            (total, quiz) =>
+              total + quiz.percentage,
+            0
+          ) / quizResults.length
+        )
+      : 0;
 
   const getLastSevenDays = () => {
-
     const days = [];
 
     for (let i = 6; i >= 0; i--) {
-
       const date = new Date();
 
-      date.setDate(
-        date.getDate() - i
-      );
+      date.setDate(date.getDate() - i);
 
       const dateString =
         date.toLocaleDateString(
@@ -105,38 +123,31 @@ function Progress({ onBack }) {
     return days;
   };
 
-
   const weeklyDays = getLastSevenDays();
-
 
   return (
     <div className="progress-page">
 
+      {/* HEADER */}
 
       <header className="progress-header">
-
         <button
           className="back-button"
           onClick={onBack}
         >
-          ← 
+          ← Dashboard
         </button>
 
         <div>
-
-          <h1>
-            Your Progress
-          </h1>
-
+          <h1>Your Progress</h1>
           <p>
-            Track your learning consistency and
-            skill growth.
+            Track your learning consistency and skill growth.
           </p>
-
         </div>
-
       </header>
 
+
+      {/* DAILY STREAK */}
 
       <section className="streak-section">
 
@@ -147,7 +158,6 @@ function Progress({ onBack }) {
           </div>
 
           <div>
-
             <span className="section-label">
               DAILY LEARNING STREAK
             </span>
@@ -159,10 +169,8 @@ function Progress({ onBack }) {
             </h2>
 
             <p>
-              Keep learning every day to maintain
-              your streak.
+              Keep learning every day to maintain your streak.
             </p>
-
           </div>
 
         </div>
@@ -171,10 +179,7 @@ function Progress({ onBack }) {
         <div className="streak-stats">
 
           <div className="streak-stat">
-
-            <span>
-              Current Streak
-            </span>
+            <span>Current Streak</span>
 
             <strong>
               {loading
@@ -182,18 +187,12 @@ function Progress({ onBack }) {
                 : streak.currentStreak}
             </strong>
 
-            <small>
-              days
-            </small>
-
+            <small>days</small>
           </div>
 
 
           <div className="streak-stat">
-
-            <span>
-              Longest Streak
-            </span>
+            <span>Longest Streak</span>
 
             <strong>
               {loading
@@ -201,24 +200,17 @@ function Progress({ onBack }) {
                 : streak.longestStreak}
             </strong>
 
-            <small>
-              days
-            </small>
-
+            <small>days</small>
           </div>
 
         </div>
 
 
-        {/* WEEKLY ACTIVITY */}
-
         <div className="weekly-activity">
 
           <div className="weekly-header">
 
-            <h3>
-              This Week
-            </h3>
+            <h3>This Week</h3>
 
             <span>
               {streak.activityDates.length > 0
@@ -234,17 +226,12 @@ function Progress({ onBack }) {
             {weeklyDays.map((day) => {
 
               const completed =
-                streak.activityDates.includes(
-                  day.date
-                );
+                streak.activityDates.includes(day.date);
 
               return (
-
                 <div
                   className={`day-item ${
-                    completed
-                      ? "completed"
-                      : ""
+                    completed ? "completed" : ""
                   }`}
                   key={day.date}
                 >
@@ -254,17 +241,11 @@ function Progress({ onBack }) {
                   </span>
 
                   <div className="day-circle">
-
-                    {completed
-                      ? "✓"
-                      : ""}
-
+                    {completed ? "✓" : ""}
                   </div>
 
                 </div>
-
               );
-
             })}
 
           </div>
@@ -272,7 +253,6 @@ function Progress({ onBack }) {
         </div>
 
       </section>
-
 
 
       {/* LEARNING OVERVIEW */}
@@ -285,13 +265,11 @@ function Progress({ onBack }) {
             LEARNING OVERVIEW
           </span>
 
-          <h2>
-            Your Learning Journey
-          </h2>
+          <h2>Your Learning Journey</h2>
 
           <p>
-            Monitor your consistency and progress
-            as you build your technical skills.
+            Monitor your consistency and progress as you build
+            your technical skills.
           </p>
 
         </div>
@@ -299,14 +277,9 @@ function Progress({ onBack }) {
 
         <div className="progress-cards">
 
-
-          {/* OVERALL PROGRESS */}
-
           <div className="progress-card">
 
-            <span>
-              Overall Progress
-            </span>
+            <span>Overall Progress</span>
 
             <strong>
               {loading
@@ -321,13 +294,9 @@ function Progress({ onBack }) {
           </div>
 
 
-          {/* SKILLS ASSESSED */}
-
           <div className="progress-card">
 
-            <span>
-              Skills Assessed
-            </span>
+            <span>Skills Assessed</span>
 
             <strong>
               {loading
@@ -344,18 +313,16 @@ function Progress({ onBack }) {
 
           <div className="progress-card">
 
-            <span>
-              Active Days
-            </span>
+            <span>Quiz Average</span>
 
             <strong>
               {loading
                 ? "..."
-                : streak.activityDates.length}
+                : `${averageQuizScore}%`}
             </strong>
 
             <p>
-              Total learning days
+              Average practice quiz score
             </p>
 
           </div>
@@ -364,6 +331,8 @@ function Progress({ onBack }) {
 
       </section>
 
+
+      {/* LATEST ASSESSMENT */}
 
       <section className="progress-section">
 
@@ -375,9 +344,7 @@ function Progress({ onBack }) {
               LATEST PERFORMANCE
             </span>
 
-            <h2>
-              Latest Skill Level
-            </h2>
+            <h2>Latest Skill Level</h2>
 
             <p>
               Your most recent assessment performance.
@@ -390,9 +357,7 @@ function Progress({ onBack }) {
 
         {loading ? (
 
-          <p>
-            Loading latest assessment...
-          </p>
+          <p>Loading latest assessment...</p>
 
         ) : latestAssessment ? (
 
@@ -417,9 +382,7 @@ function Progress({ onBack }) {
                 {latestAssessment.percentage}%
               </strong>
 
-              <small>
-                Score
-              </small>
+              <small>Score</small>
 
             </div>
 
@@ -445,156 +408,328 @@ function Progress({ onBack }) {
       </section>
 
 
-<section className="progress-section">
+      {/* SKILL PERFORMANCE */}
 
-  <div className="progress-section-header">
+      <section className="progress-section">
 
-    <div>
+        <div className="progress-section-header">
 
-      <span className="section-label">
-        SKILL PERFORMANCE
-      </span>
+          <div>
 
-      <h2>
-        Your Skills
-      </h2>
-
-      <p>
-        Track your competency level across assessed skills.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  {loading ? (
-
-    <p>Loading skill performance...</p>
-
-  ) : assessments.length === 0 ? (
-
-    <div className="empty-state">
-
-      <h3>
-        No skills assessed yet
-      </h3>
-
-      <p>
-        Complete a skill assessment to see your
-        competency progress here.
-      </p>
-
-    </div>
-
-  ) : (
-
-    <div className="skill-performance-grid">
-
-      {assessments.map((assessment) => (
-
-        <div
-          className="skill-performance-card"
-          key={assessment._id}
-        >
-
-          <div className="skill-card-top">
-
-            <div className="skill-card-title">
-
-              <div className="skill-mini-icon">
-                {assessment.skill
-                  ? assessment.skill.charAt(0).toUpperCase()
-                  : "S"}
-              </div>
-
-              <div>
-
-                <h3>
-                  {assessment.skill}
-                </h3>
-
-                <span>
-                  Skill Assessment
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div className="skill-score">
-
-              <strong>
-                {assessment.percentage}%
-              </strong>
-
-            </div>
-
-          </div>
-
-
-          <div className="skill-level-row">
-
-            <span>
-              Competency Level
+            <span className="section-label">
+              SKILL PERFORMANCE
             </span>
 
-            <span className="skill-level-badge">
-              {assessment.level}
-            </span>
+            <h2>Your Skills</h2>
 
-          </div>
-
-
-          <div className="skill-progress-wrapper">
-
-            <div className="skill-progress-track">
-
-             <div
-  className={`skill-progress-fill ${
-    assessment.percentage >= 80
-      ? "strong"
-      : assessment.percentage >= 60
-      ? "good"
-      : "needs-improvement"
-  }`}
-  style={{
-    width: `${assessment.percentage}%`
-  }}
-></div>
-
-            </div>
-
-          </div>
-
-
-          <div className="skill-card-footer">
-
-            <span>
-              Current performance
-            </span>
-
-            <span>
-              {assessment.percentage >= 80
-                ? "Strong"
-                : assessment.percentage >= 60
-                ? "Good"
-                : "Needs Improvement"}
-            </span>
+            <p>
+              Performance across your assessed skills.
+            </p>
 
           </div>
 
         </div>
 
-      ))}
 
-    </div>
+        {loading ? (
 
-  )}
+          <p>Loading skill performance...</p>
 
-</section>
+        ) : assessments.length === 0 ? (
 
+          <div className="empty-state">
+
+            <h3>
+              No skills assessed yet
+            </h3>
+
+            <p>
+              Complete a skill assessment to see
+              your competency progress here.
+            </p>
+
+          </div>
+
+        ) : (
+
+          <div className="skill-performance-grid">
+
+            {assessments.map((assessment) => (
+
+              <div
+                className="skill-performance-card"
+                key={assessment._id}
+              >
+
+                <div className="skill-card-top">
+
+                  <div className="skill-card-title">
+
+                    <div className="skill-mini-icon">
+
+                      {assessment.skill
+                        ? assessment.skill
+                            .charAt(0)
+                            .toUpperCase()
+                        : "S"}
+
+                    </div>
+
+                    <div>
+
+                      <h3>
+                        {assessment.skill}
+                      </h3>
+
+                      <span>
+                        Skill Assessment
+                      </span>
+
+                    </div>
+
+                  </div>
+
+
+                  <div className="skill-score">
+
+                    <strong>
+                      {assessment.percentage}%
+                    </strong>
+
+                  </div>
+
+                </div>
+
+
+                <div className="skill-level-row">
+
+                  <span>
+                    Competency Level
+                  </span>
+
+                  <span className="skill-level-badge">
+                    {assessment.level}
+                  </span>
+
+                </div>
+
+
+                <div className="skill-progress-wrapper">
+
+                  <div className="skill-progress-track">
+
+                    <div
+                      className={`skill-progress-fill ${
+                        assessment.percentage >= 80
+                          ? "strong"
+                          : assessment.percentage >= 60
+                          ? "good"
+                          : "needs-improvement"
+                      }`}
+                      style={{
+                        width:
+                          `${assessment.percentage}%`
+                      }}
+                    ></div>
+
+                  </div>
+
+                </div>
+
+
+                <div className="skill-card-footer">
+
+                  <span>
+                    Current performance
+                  </span>
+
+                  <span>
+
+                    {assessment.percentage >= 80
+                      ? "Strong"
+                      : assessment.percentage >= 60
+                      ? "Good"
+                      : "Needs Improvement"}
+
+                  </span>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        )}
+
+      </section>
+
+
+      {/* QUIZ PERFORMANCE */}
+
+      <section className="progress-section">
+
+        <div className="progress-section-header">
+
+          <div>
+
+            <span className="section-label">
+              PRACTICE PERFORMANCE
+            </span>
+
+            <h2>Quiz Performance</h2>
+
+            <p>
+              Track your practice quiz results and improvement.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        {loading ? (
+
+          <p>Loading quiz performance...</p>
+
+        ) : quizResults.length === 0 ? (
+
+          <div className="empty-state">
+
+            <h3>
+              No quizzes completed yet
+            </h3>
+
+            <p>
+              Complete a practice quiz to start
+              tracking your quiz performance.
+            </p>
+
+          </div>
+
+        ) : (
+
+          <div className="quiz-performance-list">
+
+            {quizResults.slice(0, 5).map((quiz) => (
+
+              <div
+                className="quiz-performance-row"
+                key={quiz._id}
+              >
+
+                <div>
+
+                  <h3>
+                    {quiz.skill}
+                  </h3>
+
+                  <span>
+                    {quiz.score}/{quiz.totalQuestions} correct
+                  </span>
+
+                </div>
+
+
+                <div className="quiz-performance-score">
+
+                  <strong>
+                    {quiz.percentage}%
+                  </strong>
+
+                  <small>
+                    {quiz.level}
+                  </small>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        )}
+
+      </section>
+
+
+      {/* RECENT ASSESSMENTS */}
+
+      <section className="progress-section">
+
+        <div className="progress-section-header">
+
+          <div>
+
+            <span className="section-label">
+              RECENT ACTIVITY
+            </span>
+
+            <h2>Recent Assessment Results</h2>
+
+            <p>
+              Review your completed skill assessments.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        {assessments.length > 0 ? (
+
+          <div className="assessment-history">
+
+            {assessments
+              .slice(0, 5)
+              .map((assessment) => (
+
+                <div
+                  className="assessment-history-row"
+                  key={assessment._id}
+                >
+
+                  <div>
+
+                    <h3>
+                      {assessment.skill}
+                    </h3>
+
+                    <span>
+                      {assessment.level}
+                    </span>
+
+                  </div>
+
+
+                  <div className="history-score">
+
+                    <strong>
+                      {assessment.percentage}%
+                    </strong>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+          </div>
+
+        ) : (
+
+          <p>
+            No assessment history available.
+          </p>
+
+        )}
+
+      </section>
+
+
+      {/* MOTIVATION */}
 
       <section className="progress-message">
 
@@ -609,15 +744,13 @@ function Progress({ onBack }) {
           </h3>
 
           <p>
-            Complete an assessment or quiz every
-            day to continue building your learning
-            streak.
+            Complete an assessment or quiz every day
+            to continue building your learning streak.
           </p>
 
         </div>
 
       </section>
-
 
     </div>
   );
