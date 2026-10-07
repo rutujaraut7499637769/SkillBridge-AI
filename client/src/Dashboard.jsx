@@ -319,17 +319,88 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
         </div>
 
 
-        {/* Recommended Learning */}
-        <div className="dashboard-section">
+       {/* Recommended Learning */}
 
-          <h2>Recommended Learning</h2>
+<div className="dashboard-section">
 
-          <p>
-            Your personalized recommendations will appear
-            here after the AI competency-gap analysis is implemented.
-          </p>
+  <div className="section-heading">
 
-        </div>
+    <div>
+      <h2>Recommended Next Step</h2>
+
+      <p>
+        Based on your latest skill assessment.
+      </p>
+    </div>
+
+  </div>
+
+
+  {latestAssessment ? (
+
+    <div className="dashboard-recommendation">
+
+      <div className="recommendation-info">
+
+        <span className="recommendation-label">
+          NEXT FOR YOU
+        </span>
+
+        <h3>
+          {latestAssessment.skill}
+        </h3>
+
+        <p>
+          Your current level is{" "}
+          <strong>
+            {latestAssessment.level}
+          </strong>
+          . Focus on strengthening this skill
+          before moving to advanced topics.
+        </p>
+
+      </div>
+
+
+      <div className="recommendation-score">
+
+        <strong>
+          {latestAssessment.percentage}%
+        </strong>
+
+        <span>
+          Current Score
+        </span>
+
+      </div>
+
+    </div>
+
+  ) : (
+
+    <div className="empty-state">
+
+      <h3>
+        Start your learning journey
+      </h3>
+
+      <p>
+        Complete a skill assessment to get
+        personalized learning recommendations.
+      </p>
+
+      <button
+        className="primary-button"
+        onClick={onSkillAssessment}
+      >
+        Start Assessment
+      </button>
+
+    </div>
+
+  )}
+
+</div>
 
       </main>
 
