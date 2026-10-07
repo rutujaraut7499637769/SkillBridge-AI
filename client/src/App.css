@@ -27,7 +27,6 @@ body {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
-/* Brand */
 
 .brand {
   text-align: center;
@@ -59,7 +58,6 @@ body {
   font-size: 14px;
 }
 
-/* Tabs */
 
 .auth-tabs {
   display: flex;
@@ -83,7 +81,6 @@ body {
   font-weight: 700;
 }
 
-/* Form */
 
 .auth-form h2 {
   text-align: center;
@@ -125,7 +122,6 @@ body {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-/* Password */
 
 .password-box {
   position: relative;
@@ -147,7 +143,6 @@ body {
   font-size: 17px;
 }
 
-/* Main Button */
 
 .main-button {
   width: 100%;
@@ -166,7 +161,6 @@ body {
   background: #1d4ed8;
 }
 
-/* Bottom text */
 
 .switch-text {
   text-align: center;
@@ -185,7 +179,6 @@ body {
   text-decoration: underline;
 }
 
-/* Mobile */
 
 @media (max-width: 480px) {
   .auth-page {
