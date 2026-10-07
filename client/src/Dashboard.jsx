@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Dashboard.css";
 
-function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onProgress }) {
+function Dashboard({
+  onSkillAssessment,
+  onMySkills,
+  onLearningRoadmap,
+  onQuiz,
+  onProgress,
+  onProfile,
+  onLogout
+}) {
 
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,95 +40,142 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
       setAssessments(response.data);
 
     } catch (error) {
-      console.log("Error fetching assessments:", error);
+      console.log(
+        "Error fetching assessments:",
+        error
+      );
+
       setAssessments([]);
+
     } finally {
       setLoading(false);
     }
   };
 
-  const latestAssessment = assessments.length > 0
-    ? assessments[0]
-    : null;
 
-  const overallProgress = assessments.length > 0
-    ? Math.round(
-        assessments.reduce(
-          (total, assessment) => total + assessment.percentage,
-          0
-        ) / assessments.length
-      )
-    : 0;
-const getNextLearning = (assessment) => {
-  const skill = assessment.skill?.toLowerCase();
-  const score = assessment.percentage;
+  const latestAssessment =
+    assessments.length > 0
+      ? assessments[0]
+      : null;
 
-  const topics = {
-    javascript: {
-      weak: "JavaScript Basics → Functions → Arrays",
-      average: "DOM → ES6 → Async JavaScript",
-      strong: "Advanced JavaScript → APIs → Real Project"
-    },
 
-    react: {
-      weak: "Components → Props → State",
-      average: "Hooks → API Integration → Component Design",
-      strong: "Advanced Hooks → Performance → Real Project"
-    },
+  const overallProgress =
+    assessments.length > 0
+      ? Math.round(
+          assessments.reduce(
+            (total, assessment) =>
+              total + assessment.percentage,
+            0
+          ) / assessments.length
+        )
+      : 0;
 
-    html: {
-      weak: "HTML Basics → Semantic HTML → Forms",
-      average: "Accessibility → SEO → Responsive HTML",
-      strong: "Advanced Accessibility → SEO → Professional Website"
-    },
 
-    css: {
-      weak: "CSS Basics → Flexbox → Responsive Design",
-      average: "Grid → Advanced Flexbox → Responsive UI",
-      strong: "Animations → Advanced CSS → Professional UI"
-    },
+  const getNextLearning = (assessment) => {
 
-    node: {
-      weak: "Node Basics → Express → REST API",
-      average: "Middleware → Authentication → API Integration",
-      strong: "JWT → API Security → Production API"
-    },
+    const skill =
+      assessment.skill?.toLowerCase();
 
-    sql: {
-      weak: "SQL Basics → SELECT → Filtering",
-      average: "Joins → Subqueries → Database Design",
-      strong: "Advanced SQL → Optimization → Database Project"
+    const score =
+      assessment.percentage;
+
+    const topics = {
+
+      javascript: {
+        weak: "JavaScript Basics → Functions → Arrays",
+        average: "DOM → ES6 → Async JavaScript",
+        strong: "Advanced JavaScript → APIs → Real Project"
+      },
+
+      react: {
+        weak: "Components → Props → State",
+        average: "Hooks → API Integration → Component Design",
+        strong: "Advanced Hooks → Performance → Real Project"
+      },
+
+      html: {
+        weak: "HTML Basics → Semantic HTML → Forms",
+        average: "Accessibility → SEO → Responsive HTML",
+        strong: "Advanced Accessibility → SEO → Professional Website"
+      },
+
+      css: {
+        weak: "CSS Basics → Flexbox → Responsive Design",
+        average: "Grid → Advanced Flexbox → Responsive UI",
+        strong: "Animations → Advanced CSS → Professional UI"
+      },
+
+      node: {
+        weak: "Node Basics → Express → REST API",
+        average: "Middleware → Authentication → API Integration",
+        strong: "JWT → API Security → Production API"
+      },
+
+      sql: {
+        weak: "SQL Basics → SELECT → Filtering",
+        average: "Joins → Subqueries → Database Design",
+        strong: "Advanced SQL → Optimization → Database Project"
+      }
+
+    };
+
+
+    const selectedSkill =
+      topics[skill];
+
+
+    if (!selectedSkill) {
+
+      if (score < 60) {
+        return "Learn the basics → Core concepts → Practice Quiz";
+      }
+
+      if (score < 80) {
+        return "Intermediate concepts → Practice → Small Project";
+      }
+
+      return "Advanced concepts → Real-world problems → Advanced Project";
     }
+
+
+    if (score < 60) {
+      return selectedSkill.weak;
+    }
+
+    if (score < 80) {
+      return selectedSkill.average;
+    }
+
+    return selectedSkill.strong;
   };
 
-  const selectedSkill = topics[skill];
 
-  if (!selectedSkill) {
-    if (score < 60) return "Learn the basics → Core concepts → Practice Quiz";
-    if (score < 80) return "Intermediate concepts → Practice → Small Project";
-    return "Advanced concepts → Real-world problems → Advanced Project";
-  }
-
-  if (score < 60) return selectedSkill.weak;
-  if (score < 80) return selectedSkill.average;
-
-  return selectedSkill.strong;
-};
   return (
     <div className="dashboard">
 
       <aside className="sidebar">
 
         <div className="sidebar-brand">
-          <div className="sidebar-logo">SB</div>
-          <h2>SkillBridge AI</h2>
+
+          <div className="sidebar-logo">
+            SB
+          </div>
+
+          <h2>
+            SkillBridge AI
+          </h2>
+
         </div>
+
 
         <nav className="sidebar-menu">
 
-          <button className="menu-item active">
+          <button
+            className="menu-item active"
+          >
             🏠 Dashboard
           </button>
+
 
           <button
             className="menu-item"
@@ -129,6 +184,7 @@ const getNextLearning = (assessment) => {
             📊 Skill Assessment
           </button>
 
+
           <button
             className="menu-item"
             onClick={onMySkills}
@@ -136,14 +192,18 @@ const getNextLearning = (assessment) => {
             🧠 My Skills
           </button>
 
+
           <button
-  className="menu-item"
-  onClick={() =>
-    onLearningRoadmap(latestAssessment?.skill || "")
-  }
->
-  🗺️ Learning Roadmap
-</button>
+            className="menu-item"
+            onClick={() =>
+              onLearningRoadmap(
+                latestAssessment?.skill || ""
+              )
+            }
+          >
+            🗺️ Learning Roadmap
+          </button>
+
 
           <button
             className="menu-item"
@@ -152,49 +212,75 @@ const getNextLearning = (assessment) => {
             📝 Quiz
           </button>
 
-          <button className="menu-item"
-            onClick={onProgress}>
+
+          <button
+            className="menu-item"
+            onClick={onProgress}
+          >
             📈 Progress
           </button>
 
-          <button className="menu-item">
+
+          <button
+            className="menu-item"
+            onClick={onProfile}
+          >
             👤 Profile
           </button>
 
         </nav>
 
-        <button className="logout-button">
+
+        <button
+          className="logout-button"
+          onClick={onLogout}
+        >
           🚪 Logout
         </button>
 
       </aside>
+
 
       <main className="dashboard-main">
 
         <div className="dashboard-header">
 
           <div>
-            <h1>Welcome back 👋</h1>
+
+            <h1>
+              Welcome back 👋
+            </h1>
 
             <p>
               Continue your personalized learning journey.
             </p>
+
           </div>
 
-          <div className="profile-circle">
+
+          <div
+            className="profile-circle"
+            onClick={onProfile}
+            style={{ cursor: "pointer" }}
+          >
             R
           </div>
 
         </div>
 
+
         <div className="overview-grid">
 
           <div className="overview-card">
 
-            <span>Overall Progress</span>
+            <span>
+              Overall Progress
+            </span>
 
             <h2>
-              {loading ? "..." : `${overallProgress}%`}
+              {loading
+                ? "..."
+                : `${overallProgress}%`}
             </h2>
 
             <p>
@@ -205,12 +291,17 @@ const getNextLearning = (assessment) => {
 
           </div>
 
+
           <div className="overview-card">
 
-            <span>Skills Assessed</span>
+            <span>
+              Skills Assessed
+            </span>
 
             <h2>
-              {loading ? "..." : assessments.length}
+              {loading
+                ? "..."
+                : assessments.length}
             </h2>
 
             <p>
@@ -221,9 +312,12 @@ const getNextLearning = (assessment) => {
 
           </div>
 
+
           <div className="overview-card">
 
-            <span>Latest Skill Level</span>
+            <span>
+              Latest Skill Level
+            </span>
 
             <h2>
               {loading
@@ -243,16 +337,21 @@ const getNextLearning = (assessment) => {
 
         </div>
 
+
         <div className="dashboard-section">
 
           <div className="section-heading">
 
             <div>
-              <h2>Skill Performance</h2>
+
+              <h2>
+                Skill Performance
+              </h2>
 
               <p>
                 Your latest performance across assessed skills.
               </p>
+
             </div>
 
           </div>
@@ -260,13 +359,17 @@ const getNextLearning = (assessment) => {
 
           {loading ? (
 
-            <p>Loading assessment results...</p>
+            <p>
+              Loading assessment results...
+            </p>
 
           ) : assessments.length === 0 ? (
 
             <div className="empty-state">
 
-              <h3>No skills assessed yet</h3>
+              <h3>
+                No skills assessed yet
+              </h3>
 
               <p>
                 Complete your first skill assessment to see
@@ -286,52 +389,57 @@ const getNextLearning = (assessment) => {
 
             <div className="skills-list">
 
-              {assessments.map((assessment) => (
+              {assessments.map(
+                (assessment) => (
 
-                <div
-                  className="skill-row"
-                  key={assessment._id}
-                >
+                  <div
+                    className="skill-row"
+                    key={assessment._id}
+                  >
 
-                  <div className="skill-info">
+                    <div className="skill-info">
 
-                    <h3>{assessment.skill}</h3>
+                      <h3>
+                        {assessment.skill}
+                      </h3>
 
-                    <span>
-                      {assessment.level}
-                    </span>
-
-                  </div>
-
-
-                  <div className="skill-progress">
-
-                    <div className="progress-track">
-
-                      <div
-  className={`skill-progress-fill ${
-    assessment.percentage >= 80
-      ? "strong"
-      : assessment.percentage >= 60
-      ? "good"
-      : "needs-improvement"
-  }`}
-  style={{
-    width: `${assessment.percentage}%`
-  }}
-></div>
+                      <span>
+                        {assessment.level}
+                      </span>
 
                     </div>
 
-                    <strong>
-                      {assessment.percentage}%
-                    </strong>
+
+                    <div className="skill-progress">
+
+                      <div className="progress-track">
+
+                        <div
+                          className={`skill-progress-fill ${
+                            assessment.percentage >= 80
+                              ? "strong"
+                              : assessment.percentage >= 60
+                              ? "good"
+                              : "needs-improvement"
+                          }`}
+                          style={{
+                            width:
+                              `${assessment.percentage}%`
+                          }}
+                        />
+
+                      </div>
+
+                      <strong>
+                        {assessment.percentage}%
+                      </strong>
+
+                    </div>
 
                   </div>
 
-                </div>
-
-              ))}
+                )
+              )}
 
             </div>
 
@@ -339,9 +447,12 @@ const getNextLearning = (assessment) => {
 
         </div>
 
+
         <div className="dashboard-section">
 
-          <h2>Improve Your Skills</h2>
+          <h2>
+            Improve Your Skills
+          </h2>
 
           <p>
             Take skill assessments to identify your strengths,
@@ -358,100 +469,115 @@ const getNextLearning = (assessment) => {
         </div>
 
 
-<div className="dashboard-section">
+        <div className="dashboard-section">
 
-  <div className="section-heading">
+          <div className="section-heading">
 
-    <div>
-      <h2>Recommended Next Step</h2>
+            <div>
 
-      <p>
-        Based on your latest skill assessment.
-      </p>
-    </div>
+              <h2>
+                Recommended Next Step
+              </h2>
 
-  </div>
+              <p>
+                Based on your latest skill assessment.
+              </p>
 
+            </div>
 
-  {latestAssessment ? (
-
-    <div className="dashboard-recommendation">
-
-      <div className="recommendation-info">
-
-        <span className="recommendation-label">
-          NEXT FOR YOU
-        </span>
-
-        <h3>
-          {latestAssessment.skill}
-        </h3>
-
-       <p>
-  Your current level is{" "}
-  <strong>
-    {latestAssessment.level}
-  </strong>
-  .
-</p>
-
-<div className="next-learning-path">
-  <span>Recommended next:</span>
-
-  <strong>
-    {getNextLearning(latestAssessment)}
-  </strong>
-</div>
-<button
-  className="roadmap-button"
-  onClick={() =>
-    onLearningRoadmap(latestAssessment.skill)
-  }
->
-  View Learning Roadmap →
-</button>
-      </div>
+          </div>
 
 
-      <div className="recommendation-score">
+          {latestAssessment ? (
 
-        <strong>
-          {latestAssessment.percentage}%
-        </strong>
+            <div className="dashboard-recommendation">
 
-        <span>
-          Current Score
-        </span>
+              <div className="recommendation-info">
 
-      </div>
+                <span className="recommendation-label">
+                  NEXT FOR YOU
+                </span>
 
-    </div>
+                <h3>
+                  {latestAssessment.skill}
+                </h3>
 
-  ) : (
+                <p>
+                  Your current level is{" "}
+                  <strong>
+                    {latestAssessment.level}
+                  </strong>.
+                </p>
 
-    <div className="empty-state">
 
-      <h3>
-        Start your learning journey
-      </h3>
+                <div className="next-learning-path">
 
-      <p>
-        Complete a skill assessment to get
-        personalized learning recommendations.
-      </p>
+                  <span>
+                    Recommended next:
+                  </span>
 
-      <button
-        className="primary-button"
-        onClick={onSkillAssessment}
-      >
-        Start Assessment
-      </button>
+                  <strong>
+                    {getNextLearning(
+                      latestAssessment
+                    )}
+                  </strong>
 
-    </div>
+                </div>
 
-  )}
 
-</div>
+                <button
+                  className="roadmap-button"
+                  onClick={() =>
+                    onLearningRoadmap(
+                      latestAssessment.skill
+                    )
+                  }
+                >
+                  View Learning Roadmap →
+                </button>
+
+              </div>
+
+
+              <div className="recommendation-score">
+
+                <strong>
+                  {latestAssessment.percentage}%
+                </strong>
+
+                <span>
+                  Current Score
+                </span>
+
+              </div>
+
+            </div>
+
+          ) : (
+
+            <div className="empty-state">
+
+              <h3>
+                Start your learning journey
+              </h3>
+
+              <p>
+                Complete a skill assessment to get
+                personalized learning recommendations.
+              </p>
+
+              <button
+                className="primary-button"
+                onClick={onSkillAssessment}
+              >
+                Start Assessment
+              </button>
+
+            </div>
+
+          )}
+
+        </div>
 
       </main>
 

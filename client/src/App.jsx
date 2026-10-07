@@ -8,12 +8,14 @@ import MySkills from "./MySkills";
 import LearningRoadmap from "./LearningRoadmap";
 import Quiz from "./Quiz";
 import Progress from "./progress";
+import Profile from "./Profile";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [currentPage, setCurrentPage] = useState("dashboard");
-  const [selectedSkill, setSelectedSkill] = useState(""); 
+  const [selectedSkill, setSelectedSkill] = useState("");
 
   // Signup
   const [name, setName] = useState("");
@@ -29,6 +31,7 @@ function App() {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [showSignupPassword, setShowSignupPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
   // Signup
   const handleSignup = async (e) => {
@@ -66,6 +69,7 @@ function App() {
     }
   };
 
+
   // Login
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -97,6 +101,22 @@ function App() {
     }
   };
 
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
+    setIsLoggedIn(false);
+    setCurrentPage("dashboard");
+    setSelectedSkill("");
+
+    setLoginEmail("");
+    setLoginPassword("");
+
+    alert("Logged out successfully");
+  };
+
+
   // Logged-in pages
   if (isLoggedIn) {
 
@@ -108,17 +128,19 @@ function App() {
       );
     }
 
+
     if (currentPage === "mySkills") {
-  return (
-    <MySkills
-      onBack={() => setCurrentPage("dashboard")}
-      onLearningRoadmap={(skill) => {
-        setSelectedSkill(skill);
-        setCurrentPage("learningRoadmap");
-      }}
-    />
-  );
-}
+      return (
+        <MySkills
+          onBack={() => setCurrentPage("dashboard")}
+          onLearningRoadmap={(skill) => {
+            setSelectedSkill(skill);
+            setCurrentPage("learningRoadmap");
+          }}
+        />
+      );
+    }
+
 
     if (currentPage === "learningRoadmap") {
       return (
@@ -129,17 +151,19 @@ function App() {
       );
     }
 
+
     if (currentPage === "quiz") {
-  return (
-    <Quiz
-      onBack={() => setCurrentPage("dashboard")}
-      onLearningRoadmap={(skill) => {
-        setSelectedSkill(skill);
-        setCurrentPage("learningRoadmap");
-      }}
-    />
-  );
-}
+      return (
+        <Quiz
+          onBack={() => setCurrentPage("dashboard")}
+          onLearningRoadmap={(skill) => {
+            setSelectedSkill(skill);
+            setCurrentPage("learningRoadmap");
+          }}
+        />
+      );
+    }
+
 
     if (currentPage === "progress") {
       return (
@@ -149,34 +173,56 @@ function App() {
       );
     }
 
+
+    if (currentPage === "profile") {
+      return (
+        <Profile
+          onBack={() => setCurrentPage("dashboard")}
+          onLogout={handleLogout}
+        />
+      );
+    }
+
+
     return (
       <Dashboard
         onSkillAssessment={() =>
           setCurrentPage("assessment")
         }
+
         onMySkills={() =>
           setCurrentPage("mySkills")
         }
-       onLearningRoadmap={(skill) => {
-  setSelectedSkill(skill);
-  setCurrentPage("learningRoadmap");
-}}
+
+        onLearningRoadmap={(skill) => {
+          setSelectedSkill(skill);
+          setCurrentPage("learningRoadmap");
+        }}
+
         onQuiz={() =>
           setCurrentPage("quiz")
         }
+
         onProgress={() =>
           setCurrentPage("progress")
         }
+
+        onProfile={() =>
+          setCurrentPage("profile")
+        }
+
+        onLogout={handleLogout}
       />
     );
   }
 
+
+  // Login / Signup
   return (
     <div className="auth-page">
 
       <div className="auth-card">
 
-        {/* Brand */}
         <div className="brand">
 
           <div className="brand-icon">
@@ -191,7 +237,7 @@ function App() {
 
         </div>
 
-        {/* Login / Signup Tabs */}
+
         <div className="auth-tabs">
 
           <button
@@ -210,7 +256,7 @@ function App() {
 
         </div>
 
-        {/* LOGIN */}
+
         {isLogin ? (
 
           <form
@@ -235,6 +281,7 @@ function App() {
               }
               required
             />
+
 
             <label>Password</label>
 
@@ -268,12 +315,14 @@ function App() {
 
             </div>
 
+
             <button
               type="submit"
               className="main-button"
             >
               Login
             </button>
+
 
             <p className="switch-text">
 
@@ -291,7 +340,6 @@ function App() {
 
         ) : (
 
-          /* SIGNUP */
           <form
             onSubmit={handleSignup}
             className="auth-form"
@@ -302,6 +350,7 @@ function App() {
             <p className="form-subtitle">
               Start your personalized learning journey.
             </p>
+
 
             <label>Full Name</label>
 
@@ -315,6 +364,7 @@ function App() {
               required
             />
 
+
             <label>Email</label>
 
             <input
@@ -326,6 +376,7 @@ function App() {
               }
               required
             />
+
 
             <label>Password</label>
 
@@ -359,6 +410,7 @@ function App() {
 
             </div>
 
+
             <label>Confirm Password</label>
 
             <div className="password-box">
@@ -391,12 +443,14 @@ function App() {
 
             </div>
 
+
             <button
               type="submit"
               className="main-button"
             >
               Create Account
             </button>
+
 
             <p className="switch-text">
 
@@ -411,7 +465,6 @@ function App() {
             </p>
 
           </form>
-
         )}
 
       </div>
