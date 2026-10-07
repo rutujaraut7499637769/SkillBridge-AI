@@ -316,9 +316,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
         </div>
 
-
-        {/* ROADMAP */}
-
         <div className="roadmap-section">
 
           <div className="roadmap-section-heading">

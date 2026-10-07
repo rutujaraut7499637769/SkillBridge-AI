@@ -10,11 +10,6 @@
   margin: 0 auto;
 }
 
-
-/* =========================
-   PAGE HEADER
-========================= */
-
 .my-skills-header {
   margin-bottom: 40px;
 }
@@ -62,11 +57,6 @@
   max-width: 650px;
 }
 
-
-/* =========================
-   SUMMARY
-========================= */
-
 .skills-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -113,11 +103,6 @@
   font-weight: 700;
 }
 
-
-/* =========================
-   COMPETENCY SECTION
-========================= */
-
 .skills-section {
   background: #ffffff;
   border: 1px solid #e7ebf2;
@@ -155,11 +140,6 @@
   font-weight: 600;
   white-space: nowrap;
 }
-
-
-/* =========================
-   SKILL CARDS
-========================= */
 
 .my-skills-grid {
   display: grid;
@@ -207,9 +187,6 @@
   white-space: nowrap;
 }
 
-
-/* Level colors */
-
 .skill-level.advanced {
   background: #ecfdf3;
   color: #15803d;
@@ -229,11 +206,6 @@
   background: #fef2f2;
   color: #dc2626;
 }
-
-
-/* =========================
-   SCORE
-========================= */
 
 .skill-score-row {
   display: flex;
@@ -312,11 +284,6 @@
   font-size: 11px;
 }
 
-
-/* =========================
-   INSIGHT
-========================= */
-
 .skills-insight {
   margin-top: 22px;
   background: #eff6ff;
@@ -353,11 +320,6 @@
   line-height: 1.5;
 }
 
-
-/* =========================
-   LOADING
-========================= */
-
 .skills-loading {
   min-height: 300px;
   background: #ffffff;
@@ -389,11 +351,6 @@
     transform: rotate(360deg);
   }
 }
-
-
-/* =========================
-   EMPTY STATE
-========================= */
 
 .skills-empty {
   background: #ffffff;
