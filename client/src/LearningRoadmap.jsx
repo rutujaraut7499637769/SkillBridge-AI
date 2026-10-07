@@ -8,16 +8,50 @@ function LearningRoadmap({ onBack, selectedSkill }) {
   const [openSkill, setOpenSkill] = useState(null);
   const [completedTopics, setCompletedTopics] = useState({});
 
+  // Load saved topic progress
+  useEffect(() => {
+    const savedProgress = localStorage.getItem(
+      "skillbridgeCompletedTopics"
+    );
+
+    if (savedProgress) {
+      setCompletedTopics(JSON.parse(savedProgress));
+    }
+  }, []);
+
+  // Save topic progress
+  useEffect(() => {
+    localStorage.setItem(
+      "skillbridgeCompletedTopics",
+      JSON.stringify(completedTopics)
+    );
+  }, [completedTopics]);
+
+  // Topic status
   const getTopicStatus = (skill, topicIndex) => {
-    const completedCount = Object.keys(completedTopics)
-      .filter((key) => key.startsWith(`${skill}-`))
-      .length;
+    const completedCount =
+      1 +
+      Object.keys(completedTopics).filter((key) =>
+        key.startsWith(`${skill}-`)
+      ).length;
 
-    if (topicIndex < completedCount) return "completed";
+    if (topicIndex < completedCount) {
+      return "completed";
+    }
 
-    if (topicIndex === completedCount) return "current";
+    if (topicIndex === completedCount) {
+      return "current";
+    }
 
     return "locked";
+  };
+
+  // Complete current topic
+  const completeTopic = (skill, topicIndex) => {
+    setCompletedTopics((prev) => ({
+      ...prev,
+      [`${skill}-${topicIndex}`]: true
+    }));
   };
 
   useEffect(() => {
@@ -365,10 +399,11 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
               return (
                 <div
-                  className={`roadmap-item ${status} ${selectedSkill === item.skill
+                  className={`roadmap-item ${status} ${
+                    selectedSkill === item.skill
                       ? "selected-roadmap"
                       : ""
-                    }`}
+                  }`}
                   key={item.id}
                 >
 
@@ -399,7 +434,8 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                       <div>
 
                         <span className="stage-label">
-                          STAGE {String(item.id).padStart(2, "0")}
+                          STAGE{" "}
+                          {String(item.id).padStart(2, "0")}
                         </span>
 
                         <h3>
@@ -480,10 +516,12 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                         {item.topics.map(
                           (topic, topicIndex) => {
 
-                            const topicStatus = getTopicStatus(
-                              item.skill,
-                              topicIndex
-                            );
+                            const topicStatus =
+                              getTopicStatus(
+                                item.skill,
+                                topicIndex
+                              );
+
                             return (
                               <div
                                 className={`learning-topic ${topicStatus}`}
@@ -491,13 +529,11 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                               >
 
                                 <span>
-
                                   {topicStatus === "completed"
                                     ? "✓"
                                     : topicStatus === "current"
-                                      ? "→"
-                                      : "🔒"}
-
+                                    ? "→"
+                                    : "🔒"}
                                 </span>
 
                                 <p>
@@ -505,27 +541,27 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                                 </p>
 
                                 <small>
-
                                   {topicStatus === "completed"
                                     ? "Completed"
                                     : topicStatus === "current"
-                                      ? "Current"
-                                      : "Locked"}
-
+                                    ? "Current"
+                                    : "Locked"}
                                 </small>
+
                                 {topicStatus === "current" && (
                                   <button
                                     className="complete-topic-button"
                                     onClick={() =>
-                                      setCompletedTopics((prev) => ({
-                                        ...prev,
-                                        [`${item.skill}-${topicIndex}`]: true
-                                      }))
+                                      completeTopic(
+                                        item.skill,
+                                        topicIndex
+                                      )
                                     }
                                   >
                                     Mark as Complete ✓
                                   </button>
                                 )}
+
                               </div>
                             );
                           }
