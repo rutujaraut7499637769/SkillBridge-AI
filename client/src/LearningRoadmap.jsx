@@ -5,6 +5,7 @@ import "./LearningRoadmap.css";
 function LearningRoadmap({ onBack, selectedSkill }) {
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [openSkill, setOpenSkill] = useState(null);
 
   useEffect(() => {
     fetchAssessments();
@@ -248,7 +249,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
     <div className="roadmap-page">
       <div className="roadmap-container">
 
-        {/* HEADER */}
 
         <div className="roadmap-header">
 
@@ -346,8 +346,8 @@ function LearningRoadmap({ onBack, selectedSkill }) {
               return (
                 <div
                   className={`roadmap-item ${status} ${selectedSkill === item.skill
-                      ? "selected-roadmap"
-                      : ""
+                    ? "selected-roadmap"
+                    : ""
                     }`}
                   key={item.id}
                 >
@@ -429,10 +429,29 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                     )}
                     <button
                       className="start-learning-button"
-                      onClick={() => alert(`Starting ${item.title}`)}
+                      onClick={() =>
+                        setOpenSkill(
+                          openSkill === item.skill ? null : item.skill
+                        )
+                      }
                     >
                       Start Learning →
                     </button>
+                    {openSkill === item.skill && (
+  <div className="learning-topics">
+    <h4>Topics to Learn</h4>
+
+    {item.topics.map((topic, topicIndex) => (
+      <div
+        className="learning-topic"
+        key={topic}
+      >
+        <span>{topicIndex + 1}</span>
+        <p>{topic}</p>
+      </div>
+    ))}
+  </div>
+)}
                   </div>
 
                 </div>
