@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import "./MySkills.css";
 
-function MySkills({ onBack }) {
+function MySkills({ onBack, onLearningRoadmap }) {
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -312,7 +312,12 @@ function MySkills({ onBack }) {
                       </span>
 
                     </div>
-
+                    <button
+                      className="View-roadmap-button"
+                      onClick={() => onLearningRoadmap(assessment.skill)}
+                    >
+                      View Learning Roadmap →
+                    </button>
                   </div>
 
                 ))}

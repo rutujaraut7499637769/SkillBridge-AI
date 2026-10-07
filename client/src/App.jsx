@@ -109,12 +109,16 @@ function App() {
     }
 
     if (currentPage === "mySkills") {
-      return (
-        <MySkills
-          onBack={() => setCurrentPage("dashboard")}
-        />
-      );
-    }
+  return (
+    <MySkills
+      onBack={() => setCurrentPage("dashboard")}
+      onLearningRoadmap={(skill) => {
+        setSelectedSkill(skill);
+        setCurrentPage("learningRoadmap");
+      }}
+    />
+  );
+}
 
     if (currentPage === "learningRoadmap") {
       return (
