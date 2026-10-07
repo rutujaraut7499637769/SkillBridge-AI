@@ -889,190 +889,101 @@ if (quizCompleted) {
 
           <div className="result-details">
 
-            <h2>{getLevel()}</h2>
+  <h2>{getLevel()}</h2>
 
-            <p>
-              You answered{" "}
-              <strong>
-                {score} out of {questions.length}
-              </strong>{" "}
-              questions correctly.
-            </p>
+  <p>
+    You answered{" "}
+    <strong>
+      {score} out of {questions.length}
+    </strong>{" "}
+    questions correctly.
+  </p>
 
-            <div
-              className={`result-level ${getLevelClass()}`}
-            >
-              {getLevel()}
-            </div>
+  <div
+    className={`result-level ${getLevelClass()}`}
+  >
+    {getLevel()}
+  </div>
 
-          </div>
+  {/* PERSONALIZED RECOMMENDATION */}
 
-        </div>
+  <div className="quiz-recommendation">
 
-        <div className="result-actions">
+    <span className="recommendation-label">
+      PERSONALIZED RECOMMENDATION
+    </span>
 
-          <button
-            className="secondary-quiz-button"
-            onClick={resetQuiz}
-          >
-            Choose Another Skill
-          </button>
-
-          <button
-            className="primary-quiz-button"
-            onClick={handleStartQuiz}
-          >
-            Try Again
-
-          </button>
-<button
-  className="primary-quiz-button"
-  onClick={() =>
-    onLearningRoadmap(selectedSkill)
-  }
->
-  View Learning Roadmap →
-</button>
-        </div>
-
-      </div>
-
-    </div>
-  );
-}
-
-const question = questions[currentQuestion];
-
-return (
-  <div className="quiz-page">
-
-    <div className="quiz-container">
-
-      <div className="quiz-header">
-
-        <button
-          className="quiz-back"
-          onClick={onBack}
-          aria-label="Back"
-        >
-          ←
-        </button>
-
-        <span className="quiz-label">
-          SKILLBRIDGE AI • {selectedSkill.toUpperCase()}
-        </span>
-
-        <h1>{selectedSkill} Quiz</h1>
+    {getLevel() === "Strong" && (
+      <>
+        <h3>
+          Great work! Keep building your {selectedSkill} skills.
+        </h3>
 
         <p>
-          Answer each question carefully to measure your
-          current understanding.
+          Your performance shows a strong understanding of{" "}
+          {selectedSkill}. Continue with advanced topics and
+          practical projects to strengthen your skills further.
         </p>
+      </>
+    )}
 
-      </div>
+    {getLevel() === "Average" && (
+      <>
+        <h3>
+          Your {selectedSkill} skills need more practice.
+        </h3>
 
-      <div className="quiz-progress-section">
+        <p>
+          You have a good foundation, but some concepts need
+          improvement. Follow the learning roadmap and practice
+          the recommended topics to improve your performance.
+        </p>
+      </>
+    )}
 
-        <div className="quiz-progress-info">
+    {getLevel() !== "Strong" &&
+      getLevel() !== "Average" && (
+        <>
+          <h3>
+            Focus on improving your {selectedSkill} skills.
+          </h3>
 
-          <span>
-            Question {currentQuestion + 1} of {questions.length}
-          </span>
-
-          <span>
-            {Math.round(
-              ((currentQuestion + 1) / questions.length) * 100
-            )}%
-          </span>
-
-        </div>
-
-        <div className="quiz-progress-bar">
-
-          <div
-            className="quiz-progress-fill"
-            style={{
-              width: `${
-                ((currentQuestion + 1) / questions.length) * 100
-              }%`
-            }}
-          ></div>
-
-        </div>
-
-      </div>
-
-      <div className="question-card">
-
-        <div className="question-number">
-          QUESTION{" "}
-          {String(currentQuestion + 1).padStart(2, "0")}
-        </div>
-
-        <h2>
-          {question.question}
-        </h2>
-
-        <div className="answer-options">
-
-          {question.options.map((option, index) => (
-
-            <button
-              key={option}
-              className={`answer-option ${
-                answers[currentQuestion] === index
-                  ? "selected"
-                  : ""
-              }`}
-              onClick={() => handleAnswer(index)}
-            >
-
-              <span className="option-letter">
-                {String.fromCharCode(65 + index)}
-              </span>
-
-              <span className="option-text">
-                {option}
-              </span>
-
-            </button>
-
-          ))}
-
-        </div>
-
-      </div>
-
-      <div className="quiz-navigation">
-
-        <button
-          className="secondary-quiz-button"
-          onClick={handlePrevious}
-          disabled={currentQuestion === 0}
-        >
-          ← Previous
-        </button>
-
-        <button
-          className="primary-quiz-button"
-          onClick={handleNext}
-          disabled={
-            answers[currentQuestion] === undefined
-          }
-        >
-          {currentQuestion === questions.length - 1
-            ? "Submit Quiz"
-            : "Next Question →"}
-        </button>
-
-      </div>
-
-    </div>
+          <p>
+            Your current performance shows that you need more
+            practice with {selectedSkill}. Start from the
+            fundamentals and follow the learning roadmap step
+            by step.
+          </p>
+        </>
+      )}
 
   </div>
-);
-}
 
-export default Quiz;
+</div>
 
-  
+<div className="result-actions">
+
+  <button
+    className="secondary-quiz-button"
+    onClick={resetQuiz}
+  >
+    Choose Another Skill
+  </button>
+
+  <button
+    className="primary-quiz-button"
+    onClick={handleStartQuiz}
+  >
+    Try Again
+  </button>
+
+  <button
+    className="primary-quiz-button"
+    onClick={() =>
+      onLearningRoadmap(selectedSkill)
+    }
+  >
+    View Learning Roadmap →
+  </button>
+
+</div>
