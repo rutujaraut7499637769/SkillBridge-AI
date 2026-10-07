@@ -17,11 +17,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-// ===============================
-// MONGODB CONNECTION
-// ===============================
-
 mongoose
   .connect("mongodb://localhost:27017/skillbridge")
   .then(() => {
@@ -32,18 +27,10 @@ mongoose
   });
 
 
-// ===============================
-// HOME ROUTE
-// ===============================
-
 app.get("/", (req, res) => {
   res.send("SkillBridge AI Backend is Running!");
 });
 
-
-// ===============================
-// TEST USER
-// ===============================
 
 app.get("/test-user", async (req, res) => {
   try {
@@ -62,10 +49,6 @@ app.get("/test-user", async (req, res) => {
   }
 });
 
-
-// ===============================
-// SIGNUP
-// ===============================
 
 app.post("/signup", async (req, res) => {
   try {
@@ -91,10 +74,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-
-// ===============================
-// LOGIN
-// ===============================
 
 app.post("/login", async (req, res) => {
   try {
@@ -138,10 +117,6 @@ app.post("/login", async (req, res) => {
 });
 
 
-// ===============================
-// PROFILE
-// ===============================
-
 app.get("/profile", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId)
@@ -159,10 +134,6 @@ app.get("/profile", authMiddleware, async (req, res) => {
   }
 });
 
-
-// ===============================
-// SAVE LEARNING ACTIVITY
-// ===============================
 
 const recordLearningActivity = async (userId) => {
   try {
@@ -197,10 +168,6 @@ const recordLearningActivity = async (userId) => {
 };
 
 
-// ===============================
-// SAVE ASSESSMENT RESULT
-// ===============================
-
 app.post("/assessment", authMiddleware, async (req, res) => {
   try {
     const {
@@ -220,7 +187,6 @@ app.post("/assessment", authMiddleware, async (req, res) => {
       level
     });
 
-    // Record learning activity
     await recordLearningActivity(req.user.userId);
 
     res.status(201).json({
@@ -235,10 +201,6 @@ app.post("/assessment", authMiddleware, async (req, res) => {
   }
 });
 
-
-// ===============================
-// SAVE QUIZ RESULT
-// ===============================
 
 app.post("/quiz/result", authMiddleware, async (req, res) => {
   try {
@@ -273,7 +235,6 @@ app.post("/quiz/result", authMiddleware, async (req, res) => {
 
     await quizResult.save();
 
-    // Record learning activity
     await recordLearningActivity(req.user.userId);
 
     res.status(201).json({
@@ -293,10 +254,6 @@ app.post("/quiz/result", authMiddleware, async (req, res) => {
   }
 });
 
-
-// ===============================
-// GET LATEST ASSESSMENT RESULT
-// ===============================
 
 app.get(
   "/assessment/latest",
@@ -329,9 +286,6 @@ app.get(
 );
 
 
-// ===============================
-// GET ALL ASSESSMENT RESULTS
-// ===============================
 
 app.get(
   "/assessment/all",
@@ -358,10 +312,6 @@ app.get(
 );
 
 
-// ===============================
-// GET ALL QUIZ RESULTS
-// ===============================
-
 app.get(
   "/quiz/results",
   authMiddleware,
@@ -387,10 +337,6 @@ app.get(
 );
 
 
-// ===============================
-// GET DAILY STREAK
-// ===============================
-
 app.get(
   "/activity/streak",
   authMiddleware,
@@ -414,15 +360,11 @@ app.get(
         });
       }
 
-      // Remove duplicate dates
       const uniqueDates = [
         ...new Set(dates)
       ];
 
-      // ===============================
-      // CURRENT STREAK
-      // ===============================
-
+  
       const today = new Date().toLocaleDateString(
         "en-CA",
         {
@@ -455,10 +397,6 @@ app.get(
         }
       }
 
-
-      // ===============================
-      // LONGEST STREAK
-      // ===============================
 
       const sortedDates = [...uniqueDates].sort();
 
@@ -511,10 +449,6 @@ app.get(
   }
 );
 
-
-// ===============================
-// SERVER
-// ===============================
 
 app.listen(5000, () => {
   console.log(
