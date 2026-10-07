@@ -315,7 +315,7 @@ function Progress({ onBack }) {
           className="back-button"
           onClick={onBack}
         >
-          ← Dashboard
+          ← 
         </button>
 
         <div>
