@@ -446,59 +446,70 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                       <div className="learning-topics">
                         <h4>Topics to Learn</h4>
 
-                        {item.topics.map((topic, topicIndex) => (
-                          <div
-                            className="learning-topic"
-                            key={topic}
-                          >
-                            <span>{topicIndex + 1}</span>
-                            <p>{topic}</p>
-                          </div>
-                        ))}
+                        {item.topics.map((topic, topicIndex) => {
+                          const topicStatus = getTopicStatus(topicIndex);
+
+                          return (
+                            <div
+                              className={`learning-topic ${topicStatus}`}
+                              key={topic}
+                            >
+                              <span>
+                                {topicStatus === "completed"
+                                  ? "✓"
+                                  : topicStatus === "current"
+                                    ? "→"
+                                    : "🔒"}
+                              </span>
+
+                              <p>{topic}</p>
+
+                              <small>
+                                {topicStatus === "completed"
+                                  ? "Completed"
+                                  : topicStatus === "current"
+                                    ? "Current"
+                                    : "Locked"}
+                              </small>
+                            </div>
+                          );
+                        })}
                       </div>
-                    )}
+
+        </div>
+
+
+                  {/* AI NOTE */}
+
+                  <div className="roadmap-ai-note">
+
+                    <div className="ai-note-icon">
+                      ✦
+                    </div>
+
+                    <div>
+
+                      <span>
+                        AI-POWERED PERSONALIZATION
+                      </span>
+
+                      <h3>
+                        Your roadmap will become smarter
+                      </h3>
+
+                      <p>
+                        SkillBridge AI will analyze your competency gaps,
+                        assessment history and learning performance to
+                        automatically prioritize the topics you need most.
+                      </p>
+
+                    </div>
+
                   </div>
 
                 </div>
-              );
-            })}
-
-          </div>
-
-        </div>
-
-
-        {/* AI NOTE */}
-
-        <div className="roadmap-ai-note">
-
-          <div className="ai-note-icon">
-            ✦
-          </div>
-
-          <div>
-
-            <span>
-              AI-POWERED PERSONALIZATION
-            </span>
-
-            <h3>
-              Your roadmap will become smarter
-            </h3>
-
-            <p>
-              SkillBridge AI will analyze your competency gaps,
-              assessment history and learning performance to
-              automatically prioritize the topics you need most.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
     </div>
-  );
+          );
 }
 
-export default LearningRoadmap;
+          export default LearningRoadmap;
