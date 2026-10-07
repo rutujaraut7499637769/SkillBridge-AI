@@ -11,9 +11,6 @@
 }
 
 
-/* =========================
-   HEADER
-========================= */
 
 .roadmap-header {
   margin-bottom: 34px;
@@ -59,10 +56,6 @@
   line-height: 1.6;
 }
 
-
-/* =========================
-   OVERVIEW
-========================= */
 
 .roadmap-overview {
   background: #111827;
@@ -125,11 +118,6 @@
   font-size: 11px;
 }
 
-
-/* =========================
-   SECTION
-========================= */
-
 .roadmap-section {
   background: #ffffff;
   border: 1px solid #e7ebf2;
@@ -168,10 +156,6 @@
   white-space: nowrap;
 }
 
-
-/* =========================
-   ROADMAP
-========================= */
 
 .roadmap-list {
   display: flex;
@@ -215,10 +199,6 @@
 }
 
 
-/* =========================
-   STATUS
-========================= */
-
 .roadmap-item.completed .stage-number {
   background: #16a34a;
   border-color: #16a34a;
@@ -237,10 +217,6 @@
   color: #c2410c;
 }
 
-
-/* =========================
-   ROADMAP CARD
-========================= */
 
 .roadmap-card {
   border: 1px solid #e8edf4;
@@ -310,11 +286,6 @@
   max-width: 760px;
 }
 
-
-/* =========================
-   TOPICS
-========================= */
-
 .roadmap-topics {
   display: flex;
   flex-wrap: wrap;
@@ -330,10 +301,6 @@
   font-size: 10px;
 }
 
-
-/* =========================
-   RESULT
-========================= */
 
 .roadmap-skill-result {
   border-top: 1px solid #edf1f5;
@@ -363,19 +330,11 @@
 }
 
 
-/* =========================
-   SELECTED ROADMAP
-========================= */
-
 .selected-roadmap .roadmap-card {
   border: 2px solid #2563eb;
   background: #f8fbff;
 }
 
-
-/* =========================
-   AI NOTE
-========================= */
 
 .roadmap-ai-note {
   margin-top: 22px;
@@ -421,10 +380,6 @@
 }
 
 
-/* =========================
-   LOADING
-========================= */
-
 .roadmap-loading {
   min-height: 100vh;
   display: flex;
@@ -453,11 +408,6 @@
     transform: rotate(360deg);
   }
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 800px) {
 
