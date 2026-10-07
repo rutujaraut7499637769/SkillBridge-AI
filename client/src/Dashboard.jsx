@@ -268,11 +268,17 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
                     <div className="progress-track">
 
                       <div
-                        className="progress-fill"
-                        style={{
-                          width: `${assessment.percentage}%`
-                        }}
-                      ></div>
+  className={`skill-progress-fill ${
+    assessment.percentage >= 80
+      ? "strong"
+      : assessment.percentage >= 60
+      ? "good"
+      : "needs-improvement"
+  }`}
+  style={{
+    width: `${assessment.percentage}%`
+  }}
+></div>
 
                     </div>
 

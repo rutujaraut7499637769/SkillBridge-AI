@@ -121,7 +121,7 @@ function Progress({ onBack }) {
           className="back-button"
           onClick={onBack}
         >
-          ← Dashboard
+          ← 
         </button>
 
         <div>
@@ -564,12 +564,18 @@ function Progress({ onBack }) {
 
             <div className="skill-progress-track">
 
-              <div
-                className="skill-progress-fill"
-                style={{
-                  width: `${assessment.percentage}%`
-                }}
-              ></div>
+             <div
+  className={`skill-progress-fill ${
+    assessment.percentage >= 80
+      ? "strong"
+      : assessment.percentage >= 60
+      ? "good"
+      : "needs-improvement"
+  }`}
+  style={{
+    width: `${assessment.percentage}%`
+  }}
+></div>
 
             </div>
 
