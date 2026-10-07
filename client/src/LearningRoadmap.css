@@ -462,3 +462,18 @@
     flex-direction: column;
   }
 }
+.start-learning-button {
+  margin-top: 18px;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.start-learning-button:hover {
+  background: #1d4ed8;
+}

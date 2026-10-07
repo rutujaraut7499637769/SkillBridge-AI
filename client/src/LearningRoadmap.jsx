@@ -345,11 +345,10 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
               return (
                 <div
-                  className={`roadmap-item ${status} ${
-                    selectedSkill === item.skill
+                  className={`roadmap-item ${status} ${selectedSkill === item.skill
                       ? "selected-roadmap"
                       : ""
-                  }`}
+                    }`}
                   key={item.id}
                 >
 
@@ -428,7 +427,12 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
                       </div>
                     )}
-
+                    <button
+                      className="start-learning-button"
+                      onClick={() => alert(`Starting ${item.title}`)}
+                    >
+                      Start Learning →
+                    </button>
                   </div>
 
                 </div>
