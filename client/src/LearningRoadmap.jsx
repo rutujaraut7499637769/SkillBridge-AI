@@ -8,9 +8,15 @@ function LearningRoadmap({ onBack, selectedSkill }) {
   const [openSkill, setOpenSkill] = useState(null);
   const [completedTopics, setCompletedTopics] = useState({});
 
-  const getTopicStatus = (topicIndex) => {
-    if (topicIndex === 0) return "completed";
-    if (topicIndex === 1) return "current";
+  const getTopicStatus = (skill, topicIndex) => {
+    const completedCount = Object.keys(completedTopics)
+      .filter((key) => key.startsWith(`${skill}-`))
+      .length;
+
+    if (topicIndex < completedCount) return "completed";
+
+    if (topicIndex === completedCount) return "current";
+
     return "locked";
   };
 
@@ -359,11 +365,10 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
               return (
                 <div
-                  className={`roadmap-item ${status} ${
-                    selectedSkill === item.skill
+                  className={`roadmap-item ${status} ${selectedSkill === item.skill
                       ? "selected-roadmap"
                       : ""
-                  }`}
+                    }`}
                   key={item.id}
                 >
 
@@ -475,9 +480,10 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                         {item.topics.map(
                           (topic, topicIndex) => {
 
-                            const topicStatus =
-                              getTopicStatus(topicIndex);
-
+                            const topicStatus = getTopicStatus(
+                              item.skill,
+                              topicIndex
+                            );
                             return (
                               <div
                                 className={`learning-topic ${topicStatus}`}
@@ -489,8 +495,8 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                                   {topicStatus === "completed"
                                     ? "✓"
                                     : topicStatus === "current"
-                                    ? "→"
-                                    : "🔒"}
+                                      ? "→"
+                                      : "🔒"}
 
                                 </span>
 
@@ -503,23 +509,23 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                                   {topicStatus === "completed"
                                     ? "Completed"
                                     : topicStatus === "current"
-                                    ? "Current"
-                                    : "Locked"}
+                                      ? "Current"
+                                      : "Locked"}
 
                                 </small>
-{topicStatus === "current" && (
-  <button
-    className="complete-topic-button"
-    onClick={() =>
-      setCompletedTopics((prev) => ({
-        ...prev,
-        [`${item.skill}-${topicIndex}`]: true
-      }))
-    }
-  >
-    Mark as Complete ✓
-  </button>
-)}
+                                {topicStatus === "current" && (
+                                  <button
+                                    className="complete-topic-button"
+                                    onClick={() =>
+                                      setCompletedTopics((prev) => ({
+                                        ...prev,
+                                        [`${item.skill}-${topicIndex}`]: true
+                                      }))
+                                    }
+                                  >
+                                    Mark as Complete ✓
+                                  </button>
+                                )}
                               </div>
                             );
                           }
