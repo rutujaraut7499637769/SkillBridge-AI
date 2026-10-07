@@ -6,6 +6,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openSkill, setOpenSkill] = useState(null);
+
   const getTopicStatus = (topicIndex) => {
     if (topicIndex === 0) return "completed";
     if (topicIndex === 1) return "current";
@@ -254,6 +255,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
     <div className="roadmap-page">
       <div className="roadmap-container">
 
+        {/* HEADER */}
 
         <div className="roadmap-header">
 
@@ -278,7 +280,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
         </div>
 
-
         {/* OVERVIEW */}
 
         <div className="roadmap-overview">
@@ -286,6 +287,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
           <div className="overview-content">
 
             <div>
+
               <span className="overview-label">
                 ROADMAP PROGRESS
               </span>
@@ -298,17 +300,20 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                 Keep improving your skills to unlock the next
                 stages of your learning journey.
               </p>
+
             </div>
 
             <div className="overview-progress">
 
               <div className="overview-progress-track">
+
                 <div
                   className="overview-progress-fill"
                   style={{
                     width: `${getOverallProgress()}%`
                   }}
                 ></div>
+
               </div>
 
               <span>
@@ -321,17 +326,21 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
         </div>
 
+        {/* LEARNING PATH */}
+
         <div className="roadmap-section">
 
           <div className="roadmap-section-heading">
 
             <div>
+
               <h2>Learning Path</h2>
 
               <p>
                 Follow the stages in order to build your
                 full-stack competency.
               </p>
+
             </div>
 
             <span>
@@ -339,7 +348,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
             </span>
 
           </div>
-
 
           <div className="roadmap-list">
 
@@ -350,19 +358,24 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
               return (
                 <div
-                  className={`roadmap-item ${status} ${selectedSkill === item.skill
-                    ? "selected-roadmap"
-                    : ""
-                    }`}
+                  className={`roadmap-item ${status} ${
+                    selectedSkill === item.skill
+                      ? "selected-roadmap"
+                      : ""
+                  }`}
                   key={item.id}
                 >
+
+                  {/* STAGE MARKER */}
 
                   <div className="roadmap-marker">
 
                     <div className="stage-number">
+
                       {status === "completed"
                         ? "✓"
                         : item.id}
+
                     </div>
 
                     {index !== roadmap.length - 1 && (
@@ -371,6 +384,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
                   </div>
 
+                  {/* ROADMAP CARD */}
 
                   <div className="roadmap-card">
 
@@ -394,11 +408,9 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
                     </div>
 
-
                     <p className="roadmap-description">
                       {item.description}
                     </p>
-
 
                     <div className="roadmap-topics">
 
@@ -409,7 +421,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                       ))}
 
                     </div>
-
 
                     {data && (
                       <div className="roadmap-skill-result">
@@ -432,84 +443,120 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
                       </div>
                     )}
+
+                    {/* START LEARNING */}
+
                     <button
                       className="start-learning-button"
                       onClick={() =>
                         setOpenSkill(
-                          openSkill === item.skill ? null : item.skill
+                          openSkill === item.skill
+                            ? null
+                            : item.skill
                         )
                       }
                     >
-                      Start Learning →
+                      {openSkill === item.skill
+                        ? "Hide Topics ↑"
+                        : "Start Learning →"}
                     </button>
+
+                    {/* LEARNING TOPICS */}
+
                     {openSkill === item.skill && (
+
                       <div className="learning-topics">
-                        <h4>Topics to Learn</h4>
 
-                        {item.topics.map((topic, topicIndex) => {
-                          const topicStatus = getTopicStatus(topicIndex);
+                        <h4>
+                          Topics to Learn
+                        </h4>
 
-                          return (
-                            <div
-                              className={`learning-topic ${topicStatus}`}
-                              key={topic}
-                            >
-                              <span>
-                                {topicStatus === "completed"
-                                  ? "✓"
-                                  : topicStatus === "current"
+                        {item.topics.map(
+                          (topic, topicIndex) => {
+
+                            const topicStatus =
+                              getTopicStatus(topicIndex);
+
+                            return (
+                              <div
+                                className={`learning-topic ${topicStatus}`}
+                                key={topic}
+                              >
+
+                                <span>
+
+                                  {topicStatus === "completed"
+                                    ? "✓"
+                                    : topicStatus === "current"
                                     ? "→"
                                     : "🔒"}
-                              </span>
 
-                              <p>{topic}</p>
+                                </span>
 
-                              <small>
-                                {topicStatus === "completed"
-                                  ? "Completed"
-                                  : topicStatus === "current"
+                                <p>
+                                  {topic}
+                                </p>
+
+                                <small>
+
+                                  {topicStatus === "completed"
+                                    ? "Completed"
+                                    : topicStatus === "current"
                                     ? "Current"
                                     : "Locked"}
-                              </small>
-                            </div>
-                          );
-                        })}
+
+                                </small>
+
+                              </div>
+                            );
+                          }
+                        )}
+
                       </div>
 
-        </div>
-
-
-                  {/* AI NOTE */}
-
-                  <div className="roadmap-ai-note">
-
-                    <div className="ai-note-icon">
-                      ✦
-                    </div>
-
-                    <div>
-
-                      <span>
-                        AI-POWERED PERSONALIZATION
-                      </span>
-
-                      <h3>
-                        Your roadmap will become smarter
-                      </h3>
-
-                      <p>
-                        SkillBridge AI will analyze your competency gaps,
-                        assessment history and learning performance to
-                        automatically prioritize the topics you need most.
-                      </p>
-
-                    </div>
+                    )}
 
                   </div>
 
                 </div>
+              );
+            })}
+
+          </div>
+
+        </div>
+
+        {/* AI NOTE */}
+
+        <div className="roadmap-ai-note">
+
+          <div className="ai-note-icon">
+            ✦
+          </div>
+
+          <div>
+
+            <span>
+              AI-POWERED PERSONALIZATION
+            </span>
+
+            <h3>
+              Your roadmap will become smarter
+            </h3>
+
+            <p>
+              SkillBridge AI will analyze your competency gaps,
+              assessment history and learning performance to
+              automatically prioritize the topics you need most.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
     </div>
-          );
+  );
 }
 
-          export default LearningRoadmap;
+export default LearningRoadmap;
