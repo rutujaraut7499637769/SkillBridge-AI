@@ -507,7 +507,19 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                                     : "Locked"}
 
                                 </small>
-
+{topicStatus === "current" && (
+  <button
+    className="complete-topic-button"
+    onClick={() =>
+      setCompletedTopics((prev) => ({
+        ...prev,
+        [`${item.skill}-${topicIndex}`]: true
+      }))
+    }
+  >
+    Mark as Complete ✓
+  </button>
+)}
                               </div>
                             );
                           }
