@@ -365,8 +365,6 @@
   transition: width 0.4s ease;
 }
 
-/* SKILL PERFORMANCE */
-
 .skill-performance-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
