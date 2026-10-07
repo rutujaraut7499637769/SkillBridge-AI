@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import "./LearningRoadmap.css";
 
-function LearningRoadmap({ onBack }) {
+function LearningRoadmap({ onBack, selectedSkill }) {
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -246,7 +246,6 @@ function LearningRoadmap({ onBack }) {
 
   return (
     <div className="roadmap-page">
-
       <div className="roadmap-container">
 
         {/* HEADER */}
@@ -349,7 +348,11 @@ function LearningRoadmap({ onBack }) {
 
               return (
                 <div
-                  className={`roadmap-item ${status}`}
+                  className={`roadmap-item ${status} ${
+                    selectedSkill === item.skill
+                      ? "selected-roadmap"
+                      : ""
+                  }`}
                   key={item.id}
                 >
 
@@ -440,7 +443,7 @@ function LearningRoadmap({ onBack }) {
         </div>
 
 
-        {/* AI PLACEHOLDER */}
+        {/* AI NOTE */}
 
         <div className="roadmap-ai-note">
 
@@ -469,7 +472,6 @@ function LearningRoadmap({ onBack }) {
         </div>
 
       </div>
-
     </div>
   );
 }

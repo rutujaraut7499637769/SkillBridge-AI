@@ -13,6 +13,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentPage, setCurrentPage] = useState("dashboard");
+  const [selectedSkill, setSelectedSkill] = useState(""); 
 
   // Signup
   const [name, setName] = useState("");
@@ -119,6 +120,7 @@ function App() {
       return (
         <LearningRoadmap
           onBack={() => setCurrentPage("dashboard")}
+          selectedSkill={selectedSkill}
         />
       );
     }
@@ -147,9 +149,10 @@ function App() {
         onMySkills={() =>
           setCurrentPage("mySkills")
         }
-        onLearningRoadmap={() =>
-          setCurrentPage("learningRoadmap")
-        }
+       onLearningRoadmap={(skill) => {
+  setSelectedSkill(skill);
+  setCurrentPage("learningRoadmap");
+}}
         onQuiz={() =>
           setCurrentPage("quiz")
         }

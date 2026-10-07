@@ -137,11 +137,13 @@ const getNextLearning = (assessment) => {
           </button>
 
           <button
-            className="menu-item"
-            onClick={onLearningRoadmap}
-          >
-            🗺️ Learning Roadmap
-          </button>
+  className="menu-item"
+  onClick={() =>
+    onLearningRoadmap(latestAssessment?.skill || "")
+  }
+>
+  🗺️ Learning Roadmap
+</button>
 
           <button
             className="menu-item"
@@ -400,7 +402,14 @@ const getNextLearning = (assessment) => {
     {getNextLearning(latestAssessment)}
   </strong>
 </div>
-
+<button
+  className="roadmap-button"
+  onClick={() =>
+    onLearningRoadmap(latestAssessment.skill)
+  }
+>
+  View Learning Roadmap →
+</button>
       </div>
 
 
