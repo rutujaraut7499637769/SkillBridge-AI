@@ -39,12 +39,10 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
     }
   };
 
-  // Latest assessment
   const latestAssessment = assessments.length > 0
     ? assessments[0]
     : null;
 
-  // Overall progress
   const overallProgress = assessments.length > 0
     ? Math.round(
         assessments.reduce(
@@ -53,11 +51,64 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
         ) / assessments.length
       )
     : 0;
+const getNextLearning = (assessment) => {
+  const skill = assessment.skill?.toLowerCase();
+  const score = assessment.percentage;
 
+  const topics = {
+    javascript: {
+      weak: "JavaScript Basics → Functions → Arrays",
+      average: "DOM → ES6 → Async JavaScript",
+      strong: "Advanced JavaScript → APIs → Real Project"
+    },
+
+    react: {
+      weak: "Components → Props → State",
+      average: "Hooks → API Integration → Component Design",
+      strong: "Advanced Hooks → Performance → Real Project"
+    },
+
+    html: {
+      weak: "HTML Basics → Semantic HTML → Forms",
+      average: "Accessibility → SEO → Responsive HTML",
+      strong: "Advanced Accessibility → SEO → Professional Website"
+    },
+
+    css: {
+      weak: "CSS Basics → Flexbox → Responsive Design",
+      average: "Grid → Advanced Flexbox → Responsive UI",
+      strong: "Animations → Advanced CSS → Professional UI"
+    },
+
+    node: {
+      weak: "Node Basics → Express → REST API",
+      average: "Middleware → Authentication → API Integration",
+      strong: "JWT → API Security → Production API"
+    },
+
+    sql: {
+      weak: "SQL Basics → SELECT → Filtering",
+      average: "Joins → Subqueries → Database Design",
+      strong: "Advanced SQL → Optimization → Database Project"
+    }
+  };
+
+  const selectedSkill = topics[skill];
+
+  if (!selectedSkill) {
+    if (score < 60) return "Learn the basics → Core concepts → Practice Quiz";
+    if (score < 80) return "Intermediate concepts → Practice → Small Project";
+    return "Advanced concepts → Real-world problems → Advanced Project";
+  }
+
+  if (score < 60) return selectedSkill.weak;
+  if (score < 80) return selectedSkill.average;
+
+  return selectedSkill.strong;
+};
   return (
     <div className="dashboard">
 
-      {/* Sidebar */}
       <aside className="sidebar">
 
         <div className="sidebar-brand">
@@ -116,11 +167,8 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
 
       </aside>
 
-
-      {/* Main Content */}
       <main className="dashboard-main">
 
-        {/* Header */}
         <div className="dashboard-header">
 
           <div>
@@ -137,11 +185,8 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
 
         </div>
 
-
-        {/* Overview Cards */}
         <div className="overview-grid">
 
-          {/* Overall Progress */}
           <div className="overview-card">
 
             <span>Overall Progress</span>
@@ -158,8 +203,6 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
 
           </div>
 
-
-          {/* Skills Assessed */}
           <div className="overview-card">
 
             <span>Skills Assessed</span>
@@ -176,8 +219,6 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
 
           </div>
 
-
-          {/* Latest Level */}
           <div className="overview-card">
 
             <span>Latest Skill Level</span>
@@ -200,8 +241,6 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
 
         </div>
 
-
-        {/* Skill Performance */}
         <div className="dashboard-section">
 
           <div className="section-heading">
@@ -298,8 +337,6 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
 
         </div>
 
-
-        {/* Start Assessment */}
         <div className="dashboard-section">
 
           <h2>Improve Your Skills</h2>
@@ -318,8 +355,6 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
 
         </div>
 
-
-       {/* Recommended Learning */}
 
 <div className="dashboard-section">
 
@@ -350,14 +385,21 @@ function Dashboard({ onSkillAssessment, onMySkills,onLearningRoadmap,onQuiz,onPr
           {latestAssessment.skill}
         </h3>
 
-        <p>
-          Your current level is{" "}
-          <strong>
-            {latestAssessment.level}
-          </strong>
-          . Focus on strengthening this skill
-          before moving to advanced topics.
-        </p>
+       <p>
+  Your current level is{" "}
+  <strong>
+    {latestAssessment.level}
+  </strong>
+  .
+</p>
+
+<div className="next-learning-path">
+  <span>Recommended next:</span>
+
+  <strong>
+    {getNextLearning(latestAssessment)}
+  </strong>
+</div>
 
       </div>
 
