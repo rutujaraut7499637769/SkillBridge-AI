@@ -6,6 +6,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openSkill, setOpenSkill] = useState(null);
+  const [completedTopics, setCompletedTopics] = useState({});
 
   const getTopicStatus = (topicIndex) => {
     if (topicIndex === 0) return "completed";
