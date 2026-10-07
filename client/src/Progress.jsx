@@ -62,11 +62,6 @@ function Progress({ onBack }) {
       ? assessments[0]
       : null;
 
-  const latestQuiz =
-    quizResults.length > 0
-      ? quizResults[0]
-      : null;
-
   const overallProgress =
     assessments.length > 0
       ? Math.round(
@@ -88,6 +83,194 @@ function Progress({ onBack }) {
           ) / quizResults.length
         )
       : 0;
+
+  /*
+    Personalized Learning Recommendations
+  */
+
+  const getRecommendations = (assessment) => {
+    const skill = assessment.skill;
+    const percentage = assessment.percentage;
+
+    const recommendations = {
+      html: {
+        needsImprovement: [
+          "HTML Basics",
+          "Semantic HTML",
+          "Forms and Input Elements",
+          "Practice HTML Quiz"
+        ],
+        average: [
+          "Advanced HTML",
+          "HTML Accessibility",
+          "SEO-friendly HTML",
+          "Build a Responsive Web Page"
+        ],
+        strong: [
+          "Advanced Accessibility",
+          "SEO Optimization",
+          "Web Standards",
+          "Build a Professional Website"
+        ]
+      },
+
+      css: {
+        needsImprovement: [
+          "CSS Basics",
+          "Selectors and Properties",
+          "Flexbox",
+          "Practice CSS Quiz"
+        ],
+        average: [
+          "Advanced Flexbox",
+          "CSS Grid",
+          "Responsive Design",
+          "Build a Responsive UI"
+        ],
+        strong: [
+          "Advanced CSS",
+          "Animations and Transitions",
+          "Responsive Architecture",
+          "Build a Professional UI"
+        ]
+      },
+
+      javascript: {
+        needsImprovement: [
+          "JavaScript Basics",
+          "Variables and Functions",
+          "Arrays and Objects",
+          "Practice JavaScript Quiz"
+        ],
+        average: [
+          "ES6 Concepts",
+          "DOM Manipulation",
+          "Async JavaScript",
+          "Build a JavaScript Project"
+        ],
+        strong: [
+          "Advanced JavaScript",
+          "Promises and Async/Await",
+          "API Integration",
+          "Build a Full JavaScript Project"
+        ]
+      },
+
+      react: {
+        needsImprovement: [
+          "React Basics",
+          "Components and JSX",
+          "Props and State",
+          "Practice React Quiz"
+        ],
+        average: [
+          "React Hooks",
+          "Component Design",
+          "API Integration",
+          "Build a React Project"
+        ],
+        strong: [
+          "Advanced React",
+          "Performance Optimization",
+          "Advanced Hooks",
+          "Build a Production-ready React App"
+        ]
+      },
+
+      node: {
+        needsImprovement: [
+          "Node.js Basics",
+          "Modules and npm",
+          "Express.js Basics",
+          "Practice Backend Quiz"
+        ],
+        average: [
+          "Express.js",
+          "REST APIs",
+          "Middleware",
+          "Build a Backend API"
+        ],
+        strong: [
+          "Advanced Node.js",
+          "Authentication and JWT",
+          "API Security",
+          "Build a Production-ready API"
+        ]
+      },
+
+      sql: {
+        needsImprovement: [
+          "SQL Basics",
+          "SELECT and WHERE",
+          "Sorting and Filtering",
+          "Practice SQL Quiz"
+        ],
+        average: [
+          "SQL Joins",
+          "Aggregate Functions",
+          "Subqueries",
+          "Database Design"
+        ],
+        strong: [
+          "Advanced SQL",
+          "Query Optimization",
+          "Database Design",
+          "Build a Database-driven Project"
+        ]
+      },
+
+      default: {
+        needsImprovement: [
+          "Learn the Basics",
+          "Understand Core Concepts",
+          "Practice Important Questions",
+          "Take a Skill Quiz"
+        ],
+        average: [
+          "Strengthen Core Concepts",
+          "Practice Intermediate Topics",
+          "Solve More Questions",
+          "Build a Small Project"
+        ],
+        strong: [
+          "Learn Advanced Concepts",
+          "Solve Real-world Problems",
+          "Work on Advanced Projects",
+          "Practice Interview Questions"
+        ]
+      }
+    };
+
+    const skillKey = skill
+      ? skill.toLowerCase().trim()
+      : "default";
+
+    const skillData =
+      recommendations[skillKey] ||
+      recommendations.default;
+
+    if (percentage < 60) {
+      return {
+        level: "Needs Improvement",
+        className: "recommendation-needs",
+        topics: skillData.needsImprovement
+      };
+    }
+
+    if (percentage < 80) {
+      return {
+        level: "Average",
+        className: "recommendation-average",
+        topics: skillData.average
+      };
+    }
+
+    return {
+      level: "Strong",
+      className: "recommendation-strong",
+      topics: skillData.strong
+    };
+  };
 
   const getLastSevenDays = () => {
     const days = [];
@@ -128,8 +311,8 @@ function Progress({ onBack }) {
   return (
     <div className="progress-page">
 
-
       <header className="progress-header">
+
         <button
           className="back-button"
           onClick={onBack}
@@ -139,12 +322,16 @@ function Progress({ onBack }) {
 
         <div>
           <h1>Your Progress</h1>
+
           <p>
             Track your learning consistency and skill growth.
           </p>
         </div>
+
       </header>
 
+
+      {/* DAILY STREAK */}
 
       <section className="streak-section">
 
@@ -155,6 +342,7 @@ function Progress({ onBack }) {
           </div>
 
           <div>
+
             <span className="section-label">
               DAILY LEARNING STREAK
             </span>
@@ -168,6 +356,7 @@ function Progress({ onBack }) {
             <p>
               Keep learning every day to maintain your streak.
             </p>
+
           </div>
 
         </div>
@@ -176,6 +365,7 @@ function Progress({ onBack }) {
         <div className="streak-stats">
 
           <div className="streak-stat">
+
             <span>Current Streak</span>
 
             <strong>
@@ -185,10 +375,12 @@ function Progress({ onBack }) {
             </strong>
 
             <small>days</small>
+
           </div>
 
 
           <div className="streak-stat">
+
             <span>Longest Streak</span>
 
             <strong>
@@ -198,6 +390,7 @@ function Progress({ onBack }) {
             </strong>
 
             <small>days</small>
+
           </div>
 
         </div>
@@ -251,6 +444,8 @@ function Progress({ onBack }) {
 
       </section>
 
+
+      {/* LEARNING OVERVIEW */}
 
       <section className="progress-overview">
 
@@ -327,6 +522,8 @@ function Progress({ onBack }) {
       </section>
 
 
+      {/* LATEST PERFORMANCE */}
+
       <section className="progress-section">
 
         <div className="progress-section-header">
@@ -400,6 +597,8 @@ function Progress({ onBack }) {
 
       </section>
 
+
+      {/* SKILL PERFORMANCE */}
 
       <section className="progress-section">
 
@@ -557,6 +756,138 @@ function Progress({ onBack }) {
       </section>
 
 
+      {/* PERSONALIZED LEARNING RECOMMENDATIONS */}
+
+      <section className="progress-section">
+
+        <div className="progress-section-header">
+
+          <div>
+
+            <span className="section-label">
+              PERSONALIZED RECOMMENDATIONS
+            </span>
+
+            <h2>Recommended Learning Path</h2>
+
+            <p>
+              Based on your assessment performance,
+              here is what you should focus on next.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        {loading ? (
+
+          <p>Loading recommendations...</p>
+
+        ) : assessments.length === 0 ? (
+
+          <div className="empty-state">
+
+            <h3>
+              Complete an assessment first
+            </h3>
+
+            <p>
+              Once you complete a skill assessment,
+              SkillBridge will recommend what you should
+              learn next.
+            </p>
+
+          </div>
+
+        ) : (
+
+          <div className="recommendation-grid">
+
+            {assessments.slice(0, 5).map((assessment) => {
+
+              const recommendation =
+                getRecommendations(assessment);
+
+              return (
+                <div
+                  className="recommendation-card"
+                  key={`recommendation-${assessment._id}`}
+                >
+
+                  <div className="recommendation-top">
+
+                    <div>
+
+                      <h3>
+                        {assessment.skill}
+                      </h3>
+
+                      <span>
+                        Current score: {assessment.percentage}%
+                      </span>
+
+                    </div>
+
+                    <span
+                      className={`recommendation-level ${
+                        recommendation.className
+                      }`}
+                    >
+                      {recommendation.level}
+                    </span>
+
+                  </div>
+
+
+                  <div className="recommendation-line"></div>
+
+
+                  <div className="recommendation-content">
+
+                    <h4>
+                      Suggested Learning Path
+                    </h4>
+
+                    <div className="recommendation-topics">
+
+                      {recommendation.topics.map(
+                        (topic, index) => (
+
+                          <div
+                            className="recommendation-topic"
+                            key={topic}
+                          >
+
+                            <span className="topic-number">
+                              {index + 1}
+                            </span>
+
+                            <span>
+                              {topic}
+                            </span>
+
+                          </div>
+
+                        )
+                      )}
+
+                    </div>
+
+                  </div>
+
+                </div>
+              );
+            })}
+
+          </div>
+
+        )}
+
+      </section>
+
+{/* QUIZ PERFORMANCE */}
+
       <section className="progress-section">
 
         <div className="progress-section-header">
@@ -644,6 +975,8 @@ function Progress({ onBack }) {
       </section>
 
 
+      {/* RECENT ACTIVITY */}
+
       <section className="progress-section">
 
         <div className="progress-section-header">
@@ -715,6 +1048,8 @@ function Progress({ onBack }) {
 
       </section>
 
+
+      {/* MOTIVATION */}
 
       <section className="progress-message">
 
