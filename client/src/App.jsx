@@ -130,12 +130,16 @@ function App() {
     }
 
     if (currentPage === "quiz") {
-      return (
-        <Quiz
-          onBack={() => setCurrentPage("dashboard")}
-        />
-      );
-    }
+  return (
+    <Quiz
+      onBack={() => setCurrentPage("dashboard")}
+      onLearningRoadmap={(skill) => {
+        setSelectedSkill(skill);
+        setCurrentPage("learningRoadmap");
+      }}
+    />
+  );
+}
 
     if (currentPage === "progress") {
       return (

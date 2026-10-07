@@ -674,7 +674,7 @@ const quizBank = {
   ]
 };
 
-function Quiz({ onBack }) {
+function Quiz({ onBack,onLearningRoadmap }) {
   const skills = Object.keys(quizBank);
 
   const [selectedSkill, setSelectedSkill] = useState("");
@@ -923,8 +923,16 @@ if (quizCompleted) {
             onClick={handleStartQuiz}
           >
             Try Again
-          </button>
 
+          </button>
+<button
+  className="primary-quiz-button"
+  onClick={() =>
+    onLearningRoadmap(selectedSkill)
+  }
+>
+  View Learning Roadmap →
+</button>
         </div>
 
       </div>
