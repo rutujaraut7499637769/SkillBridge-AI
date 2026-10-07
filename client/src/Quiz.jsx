@@ -813,6 +813,83 @@ const quizBank = {
   ]
 };
 
+/* 
+  Each skill has 5 competency areas.
+  Every area contains 2 questions.
+*/
+const topicMap = {
+  HTML: [
+    "HTML Fundamentals",
+    "Links & Images",
+    "Lists & Text",
+    "Forms",
+    "Tables & Accessibility"
+  ],
+  CSS: [
+    "CSS Fundamentals",
+    "Colors & Typography",
+    "Layout & Flexbox",
+    "Spacing",
+    "Selectors & Styling"
+  ],
+  JavaScript: [
+    "Variables & Constants",
+    "Operators & Data Types",
+    "Arrays",
+    "Functions & Methods",
+    "JavaScript Logic"
+  ],
+  React: [
+    "React Fundamentals",
+    "State & Hooks",
+    "JSX",
+    "Props & Components",
+    "Routing & Lists"
+  ],
+  SQL: [
+    "SQL Fundamentals",
+    "CRUD Operations",
+    "Filtering & Sorting",
+    "Functions",
+    "Database Keys"
+  ],
+  "Node.js": [
+    "Node.js Fundamentals",
+    "NPM & Packages",
+    "Project Structure",
+    "Server Basics",
+    "Node.js Commands"
+  ],
+  "Express.js": [
+    "Express Fundamentals",
+    "Routes",
+    "Middleware",
+    "Request & Response",
+    "APIs & CORS"
+  ],
+  MongoDB: [
+    "MongoDB Fundamentals",
+    "Documents & Collections",
+    "MongoDB Tools",
+    "Mongoose",
+    "CRUD Operations"
+  ],
+  Git: [
+    "Git Fundamentals",
+    "Repository & Status",
+    "Staging & Commits",
+    "Remote Repositories",
+    "Branches & Collaboration"
+  ],
+  "Programming Fundamentals": [
+    "Variables & Data",
+    "Conditions",
+    "Loops",
+    "Functions & Arrays",
+    "Problem Solving"
+  ]
+};
+
 function Quiz({ onBack, onLearningRoadmap }) {
   const skills = Object.keys(quizBank);
 
@@ -821,6 +898,7 @@ function Quiz({ onBack, onLearningRoadmap }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [savingResult, setSavingResult] = useState(false);
 
   const questions = selectedSkill
     ? quizBank[selectedSkill]
@@ -830,6 +908,7 @@ function Quiz({ onBack, onLearningRoadmap }) {
     setCurrentQuestion(0);
     setAnswers([]);
     setQuizCompleted(false);
+    setSavingResult(false);
     setQuizStarted(true);
   };
 
@@ -870,8 +949,88 @@ function Quiz({ onBack, onLearningRoadmap }) {
     return "needs-improvement";
   };
 
+  const getTopicPerformance = () => {
+    const topics = topicMap[selectedSkill] || [];
+
+    return topics.map((topic, topicIndex) => {
+      const startIndex = topicIndex * 2;
+      const topicQuestions = questions.slice(
+        startIndex,
+        startIndex + 2
+      );
+
+      const topicScore = topicQuestions.reduce(
+        (total, question, index) => {
+          const actualIndex = startIndex + index;
+
+          return total + (
+            answers[actualIndex] === question.answer ? 1 : 0
+          );
+        },
+        0
+      );
+
+      const topicPercentage =
+        topicQuestions.length > 0
+          ? Math.round(
+              (topicScore / topicQuestions.length) * 100
+            )
+          : 0;
+
+      return {
+        topic,
+        score: topicScore,
+        total: topicQuestions.length,
+        percentage: topicPercentage
+      };
+    });
+  };
+
+  const topicPerformance = getTopicPerformance();
+
+  const weakTopics = topicPerformance
+    .filter((item) => item.percentage < 60)
+    .sort((a, b) => a.percentage - b.percentage);
+
+  const strongTopics = topicPerformance
+    .filter((item) => item.percentage >= 80)
+    .sort((a, b) => b.percentage - a.percentage);
+
+  const getRecommendation = () => {
+    if (weakTopics.length > 0) {
+      return {
+        title: `Focus on ${weakTopics[0].topic}`,
+        text: `Your performance shows that ${weakTopics[0].topic} needs more practice. Follow the learning roadmap and strengthen this topic before moving to advanced concepts.`
+      };
+    }
+
+    if (percentage >= 80) {
+      return {
+        title: `Explore advanced ${selectedSkill} concepts`,
+        text: `You have demonstrated strong knowledge across the tested topics. Continue with advanced concepts and practical projects to improve your real-world skills.`
+      };
+    }
+
+    if (percentage >= 60) {
+      return {
+        title: `Strengthen your ${selectedSkill} foundation`,
+        text: `You have a good understanding of ${selectedSkill}. Practice the topics where your score is lower and gradually move toward advanced concepts.`
+      };
+    }
+
+    return {
+      title: `Build your ${selectedSkill} fundamentals`,
+      text: `Start with the fundamental topics, practice regularly and follow the learning roadmap step by step to improve your competency.`
+    };
+  };
+
+  const recommendation = getRecommendation();
   const handleSubmitQuiz = async () => {
+    if (savingResult) return;
+
     try {
+      setSavingResult(true);
+
       const token = localStorage.getItem("token");
 
       await axios.post(
@@ -881,7 +1040,15 @@ function Quiz({ onBack, onLearningRoadmap }) {
           score,
           totalQuestions: questions.length,
           percentage,
-          level: getLevel()
+          level: getLevel(),
+          weakTopics: weakTopics.map((item) => ({
+            topic: item.topic,
+            percentage: item.percentage
+          })),
+          strongTopics: strongTopics.map((item) => ({
+            topic: item.topic,
+            percentage: item.percentage
+          }))
         },
         {
           headers: {
@@ -891,11 +1058,14 @@ function Quiz({ onBack, onLearningRoadmap }) {
       );
 
       setQuizCompleted(true);
-
     } catch (error) {
       console.error("Quiz result save error:", error);
 
-      alert("Failed to save quiz result. Please try again.");
+      alert(
+        "Failed to save quiz result. Please try again."
+      );
+    } finally {
+      setSavingResult(false);
     }
   };
 
@@ -918,12 +1088,12 @@ function Quiz({ onBack, onLearningRoadmap }) {
     setQuizCompleted(false);
     setCurrentQuestion(0);
     setAnswers([]);
+    setSavingResult(false);
   };
 
   if (!quizStarted) {
     return (
       <div className="quiz-page">
-
         <div className="quiz-container">
 
           <div className="quiz-header">
@@ -967,7 +1137,9 @@ function Quiz({ onBack, onLearningRoadmap }) {
                 <button
                   key={skill}
                   className={`skill-option ${
-                    selectedSkill === skill ? "selected" : ""
+                    selectedSkill === skill
+                      ? "selected"
+                      : ""
                   }`}
                   onClick={() => setSelectedSkill(skill)}
                 >
@@ -992,7 +1164,6 @@ function Quiz({ onBack, onLearningRoadmap }) {
           </div>
 
         </div>
-
       </div>
     );
   }
@@ -1028,13 +1199,11 @@ function Quiz({ onBack, onLearningRoadmap }) {
           <div className="quiz-result">
 
             <div className="result-score">
-
               <span>{percentage}%</span>
 
               <small>
                 Overall Score
               </small>
-
             </div>
 
             <div className="result-details">
@@ -1061,70 +1230,157 @@ function Quiz({ onBack, onLearningRoadmap }) {
                   PERSONALIZED RECOMMENDATION
                 </span>
 
-                {getLevel() === "Advanced" && (
-                  <>
-                    <h3>
-                      Excellent work! Keep advancing your{" "}
-                      {selectedSkill} skills.
-                    </h3>
+                <h3>
+                  {recommendation.title}
+                </h3>
 
-                    <p>
-                      Your performance shows a strong understanding
-                      of {selectedSkill}. Continue with advanced
-                      topics and practical projects to strengthen
-                      your skills further.
-                    </p>
-                  </>
-                )}
-
-                {getLevel() === "Strong" && (
-                  <>
-                    <h3>
-                      Great work! Keep building your{" "}
-                      {selectedSkill} skills.
-                    </h3>
-
-                    <p>
-                      Your performance shows a good understanding
-                      of {selectedSkill}. Continue practicing and
-                      explore more advanced concepts.
-                    </p>
-                  </>
-                )}
-
-                {getLevel() === "Average" && (
-                  <>
-                    <h3>
-                      Your {selectedSkill} skills need more practice.
-                    </h3>
-
-                    <p>
-                      You have a good foundation, but some concepts
-                      need improvement. Follow the learning roadmap
-                      and practice the recommended topics.
-                    </p>
-                  </>
-                )}
-
-                {getLevel() === "Needs Improvement" && (
-                  <>
-                    <h3>
-                      Focus on improving your{" "}
-                      {selectedSkill} skills.
-                    </h3>
-
-                    <p>
-                      Your current performance shows that you need
-                      more practice with {selectedSkill}. Start
-                      from the fundamentals and follow the learning
-                      roadmap step by step.
-                    </p>
-                  </>
-                )}
+                <p>
+                  {recommendation.text}
+                </p>
 
               </div>
 
             </div>
+
+            <div className="topic-performance-section">
+
+              <div className="topic-section-header">
+
+                <div>
+                  <span className="recommendation-label">
+                    COMPETENCY ANALYSIS
+                  </span>
+
+                  <h3>
+                    Topic-wise Performance
+                  </h3>
+
+                  <p>
+                    Your performance is analyzed across
+                    different competency areas.
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="topic-performance-list">
+
+                {topicPerformance.map((item) => (
+
+                  <div
+                    className="topic-performance-card"
+                    key={item.topic}
+                  >
+
+                    <div className="topic-performance-top">
+
+                      <span>
+                        {item.topic}
+                      </span>
+
+                      <strong>
+                        {item.percentage}%
+                      </strong>
+
+                    </div>
+
+                    <div className="topic-progress-bar">
+
+                      <div
+                        className={`topic-progress-fill ${
+                          item.percentage >= 80
+                            ? "topic-strong"
+                            : item.percentage >= 60
+                            ? "topic-average"
+                            : "topic-weak"
+                        }`}
+                        style={{
+                          width: `${item.percentage}%`
+                        }}
+                      ></div>
+
+                    </div>
+
+                    <small>
+                      {item.score} / {item.total} correct
+                    </small>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+            </div>
+
+            {weakTopics.length > 0 && (
+              <div className="weak-topics-section">
+
+                <div>
+                  <span className="recommendation-label">
+                    NEEDS ATTENTION
+                  </span>
+
+                  <h3>
+                    Topics to Improve
+                  </h3>
+                </div>
+
+                <div className="weak-topic-list">
+
+                  {weakTopics.map((item) => (
+                    <div
+                      className="weak-topic-item"
+                      key={item.topic}
+                    >
+                      <span>!</span>
+
+                      <div>
+                        <strong>
+                          {item.topic}
+                        </strong>
+
+                        <small>
+                          Current score:{" "}
+                          {item.percentage}%
+                        </small>
+                      </div>
+                    </div>
+                  ))}
+
+                </div>
+
+              </div>
+            )}
+
+            {strongTopics.length > 0 && (
+              <div className="strong-topics-section">
+
+                <div>
+                  <span className="recommendation-label">
+                    YOUR STRENGTHS
+                  </span>
+
+                  <h3>
+                    Strong Competencies
+                  </h3>
+                </div>
+
+                <div className="strong-topic-list">
+
+                  {strongTopics.map((item) => (
+                    <span
+                      className="strong-topic-tag"
+                      key={item.topic}
+                    >
+                      ✓ {item.topic}
+                    </span>
+                  ))}
+
+                </div>
+
+              </div>
+            )}
 
             <div className="result-actions">
 
@@ -1196,13 +1452,17 @@ function Quiz({ onBack, onLearningRoadmap }) {
           <div className="quiz-progress-info">
 
             <span>
-              Question {currentQuestion + 1} of {questions.length}
+              Question {currentQuestion + 1} of{" "}
+              {questions.length}
             </span>
 
             <span>
               {Math.round(
-                ((currentQuestion + 1) / questions.length) * 100
-              )}%
+                ((currentQuestion + 1) /
+                  questions.length) *
+                  100
+              )}
+              %
             </span>
 
           </div>
@@ -1213,7 +1473,9 @@ function Quiz({ onBack, onLearningRoadmap }) {
               className="quiz-progress-fill"
               style={{
                 width: `${
-                  ((currentQuestion + 1) / questions.length) * 100
+                  ((currentQuestion + 1) /
+                    questions.length) *
+                  100
                 }%`
               }}
             ></div>
@@ -1235,29 +1497,33 @@ function Quiz({ onBack, onLearningRoadmap }) {
 
           <div className="answer-options">
 
-            {question.options.map((option, index) => (
+            {question.options.map(
+              (option, index) => (
 
-              <button
-                key={option}
-                className={`answer-option ${
-                  answers[currentQuestion] === index
-                    ? "selected"
-                    : ""
-                }`}
-                onClick={() => handleAnswer(index)}
-              >
+                <button
+                  key={option}
+                  className={`answer-option ${
+                    answers[currentQuestion] === index
+                      ? "selected"
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleAnswer(index)
+                  }
+                >
 
-                <span className="option-letter">
-                  {String.fromCharCode(65 + index)}
-                </span>
+                  <span className="option-letter">
+                    {String.fromCharCode(65 + index)}
+                  </span>
 
-                <span className="option-text">
-                  {option}
-                </span>
+                  <span className="option-text">
+                    {option}
+                  </span>
 
-              </button>
+                </button>
 
-            ))}
+              )
+            )}
 
           </div>
 
@@ -1277,10 +1543,14 @@ function Quiz({ onBack, onLearningRoadmap }) {
             className="primary-quiz-button"
             onClick={handleNext}
             disabled={
-              answers[currentQuestion] === undefined
+              answers[currentQuestion] === undefined ||
+              savingResult
             }
           >
-            {currentQuestion === questions.length - 1
+            {savingResult
+              ? "Saving Result..."
+              : currentQuestion ===
+                questions.length - 1
               ? "Submit Quiz"
               : "Next Question →"}
           </button>
