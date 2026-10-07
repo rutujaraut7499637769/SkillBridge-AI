@@ -6,6 +6,11 @@ function LearningRoadmap({ onBack, selectedSkill }) {
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openSkill, setOpenSkill] = useState(null);
+  const getTopicStatus = (topicIndex) => {
+    if (topicIndex === 0) return "completed";
+    if (topicIndex === 1) return "current";
+    return "locked";
+  };
 
   useEffect(() => {
     fetchAssessments();
@@ -438,20 +443,20 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                       Start Learning →
                     </button>
                     {openSkill === item.skill && (
-  <div className="learning-topics">
-    <h4>Topics to Learn</h4>
+                      <div className="learning-topics">
+                        <h4>Topics to Learn</h4>
 
-    {item.topics.map((topic, topicIndex) => (
-      <div
-        className="learning-topic"
-        key={topic}
-      >
-        <span>{topicIndex + 1}</span>
-        <p>{topic}</p>
-      </div>
-    ))}
-  </div>
-)}
+                        {item.topics.map((topic, topicIndex) => (
+                          <div
+                            className="learning-topic"
+                            key={topic}
+                          >
+                            <span>{topicIndex + 1}</span>
+                            <p>{topic}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                 </div>
