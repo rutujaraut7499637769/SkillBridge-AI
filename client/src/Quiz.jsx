@@ -89,7 +89,12 @@ const quizBank = {
     },
     {
       question: "Which display value enables Flexbox?",
-      options: ["display: block", "display: flex", "display: grid", "display: inline"],
+      options: [
+        "display: block",
+        "display: flex",
+        "display: grid",
+        "display: inline"
+      ],
       answer: 1
     },
     {
@@ -114,7 +119,12 @@ const quizBank = {
     },
     {
       question: "Which property is used to round corners?",
-      options: ["corner-radius", "border-radius", "radius", "round-border"],
+      options: [
+        "corner-radius",
+        "border-radius",
+        "radius",
+        "round-border"
+      ],
       answer: 1
     }
   ],
@@ -190,12 +200,22 @@ const quizBank = {
     },
     {
       question: "Which function is used to create a React component with state?",
-      options: ["useState()", "useComponent()", "state()", "createState()"],
+      options: [
+        "useState()",
+        "useComponent()",
+        "state()",
+        "createState()"
+      ],
       answer: 0
     },
     {
       question: "Which hook is used for side effects?",
-      options: ["useState", "useEffect", "useSideEffect", "useAction"],
+      options: [
+        "useState",
+        "useEffect",
+        "useSideEffect",
+        "useAction"
+      ],
       answer: 1
     },
     {
@@ -323,7 +343,12 @@ const quizBank = {
     },
     {
       question: "Which command removes an entire table?",
-      options: ["DELETE TABLE", "REMOVE TABLE", "DROP TABLE", "CLEAR TABLE"],
+      options: [
+        "DELETE TABLE",
+        "REMOVE TABLE",
+        "DROP TABLE",
+        "CLEAR TABLE"
+      ],
       answer: 2
     }
   ],
@@ -366,7 +391,12 @@ const quizBank = {
     },
     {
       question: "Which command installs dependencies?",
-      options: ["npm get", "npm install", "npm download", "npm setup"],
+      options: [
+        "npm get",
+        "npm install",
+        "npm download",
+        "npm setup"
+      ],
       answer: 1
     },
     {
@@ -391,11 +421,15 @@ const quizBank = {
     },
     {
       question: "Which command runs a Node.js file?",
-      options: ["run file.js", "node file.js", "npm file.js", "start node.js"],
+      options: [
+        "run file.js",
+        "node file.js",
+        "npm file.js",
+        "start node.js"
+      ],
       answer: 1
     }
   ],
-
   "Express.js": [
     {
       question: "Express.js is mainly used for what?",
@@ -414,12 +448,22 @@ const quizBank = {
     },
     {
       question: "Which method handles a GET request?",
-      options: ["app.get()", "app.fetch()", "app.request()", "app.read()"],
+      options: [
+        "app.get()",
+        "app.fetch()",
+        "app.request()",
+        "app.read()"
+      ],
       answer: 0
     },
     {
       question: "Which method handles POST requests?",
-      options: ["app.send()", "app.post()", "app.create()", "app.add()"],
+      options: [
+        "app.send()",
+        "app.post()",
+        "app.create()",
+        "app.add()"
+      ],
       answer: 1
     },
     {
@@ -439,22 +483,42 @@ const quizBank = {
     },
     {
       question: "Which object is used to send a response?",
-      options: ["req", "res", "responseData", "send"],
+      options: [
+        "req",
+        "res",
+        "responseData",
+        "send"
+      ],
       answer: 1
     },
     {
       question: "Which method sends JSON response?",
-      options: ["res.json()", "res.data()", "res.sendJSON()", "res.object()"],
+      options: [
+        "res.json()",
+        "res.data()",
+        "res.sendJSON()",
+        "res.object()"
+      ],
       answer: 0
     },
     {
       question: "Which package is commonly used for CORS?",
-      options: ["cors", "cross", "express-cors-js", "access"],
+      options: [
+        "cors",
+        "cross",
+        "express-cors-js",
+        "access"
+      ],
       answer: 0
     },
     {
       question: "Which command installs Express?",
-      options: ["npm install express", "npm get express", "node install express", "express install"],
+      options: [
+        "npm install express",
+        "npm get express",
+        "node install express",
+        "express install"
+      ],
       answer: 0
     }
   ],
@@ -502,17 +566,32 @@ const quizBank = {
     },
     {
       question: "Which library is commonly used to work with MongoDB in Node.js?",
-      options: ["Mongoose", "MongoNode", "MongoConnect", "DBJS"],
+      options: [
+        "Mongoose",
+        "MongoNode",
+        "MongoConnect",
+        "DBJS"
+      ],
       answer: 0
     },
     {
       question: "Which operation retrieves documents?",
-      options: ["find()", "get()", "select()", "read()"],
+      options: [
+        "find()",
+        "get()",
+        "select()",
+        "read()"
+      ],
       answer: 0
     },
     {
       question: "Which operation inserts a document?",
-      options: ["insertOne()", "addRow()", "createRow()", "putData()"],
+      options: [
+        "insertOne()",
+        "addRow()",
+        "createRow()",
+        "putData()"
+      ],
       answer: 0
     },
     {
@@ -540,37 +619,72 @@ const quizBank = {
     },
     {
       question: "Which command initializes a Git repository?",
-      options: ["git start", "git init", "git create", "git new"],
+      options: [
+        "git start",
+        "git init",
+        "git create",
+        "git new"
+      ],
       answer: 1
     },
     {
       question: "Which command checks repository status?",
-      options: ["git check", "git status", "git state", "git info"],
+      options: [
+        "git check",
+        "git status",
+        "git state",
+        "git info"
+      ],
       answer: 1
     },
     {
       question: "Which command stages changes?",
-      options: ["git stage", "git add", "git push", "git save"],
+      options: [
+        "git stage",
+        "git add",
+        "git push",
+        "git save"
+      ],
       answer: 1
     },
     {
       question: "Which command creates a commit?",
-      options: ["git save", "git commit", "git record", "git store"],
+      options: [
+        "git save",
+        "git commit",
+        "git record",
+        "git store"
+      ],
       answer: 1
     },
     {
       question: "Which command uploads commits to a remote repository?",
-      options: ["git upload", "git send", "git push", "git transfer"],
+      options: [
+        "git upload",
+        "git send",
+        "git push",
+        "git transfer"
+      ],
       answer: 2
     },
     {
       question: "Which command downloads changes from a remote repository?",
-      options: ["git pull", "git download", "git fetch-all", "git receive"],
+      options: [
+        "git pull",
+        "git download",
+        "git fetch-all",
+        "git receive"
+      ],
       answer: 0
     },
     {
       question: "Which platform commonly hosts Git repositories?",
-      options: ["GitHub", "Google", "Chrome", "MongoDB"],
+      options: [
+        "GitHub",
+        "Google",
+        "Chrome",
+        "MongoDB"
+      ],
       answer: 0
     },
     {
@@ -608,17 +722,32 @@ const quizBank = {
     },
     {
       question: "Which structure is used to repeat code?",
-      options: ["Loop", "Variable", "Class", "Object"],
+      options: [
+        "Loop",
+        "Variable",
+        "Class",
+        "Object"
+      ],
       answer: 0
     },
     {
       question: "Which loop is commonly used when the number of iterations is known?",
-      options: ["for", "while", "do-while", "if"],
+      options: [
+        "for",
+        "while",
+        "do-while",
+        "if"
+      ],
       answer: 0
     },
     {
       question: "Which statement is used for decision making?",
-      options: ["if", "loop", "return", "import"],
+      options: [
+        "if",
+        "loop",
+        "return",
+        "import"
+      ],
       answer: 0
     },
     {
@@ -643,12 +772,22 @@ const quizBank = {
     },
     {
       question: "Which data structure follows LIFO?",
-      options: ["Queue", "Stack", "Array", "Tree"],
+      options: [
+        "Queue",
+        "Stack",
+        "Array",
+        "Tree"
+      ],
       answer: 1
     },
     {
       question: "Which data structure follows FIFO?",
-      options: ["Stack", "Queue", "Tree", "Graph"],
+      options: [
+        "Stack",
+        "Queue",
+        "Tree",
+        "Graph"
+      ],
       answer: 1
     },
     {
@@ -674,7 +813,7 @@ const quizBank = {
   ]
 };
 
-function Quiz({ onBack,onLearningRoadmap }) {
+function Quiz({ onBack, onLearningRoadmap }) {
   const skills = Object.keys(quizBank);
 
   const [selectedSkill, setSelectedSkill] = useState("");
@@ -687,101 +826,346 @@ function Quiz({ onBack,onLearningRoadmap }) {
     ? quizBank[selectedSkill]
     : [];
 
-const handleStartQuiz = () => {
-  setCurrentQuestion(0);
-  setAnswers([]);
-  setQuizCompleted(false);
-  setQuizStarted(true);
-};
+  const handleStartQuiz = () => {
+    setCurrentQuestion(0);
+    setAnswers([]);
+    setQuizCompleted(false);
+    setQuizStarted(true);
+  };
 
-const handleAnswer = (answerIndex) => {
-  const updatedAnswers = [...answers];
-  updatedAnswers[currentQuestion] = answerIndex;
-  setAnswers(updatedAnswers);
-};
+  const handleAnswer = (answerIndex) => {
+    const updatedAnswers = [...answers];
 
-const handleSubmitQuiz = async () => {
-  try {
-    const token = localStorage.getItem("token");
+    updatedAnswers[currentQuestion] = answerIndex;
 
-    await axios.post(
-      "http://localhost:5000/quiz/result",
-      {
-        skill: selectedSkill,
-        score,
-        totalQuestions: questions.length,
-        percentage,
-        level: getLevel()
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
+    setAnswers(updatedAnswers);
+  };
+
+  const calculateScore = () => {
+    return questions.reduce((score, question, index) => {
+      return score + (
+        answers[index] === question.answer ? 1 : 0
+      );
+    }, 0);
+  };
+
+  const score = calculateScore();
+
+  const percentage =
+    questions.length > 0
+      ? Math.round((score / questions.length) * 100)
+      : 0;
+
+  const getLevel = () => {
+    if (percentage >= 80) return "Advanced";
+    if (percentage >= 60) return "Strong";
+    if (percentage >= 40) return "Average";
+    return "Needs Improvement";
+  };
+
+  const getLevelClass = () => {
+    if (percentage >= 80) return "advanced";
+    if (percentage >= 60) return "strong";
+    if (percentage >= 40) return "average";
+    return "needs-improvement";
+  };
+
+  const handleSubmitQuiz = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      await axios.post(
+        "http://localhost:5000/quiz/result",
+        {
+          skill: selectedSkill,
+          score,
+          totalQuestions: questions.length,
+          percentage,
+          level: getLevel()
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
-      }
+      );
+
+      setQuizCompleted(true);
+
+    } catch (error) {
+      console.error("Quiz result save error:", error);
+
+      alert("Failed to save quiz result. Please try again.");
+    }
+  };
+
+  const handleNext = () => {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      handleSubmitQuiz();
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
+  const resetQuiz = () => {
+    setQuizStarted(false);
+    setQuizCompleted(false);
+    setCurrentQuestion(0);
+    setAnswers([]);
+  };
+
+  if (!quizStarted) {
+    return (
+      <div className="quiz-page">
+
+        <div className="quiz-container">
+
+          <div className="quiz-header">
+
+            <button
+              className="quiz-back"
+              onClick={onBack}
+              aria-label="Back"
+            >
+              ←
+            </button>
+
+            <span className="quiz-label">
+              SKILLBRIDGE AI • SKILL PRACTICE
+            </span>
+
+            <h1>Test Your Knowledge</h1>
+
+            <p>
+              Choose a skill and challenge yourself with a
+              competency-focused quiz.
+            </p>
+
+          </div>
+
+          <div className="quiz-selection">
+
+            <div className="quiz-selection-header">
+
+              <h2>Select a Skill</h2>
+
+              <p>
+                Choose the technology you want to practice.
+              </p>
+
+            </div>
+
+            <div className="skill-grid">
+
+              {skills.map((skill) => (
+                <button
+                  key={skill}
+                  className={`skill-option ${
+                    selectedSkill === skill ? "selected" : ""
+                  }`}
+                  onClick={() => setSelectedSkill(skill)}
+                >
+                  <span>{skill}</span>
+
+                  <small>
+                    {quizBank[skill].length} Questions
+                  </small>
+                </button>
+              ))}
+
+            </div>
+
+            <button
+              className="start-quiz-button"
+              disabled={!selectedSkill}
+              onClick={handleStartQuiz}
+            >
+              Start Quiz
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
     );
-
-    setQuizCompleted(true);
-
-  } catch (error) {
-    console.error("Quiz result save error:", error);
-
-    alert("Failed to save quiz result. Please try again.");
   }
-};
 
-const handleNext = () => {
-  if (currentQuestion < questions.length - 1) {
-    setCurrentQuestion(currentQuestion + 1);
-  } else {
-    handleSubmitQuiz();
-  }
-};
+  if (quizCompleted) {
+    return (
+      <div className="quiz-page">
 
-const handlePrevious = () => {
-  if (currentQuestion > 0) {
-    setCurrentQuestion(currentQuestion - 1);
-  }
-};
+        <div className="quiz-container">
 
-const calculateScore = () => {
-  return questions.reduce((score, question, index) => {
-    return score + (
-      answers[index] === question.answer ? 1 : 0
+          <div className="quiz-header">
+
+            <button
+              className="quiz-back"
+              onClick={onBack}
+              aria-label="Back"
+            >
+              ←
+            </button>
+
+            <span className="quiz-label">
+              SKILLBRIDGE AI • QUIZ RESULT
+            </span>
+
+            <h1>Quiz Completed</h1>
+
+            <p>
+              Here is your performance for {selectedSkill}.
+            </p>
+
+          </div>
+
+          <div className="quiz-result">
+
+            <div className="result-score">
+
+              <span>{percentage}%</span>
+
+              <small>
+                Overall Score
+              </small>
+
+            </div>
+
+            <div className="result-details">
+
+              <h2>{getLevel()}</h2>
+
+              <p>
+                You answered{" "}
+                <strong>
+                  {score} out of {questions.length}
+                </strong>{" "}
+                questions correctly.
+              </p>
+
+              <div
+                className={`result-level ${getLevelClass()}`}
+              >
+                {getLevel()}
+              </div>
+
+              <div className="quiz-recommendation">
+
+                <span className="recommendation-label">
+                  PERSONALIZED RECOMMENDATION
+                </span>
+
+                {getLevel() === "Advanced" && (
+                  <>
+                    <h3>
+                      Excellent work! Keep advancing your{" "}
+                      {selectedSkill} skills.
+                    </h3>
+
+                    <p>
+                      Your performance shows a strong understanding
+                      of {selectedSkill}. Continue with advanced
+                      topics and practical projects to strengthen
+                      your skills further.
+                    </p>
+                  </>
+                )}
+
+                {getLevel() === "Strong" && (
+                  <>
+                    <h3>
+                      Great work! Keep building your{" "}
+                      {selectedSkill} skills.
+                    </h3>
+
+                    <p>
+                      Your performance shows a good understanding
+                      of {selectedSkill}. Continue practicing and
+                      explore more advanced concepts.
+                    </p>
+                  </>
+                )}
+
+                {getLevel() === "Average" && (
+                  <>
+                    <h3>
+                      Your {selectedSkill} skills need more practice.
+                    </h3>
+
+                    <p>
+                      You have a good foundation, but some concepts
+                      need improvement. Follow the learning roadmap
+                      and practice the recommended topics.
+                    </p>
+                  </>
+                )}
+
+                {getLevel() === "Needs Improvement" && (
+                  <>
+                    <h3>
+                      Focus on improving your{" "}
+                      {selectedSkill} skills.
+                    </h3>
+
+                    <p>
+                      Your current performance shows that you need
+                      more practice with {selectedSkill}. Start
+                      from the fundamentals and follow the learning
+                      roadmap step by step.
+                    </p>
+                  </>
+                )}
+
+              </div>
+
+            </div>
+
+            <div className="result-actions">
+
+              <button
+                className="secondary-quiz-button"
+                onClick={resetQuiz}
+              >
+                Choose Another Skill
+              </button>
+
+              <button
+                className="primary-quiz-button"
+                onClick={handleStartQuiz}
+              >
+                Try Again
+              </button>
+
+              <button
+                className="primary-quiz-button"
+                onClick={() =>
+                  onLearningRoadmap(selectedSkill)
+                }
+              >
+                View Learning Roadmap →
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
     );
-  }, 0);
-};
+  }
 
-const score = calculateScore();
+  const question = questions[currentQuestion];
 
-const percentage =
-  questions.length > 0
-    ? Math.round((score / questions.length) * 100)
-    : 0;
-
-const getLevel = () => {
-  if (percentage >= 80) return "Advanced";
-  if (percentage >= 60) return "Strong";
-  if (percentage >= 40) return "Average";
-  return "Needs Improvement";
-};
-
-const getLevelClass = () => {
-  if (percentage >= 80) return "advanced";
-  if (percentage >= 60) return "strong";
-  if (percentage >= 40) return "average";
-  return "needs-improvement";
-};
-
-const resetQuiz = () => {
-  setQuizStarted(false);
-  setQuizCompleted(false);
-  setCurrentQuestion(0);
-  setAnswers([]);
-};
-
-if (!quizStarted) {
   return (
     <div className="quiz-page">
+
       <div className="quiz-container">
 
         <div className="quiz-header">
@@ -795,195 +1179,118 @@ if (!quizStarted) {
           </button>
 
           <span className="quiz-label">
-            SKILLBRIDGE AI • SKILL PRACTICE
+            SKILLBRIDGE AI • {selectedSkill.toUpperCase()}
           </span>
 
-          <h1>Test Your Knowledge</h1>
+          <h1>{selectedSkill} Quiz</h1>
 
           <p>
-            Choose a skill and challenge yourself with a
-            competency-focused quiz.
+            Answer each question carefully to measure your
+            current understanding.
           </p>
 
         </div>
 
-        <div className="quiz-selection">
+        <div className="quiz-progress-section">
 
-          <div className="quiz-selection-header">
-            <h2>Select a Skill</h2>
+          <div className="quiz-progress-info">
 
-            <p>
-              Choose the technology you want to practice.
-            </p>
+            <span>
+              Question {currentQuestion + 1} of {questions.length}
+            </span>
+
+            <span>
+              {Math.round(
+                ((currentQuestion + 1) / questions.length) * 100
+              )}%
+            </span>
+
           </div>
 
-          <div className="skill-grid">
+          <div className="quiz-progress-bar">
 
-            {skills.map((skill) => (
+            <div
+              className="quiz-progress-fill"
+              style={{
+                width: `${
+                  ((currentQuestion + 1) / questions.length) * 100
+                }%`
+              }}
+            ></div>
+
+          </div>
+
+        </div>
+
+        <div className="question-card">
+
+          <div className="question-number">
+            QUESTION{" "}
+            {String(currentQuestion + 1).padStart(2, "0")}
+          </div>
+
+          <h2>
+            {question.question}
+          </h2>
+
+          <div className="answer-options">
+
+            {question.options.map((option, index) => (
+
               <button
-                key={skill}
-                className={`skill-option ${
-                  selectedSkill === skill ? "selected" : ""
+                key={option}
+                className={`answer-option ${
+                  answers[currentQuestion] === index
+                    ? "selected"
+                    : ""
                 }`}
-                onClick={() => setSelectedSkill(skill)}
+                onClick={() => handleAnswer(index)}
               >
-                <span>{skill}</span>
 
-                <small>
-                  {quizBank[skill].length} Questions
-                </small>
+                <span className="option-letter">
+                  {String.fromCharCode(65 + index)}
+                </span>
+
+                <span className="option-text">
+                  {option}
+                </span>
+
               </button>
+
             ))}
 
           </div>
 
+        </div>
+
+        <div className="quiz-navigation">
+
           <button
-            className="start-quiz-button"
-            disabled={!selectedSkill}
-            onClick={handleStartQuiz}
+            className="secondary-quiz-button"
+            onClick={handlePrevious}
+            disabled={currentQuestion === 0}
           >
-            Start Quiz
+            ← Previous
+          </button>
+
+          <button
+            className="primary-quiz-button"
+            onClick={handleNext}
+            disabled={
+              answers[currentQuestion] === undefined
+            }
+          >
+            {currentQuestion === questions.length - 1
+              ? "Submit Quiz"
+              : "Next Question →"}
           </button>
 
         </div>
 
       </div>
+
     </div>
   );
 }
 
-if (quizCompleted) {
-  return (
-    <div className="quiz-page">
-
-      <div className="quiz-container">
-
-        <div className="quiz-header">
-
-          <button
-            className="quiz-back"
-            onClick={onBack}
-            aria-label="Back"
-          >
-            ←
-          </button>
-
-          <span className="quiz-label">
-            SKILLBRIDGE AI • QUIZ RESULT
-          </span>
-
-          <h1>Quiz Completed</h1>
-
-          <p>
-            Here is your performance for {selectedSkill}.
-          </p>
-
-        </div>
-
-        <div className="quiz-result">
-
-          <div className="result-score">
-            <span>{percentage}%</span>
-            <small>Overall Score</small>
-          </div>
-
-          <div className="result-details">
-
-  <h2>{getLevel()}</h2>
-
-  <p>
-    You answered{" "}
-    <strong>
-      {score} out of {questions.length}
-    </strong>{" "}
-    questions correctly.
-  </p>
-
-  <div
-    className={`result-level ${getLevelClass()}`}
-  >
-    {getLevel()}
-  </div>
-
-  {/* PERSONALIZED RECOMMENDATION */}
-
-  <div className="quiz-recommendation">
-
-    <span className="recommendation-label">
-      PERSONALIZED RECOMMENDATION
-    </span>
-
-    {getLevel() === "Strong" && (
-      <>
-        <h3>
-          Great work! Keep building your {selectedSkill} skills.
-        </h3>
-
-        <p>
-          Your performance shows a strong understanding of{" "}
-          {selectedSkill}. Continue with advanced topics and
-          practical projects to strengthen your skills further.
-        </p>
-      </>
-    )}
-
-    {getLevel() === "Average" && (
-      <>
-        <h3>
-          Your {selectedSkill} skills need more practice.
-        </h3>
-
-        <p>
-          You have a good foundation, but some concepts need
-          improvement. Follow the learning roadmap and practice
-          the recommended topics to improve your performance.
-        </p>
-      </>
-    )}
-
-    {getLevel() !== "Strong" &&
-      getLevel() !== "Average" && (
-        <>
-          <h3>
-            Focus on improving your {selectedSkill} skills.
-          </h3>
-
-          <p>
-            Your current performance shows that you need more
-            practice with {selectedSkill}. Start from the
-            fundamentals and follow the learning roadmap step
-            by step.
-          </p>
-        </>
-      )}
-
-  </div>
-
-</div>
-
-<div className="result-actions">
-
-  <button
-    className="secondary-quiz-button"
-    onClick={resetQuiz}
-  >
-    Choose Another Skill
-  </button>
-
-  <button
-    className="primary-quiz-button"
-    onClick={handleStartQuiz}
-  >
-    Try Again
-  </button>
-
-  <button
-    className="primary-quiz-button"
-    onClick={() =>
-      onLearningRoadmap(selectedSkill)
-    }
-  >
-    View Learning Roadmap →
-  </button>
-
-</div>
+export default Quiz;
