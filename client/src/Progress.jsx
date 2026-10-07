@@ -113,8 +113,6 @@ function Progress({ onBack }) {
     <div className="progress-page">
 
 
-      {/* HEADER */}
-
       <header className="progress-header">
 
         <button
@@ -139,9 +137,6 @@ function Progress({ onBack }) {
 
       </header>
 
-
-
-      {/* DAILY STREAK */}
 
       <section className="streak-section">
 
@@ -347,8 +342,6 @@ function Progress({ onBack }) {
           </div>
 
 
-          {/* ACTIVE DAYS */}
-
           <div className="progress-card">
 
             <span>
@@ -371,9 +364,6 @@ function Progress({ onBack }) {
 
       </section>
 
-
-
-      {/* LATEST SKILL */}
 
       <section className="progress-section">
 
@@ -454,9 +444,6 @@ function Progress({ onBack }) {
 
       </section>
 
-
-
-      {/* SKILL PERFORMANCE */}
 
 <section className="progress-section">
 
@@ -608,7 +595,6 @@ function Progress({ onBack }) {
 
 </section>
 
-      {/* MOTIVATION */}
 
       <section className="progress-message">
 
