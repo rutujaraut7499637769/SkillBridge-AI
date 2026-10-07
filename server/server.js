@@ -209,7 +209,9 @@ app.post("/quiz/result", authMiddleware, async (req, res) => {
       score,
       totalQuestions,
       percentage,
-      level
+      level,
+      weakTopics,
+      strongTopics
     } = req.body;
 
     if (
@@ -230,7 +232,9 @@ app.post("/quiz/result", authMiddleware, async (req, res) => {
       score,
       totalQuestions,
       percentage,
-      level
+      level,
+      weakTopics: weakTopics || [],
+      strongTopics: strongTopics || []
     });
 
     await quizResult.save();
@@ -284,7 +288,6 @@ app.get(
     }
   }
 );
-
 
 
 app.get(
@@ -364,7 +367,7 @@ app.get(
         ...new Set(dates)
       ];
 
-  
+
       const today = new Date().toLocaleDateString(
         "en-CA",
         {
