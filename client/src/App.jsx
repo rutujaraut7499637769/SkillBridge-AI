@@ -9,6 +9,7 @@ import LearningRoadmap from "./LearningRoadmap";
 import Quiz from "./Quiz";
 import Progress from "./progress";
 import Profile from "./Profile";
+import Footer from "./Footer";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,24 +17,15 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [selectedSkill, setSelectedSkill] = useState("");
-
-  // Signup
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  // Login
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
-
-  // Password visibility
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [showSignupPassword, setShowSignupPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-
-  // Signup
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -68,9 +60,6 @@ function App() {
       );
     }
   };
-
-
-  // Login
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -100,9 +89,6 @@ function App() {
       );
     }
   };
-
-
-  // Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
 
@@ -116,32 +102,34 @@ function App() {
     alert("Logged out successfully");
   };
 
-
-  // Logged-in pages
   if (isLoggedIn) {
 
     if (currentPage === "assessment") {
-      return (
-        <SkillAssessment
-          onBack={() => setCurrentPage("dashboard")}
-        />
-      );
-    }
+  return (
+    <>
+      <SkillAssessment
+        onBack={() => setCurrentPage("dashboard")}
+      />
 
+      <Footer />
+    </>
+  );
+}
+   if (currentPage === "mySkills") {
+  return (
+    <>
+      <MySkills
+        onBack={() => setCurrentPage("dashboard")}
+        onLearningRoadmap={(skill) => {
+          setSelectedSkill(skill);
+          setCurrentPage("learningRoadmap");
+        }}
+      />
 
-    if (currentPage === "mySkills") {
-      return (
-        <MySkills
-          onBack={() => setCurrentPage("dashboard")}
-          onLearningRoadmap={(skill) => {
-            setSelectedSkill(skill);
-            setCurrentPage("learningRoadmap");
-          }}
-        />
-      );
-    }
-
-
+      <Footer />
+    </>
+  );
+} 
     if (currentPage === "learningRoadmap") {
       return (
         <LearningRoadmap
@@ -215,9 +203,6 @@ function App() {
       />
     );
   }
-
-
-  // Login / Signup
   return (
     <div className="auth-page">
 
