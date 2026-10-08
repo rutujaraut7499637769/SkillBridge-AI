@@ -16,20 +16,9 @@ const LearningActivity = require("./models/LearningActivity");
 const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express();
-
-
-// ===============================
-// MIDDLEWARE
-// ===============================
-
 app.use(cors());
 
 app.use(express.json());
-
-
-// ===============================
-// PROFILE IMAGE UPLOADS
-// ===============================
 
 app.use(
   "/uploads",
@@ -94,12 +83,6 @@ const upload = multer({
     }
   }
 });
-
-
-// ===============================
-// MONGODB CONNECTION
-// ===============================
-
 mongoose
   .connect(
     "mongodb://localhost:27017/skillbridge"
@@ -115,23 +98,11 @@ mongoose
       error
     );
   });
-
-
-// ===============================
-// HOME ROUTE
-// ===============================
-
 app.get("/", (req, res) => {
   res.send(
     "SkillBridge AI Backend is Running!"
   );
 });
-
-
-// ===============================
-// TEST USER
-// ===============================
-
 app.get(
   "/test-user",
   async (req, res) => {
@@ -151,12 +122,6 @@ app.get(
     }
   }
 );
-
-
-// ===============================
-// SIGNUP
-// ===============================
-
 app.post(
   "/signup",
   async (req, res) => {
@@ -193,11 +158,6 @@ app.post(
     }
   }
 );
-
-
-// ===============================
-// LOGIN
-// ===============================
 
 app.post(
   "/login",
@@ -258,11 +218,6 @@ app.post(
   }
 );
 
-
-// ===============================
-// GET PROFILE
-// ===============================
-
 app.get(
   "/profile",
   authMiddleware,
@@ -299,12 +254,6 @@ app.get(
   }
 );
 
-
-// ===============================
-// UPDATE PROFILE
-// ===============================
-
-
 app.put(
   "/profile",
   authMiddleware,
@@ -316,7 +265,6 @@ app.put(
         accountType
       } = req.body;
 
-      // Check required fields
       if (
         !name ||
         !email ||
@@ -327,8 +275,6 @@ app.put(
             "Name, email and account type are required"
         });
       }
-
-      // Only allow valid account types
       const allowedAccountTypes = [
         "Student",
         "Instructor",
@@ -346,8 +292,6 @@ app.put(
         });
       }
 
-      // Check whether another user
-      // already has this email
       const existingUser =
         await User.findOne({
           email: email.trim(),
@@ -405,10 +349,6 @@ app.put(
   }
 );
 
-// ===============================
-// UPLOAD PROFILE PHOTO
-// ===============================
-
 app.post(
   "/profile/photo",
   authMiddleware,
@@ -434,7 +374,6 @@ app.post(
         });
       }
 
-      // Delete old profile image
       if (user.profileImage) {
         const oldFilePath =
           path.join(
@@ -456,7 +395,6 @@ app.post(
         }
       }
 
-      // Save new image path
       user.profileImage =
         "/uploads/" +
         req.file.filename;
@@ -484,11 +422,6 @@ app.post(
     }
   }
 );
-
-
-// ===============================
-// REMOVE PROFILE PHOTO
-// ===============================
 
 app.delete(
   "/profile/photo",
@@ -553,10 +486,6 @@ app.delete(
 );
 
 
-// ===============================
-// LEARNING ACTIVITY
-// ===============================
-
 const recordLearningActivity =
   async (userId) => {
     try {
@@ -592,10 +521,6 @@ const recordLearningActivity =
     }
   };
 
-
-// ===============================
-// ASSESSMENT
-// ===============================
 
 app.post(
   "/assessment",
@@ -640,10 +565,6 @@ app.post(
   }
 );
 
-
-// ===============================
-// QUIZ RESULT
-// ===============================
 
 app.post(
   "/quiz/result",
@@ -714,11 +635,6 @@ app.post(
   }
 );
 
-
-// ===============================
-// LATEST ASSESSMENT
-// ===============================
-
 app.get(
   "/assessment/latest",
   authMiddleware,
@@ -757,11 +673,6 @@ app.get(
   }
 );
 
-
-// ===============================
-// ALL ASSESSMENTS
-// ===============================
-
 app.get(
   "/assessment/all",
   authMiddleware,
@@ -792,11 +703,6 @@ app.get(
     }
   }
 );
-
-
-// ===============================
-// ALL QUIZ RESULTS
-// ===============================
 
 app.get(
   "/quiz/results",
@@ -829,10 +735,6 @@ app.get(
   }
 );
 
-
-// ===============================
-// LEARNING STREAK
-// ===============================
 
 app.get(
   "/activity/streak",
@@ -974,11 +876,6 @@ app.get(
     }
   }
 );
-
-
-// ===============================
-// START SERVER
-// ===============================
 
 app.listen(
   5000,

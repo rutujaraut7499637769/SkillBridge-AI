@@ -973,8 +973,8 @@ function Quiz({ onBack, onLearningRoadmap }) {
       const topicPercentage =
         topicQuestions.length > 0
           ? Math.round(
-              (topicScore / topicQuestions.length) * 100
-            )
+            (topicScore / topicQuestions.length) * 100
+          )
           : 0;
 
       return {
@@ -1136,11 +1136,10 @@ function Quiz({ onBack, onLearningRoadmap }) {
               {skills.map((skill) => (
                 <button
                   key={skill}
-                  className={`skill-option ${
-                    selectedSkill === skill
+                  className={`skill-option ${selectedSkill === skill
                       ? "selected"
                       : ""
-                  }`}
+                    }`}
                   onClick={() => setSelectedSkill(skill)}
                 >
                   <span>{skill}</span>
@@ -1287,13 +1286,12 @@ function Quiz({ onBack, onLearningRoadmap }) {
                     <div className="topic-progress-bar">
 
                       <div
-                        className={`topic-progress-fill ${
-                          item.percentage >= 80
+                        className={`topic-progress-fill ${item.percentage >= 80
                             ? "topic-strong"
                             : item.percentage >= 60
-                            ? "topic-average"
-                            : "topic-weak"
-                        }`}
+                              ? "topic-average"
+                              : "topic-weak"
+                          }`}
                         style={{
                           width: `${item.percentage}%`
                         }}
@@ -1460,7 +1458,7 @@ function Quiz({ onBack, onLearningRoadmap }) {
               {Math.round(
                 ((currentQuestion + 1) /
                   questions.length) *
-                  100
+                100
               )}
               %
             </span>
@@ -1472,11 +1470,10 @@ function Quiz({ onBack, onLearningRoadmap }) {
             <div
               className="quiz-progress-fill"
               style={{
-                width: `${
-                  ((currentQuestion + 1) /
+                width: `${((currentQuestion + 1) /
                     questions.length) *
                   100
-                }%`
+                  }%`
               }}
             ></div>
 
@@ -1502,11 +1499,10 @@ function Quiz({ onBack, onLearningRoadmap }) {
 
                 <button
                   key={option}
-                  className={`answer-option ${
-                    answers[currentQuestion] === index
+                  className={`answer-option ${answers[currentQuestion] === index
                       ? "selected"
                       : ""
-                  }`}
+                    }`}
                   onClick={() =>
                     handleAnswer(index)
                   }
@@ -1551,8 +1547,8 @@ function Quiz({ onBack, onLearningRoadmap }) {
               ? "Saving Result..."
               : currentQuestion ===
                 questions.length - 1
-              ? "Submit Quiz"
-              : "Next Question →"}
+                ? "Submit Quiz"
+                : "Next Question →"}
           </button>
 
         </div>

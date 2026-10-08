@@ -188,8 +188,6 @@
   border-color: #111827;
 }
 
-/* LEARNING OVERVIEW */
-
 .progress-overview {
   margin-bottom: 30px;
 }
@@ -700,7 +698,6 @@
   font-size: 11px;
   color: #6b7280;
 }
-/* Personalized Learning Recommendations */
 
 .recommendation-grid {
   display: grid;

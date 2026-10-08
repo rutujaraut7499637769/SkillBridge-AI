@@ -21,9 +21,6 @@ function Profile({ onBack, onLogout }) {
 
   const API_URL = "http://localhost:5000";
 
-  // ===============================
-  // FETCH PROFILE
-  // ===============================
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -54,10 +51,6 @@ function Profile({ onBack, onLogout }) {
     fetchProfile();
   }, [token]);
 
-
-  // ===============================
-  // UPDATE NAME + EMAIL
-  // ===============================
   const handleSaveProfile = async () => {
     try {
       setMessage("");
@@ -96,9 +89,6 @@ function Profile({ onBack, onLogout }) {
   };
 
 
-  // ===============================
-  // SELECT PHOTO
-  // ===============================
   const handlePhotoSelect = () => {
     setShowPhotoMenu(false);
 
@@ -106,9 +96,6 @@ function Profile({ onBack, onLogout }) {
   };
 
 
-  // ===============================
-  // UPLOAD PHOTO
-  // ===============================
   const handlePhotoUpload = async (event) => {
     const file =
       event.target.files?.[0];
@@ -157,10 +144,6 @@ function Profile({ onBack, onLogout }) {
     event.target.value = "";
   };
 
-
-  // ===============================
-  // REMOVE PHOTO
-  // ===============================
   const handleRemovePhoto = async () => {
     try {
       setShowPhotoMenu(false);
@@ -193,24 +176,16 @@ function Profile({ onBack, onLogout }) {
     }
   };
 
-
-  // ===============================
-  // PROFILE IMAGE
-  // ===============================
   const profileImage =
     user?.profileImage
       ? `${API_URL}${user.profileImage}`
       : null;
 
-
-  // ===============================
-  // USER INITIAL
-  // ===============================
   const userInitial =
     user?.name
       ? user.name
-          .charAt(0)
-          .toUpperCase()
+        .charAt(0)
+        .toUpperCase()
       : "R";
 
 
@@ -226,9 +201,6 @@ function Profile({ onBack, onLogout }) {
   return (
     <div className="profile-page">
 
-      {/* =========================
-          TOP BAR
-      ========================== */}
 
       <div className="profile-topbar">
 
@@ -247,10 +219,6 @@ function Profile({ onBack, onLogout }) {
 
       </div>
 
-
-      {/* =========================
-          PROFILE HEADER
-      ========================== */}
 
       <div className="profile-cover">
 
@@ -331,8 +299,8 @@ function Profile({ onBack, onLogout }) {
             </p>
 
             <span className="profile-role">
-  SkillBridge {user.accountType || "Student"}
-</span>
+              SkillBridge {user.accountType || "Student"}
+            </span>
 
           </div>
 
@@ -341,16 +309,9 @@ function Profile({ onBack, onLogout }) {
       </div>
 
 
-      {/* =========================
-          MAIN CONTENT
-      ========================== */}
-
       <div className="profile-content">
 
 
-        {/* =======================
-            MESSAGE
-        ======================== */}
 
         {message && (
           <div className="profile-message">
@@ -358,10 +319,6 @@ function Profile({ onBack, onLogout }) {
           </div>
         )}
 
-
-        {/* =======================
-            PERSONAL INFORMATION
-        ======================== */}
 
         <div className="profile-card">
 
@@ -411,33 +368,33 @@ function Profile({ onBack, onLogout }) {
               />
 
             </div>
-<div className="profile-field">
-  <label>
-    Account Type
-  </label>
+            <div className="profile-field">
+              <label>
+                Account Type
+              </label>
 
-  <select
-    value={accountType}
-    disabled={!editing}
-    onChange={(event) =>
-      setAccountType(
-        event.target.value
-      )
-    }
-  >
-    <option value="Student">
-      Student
-    </option>
+              <select
+                value={accountType}
+                disabled={!editing}
+                onChange={(event) =>
+                  setAccountType(
+                    event.target.value
+                  )
+                }
+              >
+                <option value="Student">
+                  Student
+                </option>
 
-    <option value="Instructor">
-      Instructor
-    </option>
+                <option value="Instructor">
+                  Instructor
+                </option>
 
-    <option value="Learner">
-      Learner
-    </option>
-  </select>
-</div>
+                <option value="Learner">
+                  Learner
+                </option>
+              </select>
+            </div>
 
             <div className="profile-field">
 
@@ -491,10 +448,6 @@ function Profile({ onBack, onLogout }) {
         </div>
 
 
-        {/* =======================
-            ACCOUNT INFORMATION
-        ======================== */}
-
         <div className="profile-card">
 
           <div className="profile-card-header">
@@ -521,7 +474,7 @@ function Profile({ onBack, onLogout }) {
               </span>
 
               <strong>
-                { user.accountType || "Student" }
+                {user.accountType || "Student"}
               </strong>
 
             </div>
@@ -557,10 +510,6 @@ function Profile({ onBack, onLogout }) {
         </div>
 
 
-        {/* =======================
-            SECURITY
-        ======================== */}
-
         <div className="profile-card security-card">
 
           <div>
@@ -582,11 +531,6 @@ function Profile({ onBack, onLogout }) {
 
         </div>
 
-
-        {/* =======================
-            LOGOUT
-        ======================== */}
-
         <div className="profile-logout-section">
 
           <button
@@ -601,11 +545,6 @@ function Profile({ onBack, onLogout }) {
         </div>
 
       </div>
-
-
-      {/* =========================
-          LOGOUT MODAL
-      ========================== */}
 
       {showLogoutModal && (
         <div className="logout-modal-overlay">

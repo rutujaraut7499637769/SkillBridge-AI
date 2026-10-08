@@ -200,8 +200,6 @@ function MySkills({ onBack, onLearningRoadmap }) {
 
             </div>
 
-
-            {/* COMPETENCY PROFILE */}
             <div className="skills-section">
 
               <div className="skills-section-header">
@@ -323,8 +321,6 @@ function MySkills({ onBack, onLearningRoadmap }) {
 
             </div>
 
-
-            {/* INSIGHT */}
             <div className="skills-insight">
 
               <div className="insight-icon">

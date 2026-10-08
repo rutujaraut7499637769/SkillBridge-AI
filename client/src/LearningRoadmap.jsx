@@ -8,7 +8,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
   const [openSkill, setOpenSkill] = useState(null);
   const [completedTopics, setCompletedTopics] = useState({});
 
-  // Load saved topic progress
   useEffect(() => {
     const savedProgress = localStorage.getItem(
       "skillbridgeCompletedTopics"
@@ -19,7 +18,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
     }
   }, []);
 
-  // Save topic progress
   useEffect(() => {
     localStorage.setItem(
       "skillbridgeCompletedTopics",
@@ -27,7 +25,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
     );
   }, [completedTopics]);
 
-  // Topic status
   const getTopicStatus = (skill, topicIndex) => {
     const completedCount =
       1 +
@@ -46,7 +43,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
     return "locked";
   };
 
-  // Complete current topic
   const completeTopic = (skill, topicIndex) => {
     setCompletedTopics((prev) => ({
       ...prev,
@@ -296,8 +292,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
     <div className="roadmap-page">
       <div className="roadmap-container">
 
-        {/* HEADER */}
-
         <div className="roadmap-header">
 
           <button
@@ -320,8 +314,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
           </p>
 
         </div>
-
-        {/* OVERVIEW */}
 
         <div className="roadmap-overview">
 
@@ -367,8 +359,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
         </div>
 
-        {/* LEARNING PATH */}
-
+       
         <div className="roadmap-section">
 
           <div className="roadmap-section-heading">
@@ -407,8 +398,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                   key={item.id}
                 >
 
-                  {/* STAGE MARKER */}
-
                   <div className="roadmap-marker">
 
                     <div className="stage-number">
@@ -425,8 +414,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
                   </div>
 
-                  {/* ROADMAP CARD */}
-
+            
                   <div className="roadmap-card">
 
                     <div className="roadmap-card-top">
@@ -486,8 +474,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                       </div>
                     )}
 
-                    {/* START LEARNING */}
-
+                   
                     <button
                       className="start-learning-button"
                       onClick={() =>
@@ -502,8 +489,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
                         ? "Hide Topics ↑"
                         : "Start Learning →"}
                     </button>
-
-                    {/* LEARNING TOPICS */}
 
                     {openSkill === item.skill && (
 
@@ -581,8 +566,7 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
         </div>
 
-        {/* AI NOTE */}
-
+    
         <div className="roadmap-ai-note">
 
           <div className="ai-note-icon">

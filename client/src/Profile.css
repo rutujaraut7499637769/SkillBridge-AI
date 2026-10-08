@@ -1,17 +1,9 @@
-/* ===============================
-   PROFILE PAGE
-================================ */
-
 .profile-page {
   min-height: 100vh;
   background: #f5f7fb;
   color: #172033;
 }
 
-
-/* ===============================
-   TOP BAR
-================================ */
 
 .profile-topbar {
   height: 72px;
@@ -56,17 +48,10 @@
   width: 80px;
 }
 
-
-/* ===============================
-   PROFILE COVER
-================================ */
-
 .profile-cover {
-  background: linear-gradient(
-    135deg,
-    #2563eb,
-    #1d4ed8
-  );
+  background: linear-gradient(135deg,
+      #2563eb,
+      #1d4ed8);
 
   min-height: 235px;
 
@@ -88,10 +73,6 @@
   gap: 28px;
 }
 
-
-/* ===============================
-   PROFILE AVATAR
-================================ */
 
 .profile-avatar-wrapper {
   position: relative;
@@ -130,10 +111,6 @@
 }
 
 
-/* ===============================
-   CAMERA BUTTON
-================================ */
-
 .profile-camera-button {
   position: absolute;
 
@@ -166,10 +143,6 @@
   background: #0f172a;
 }
 
-
-/* ===============================
-   PHOTO MENU
-================================ */
 
 .photo-menu {
   position: absolute;
@@ -223,10 +196,6 @@
 }
 
 
-/* ===============================
-   PROFILE HEADING
-================================ */
-
 .profile-heading {
   color: #ffffff;
 }
@@ -266,10 +235,6 @@
 }
 
 
-/* ===============================
-   MAIN CONTENT
-================================ */
-
 .profile-content {
   width: calc(100% - 40px);
   max-width: 1000px;
@@ -277,10 +242,6 @@
   margin: 32px auto 50px;
 }
 
-
-/* ===============================
-   MESSAGE
-================================ */
 
 .profile-message {
   background: #eff6ff;
@@ -298,10 +259,6 @@
   font-size: 14px;
   font-weight: 500;
 }
-
-/* ===============================
-   PROFILE CARD
-================================ */
 
 .profile-card {
   background: #ffffff;
@@ -347,10 +304,6 @@
 }
 
 
-/* ===============================
-   EDIT BUTTON
-================================ */
-
 .edit-profile-button {
   border: 1px solid #2563eb;
 
@@ -374,10 +327,6 @@
   background: #eff6ff;
 }
 
-
-/* ===============================
-   PROFILE FORM
-================================ */
 
 .profile-form {
   display: grid;
@@ -431,12 +380,10 @@
   background: #ffffff;
 
   box-shadow:
-    0 0 0 3px rgba(
-      37,
+    0 0 0 3px rgba(37,
       99,
       235,
-      0.08
-    );
+      0.08);
 }
 
 .profile-field input:disabled {
@@ -445,10 +392,6 @@
   cursor: default;
 }
 
-
-/* ===============================
-   EDIT ACTIONS
-================================ */
 
 .profile-edit-actions {
   display: flex;
@@ -497,10 +440,6 @@
 }
 
 
-/* ===============================
-   ACCOUNT INFORMATION
-================================ */
-
 .account-info-grid {
   display: grid;
 
@@ -540,10 +479,6 @@
   color: #16a34a !important;
 }
 
-
-/* ===============================
-   SECURITY
-================================ */
 
 .security-card {
   display: flex;
@@ -587,10 +522,6 @@
 }
 
 
-/* ===============================
-   LOGOUT
-================================ */
-
 .profile-logout-section {
   display: flex;
 
@@ -625,21 +556,16 @@
   border-color: #fca5a5;
 }
 
-/* ===============================
-   LOGOUT MODAL
-================================ */
 
 .logout-modal-overlay {
   position: fixed;
 
   inset: 0;
 
-  background: rgba(
-    15,
-    23,
-    42,
-    0.55
-  );
+  background: rgba(15,
+      23,
+      42,
+      0.55);
 
   display: flex;
 
@@ -665,12 +591,10 @@
   text-align: center;
 
   box-shadow:
-    0 20px 60px rgba(
-      15,
+    0 20px 60px rgba(15,
       23,
       42,
-      0.25
-    );
+      0.25);
 }
 
 .logout-icon {
@@ -761,10 +685,6 @@
 }
 
 
-/* ===============================
-   LOADING
-================================ */
-
 .profile-loading {
   min-height: 100vh;
 
@@ -780,10 +700,6 @@
   font-size: 15px;
 }
 
-
-/* ===============================
-   RESPONSIVE
-================================ */
 
 @media (max-width: 700px) {
 
@@ -817,7 +733,7 @@
     width: 100%;
   }
 }
-/* Account Type dropdown */
+
 
 .profile-field select {
   width: 100%;

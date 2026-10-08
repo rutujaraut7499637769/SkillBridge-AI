@@ -65,26 +65,26 @@ function Progress({ onBack }) {
   const overallProgress =
     assessments.length > 0
       ? Math.round(
-          assessments.reduce(
-            (total, assessment) =>
-              total + assessment.percentage,
-            0
-          ) / assessments.length
-        )
+        assessments.reduce(
+          (total, assessment) =>
+            total + assessment.percentage,
+          0
+        ) / assessments.length
+      )
       : 0;
 
   const averageQuizScore =
     quizResults.length > 0
       ? Math.round(
-          quizResults.reduce(
-            (total, quiz) =>
-              total + quiz.percentage,
-            0
-          ) / quizResults.length
-        )
+        quizResults.reduce(
+          (total, quiz) =>
+            total + quiz.percentage,
+          0
+        ) / quizResults.length
+      )
       : 0;
 
-  
+
 
   const getRecommendations = (assessment) => {
     const skill = assessment.skill;
@@ -315,7 +315,7 @@ function Progress({ onBack }) {
           className="back-button"
           onClick={onBack}
         >
-          ← 
+          ←
         </button>
 
         <div>
@@ -417,9 +417,8 @@ function Progress({ onBack }) {
 
               return (
                 <div
-                  className={`day-item ${
-                    completed ? "completed" : ""
-                  }`}
+                  className={`day-item ${completed ? "completed" : ""
+                    }`}
                   key={day.date}
                 >
 
@@ -594,7 +593,7 @@ function Progress({ onBack }) {
       </section>
 
 
-    
+
 
       <section className="progress-section">
 
@@ -655,8 +654,8 @@ function Progress({ onBack }) {
 
                       {assessment.skill
                         ? assessment.skill
-                            .charAt(0)
-                            .toUpperCase()
+                          .charAt(0)
+                          .toUpperCase()
                         : "S"}
 
                     </div>
@@ -705,13 +704,12 @@ function Progress({ onBack }) {
                   <div className="skill-progress-track">
 
                     <div
-                      className={`skill-progress-fill ${
-                        assessment.percentage >= 80
+                      className={`skill-progress-fill ${assessment.percentage >= 80
                           ? "strong"
                           : assessment.percentage >= 60
-                          ? "good"
-                          : "needs-improvement"
-                      }`}
+                            ? "good"
+                            : "needs-improvement"
+                        }`}
                       style={{
                         width:
                           `${assessment.percentage}%`
@@ -734,8 +732,8 @@ function Progress({ onBack }) {
                     {assessment.percentage >= 80
                       ? "Strong"
                       : assessment.percentage >= 60
-                      ? "Good"
-                      : "Needs Improvement"}
+                        ? "Good"
+                        : "Needs Improvement"}
 
                   </span>
 
@@ -823,9 +821,8 @@ function Progress({ onBack }) {
                     </div>
 
                     <span
-                      className={`recommendation-level ${
-                        recommendation.className
-                      }`}
+                      className={`recommendation-level ${recommendation.className
+                        }`}
                     >
                       {recommendation.level}
                     </span>
@@ -1036,9 +1033,6 @@ function Progress({ onBack }) {
         )}
 
       </section>
-
-
-      {/* MOTIVATION */}
 
       <section className="progress-message">
 
