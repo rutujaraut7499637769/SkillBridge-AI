@@ -17,15 +17,23 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [selectedSkill, setSelectedSkill] = useState("");
+
+  // Signup
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  // Login
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  // Password visibility
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [showSignupPassword, setShowSignupPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Signup
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -52,7 +60,6 @@ function App() {
       setConfirmPassword("");
 
       setIsLogin(true);
-
     } catch (error) {
       alert(
         error.response?.data?.message ||
@@ -60,6 +67,8 @@ function App() {
       );
     }
   };
+
+  // Login
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -81,7 +90,6 @@ function App() {
 
       setIsLoggedIn(true);
       setCurrentPage("dashboard");
-
     } catch (error) {
       alert(
         error.response?.data?.message ||
@@ -89,6 +97,8 @@ function App() {
       );
     }
   };
+
+  // Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
 
@@ -102,46 +112,38 @@ function App() {
     alert("Logged out successfully");
   };
 
+  // ===============================
+  // LOGGED-IN PAGES
+  // ===============================
+
   if (isLoggedIn) {
+    let currentContent;
 
     if (currentPage === "assessment") {
-  return (
-    <>
-      <SkillAssessment
-        onBack={() => setCurrentPage("dashboard")}
-      />
-
-      <Footer />
-    </>
-  );
-}
-   if (currentPage === "mySkills") {
-  return (
-    <>
-      <MySkills
-        onBack={() => setCurrentPage("dashboard")}
-        onLearningRoadmap={(skill) => {
-          setSelectedSkill(skill);
-          setCurrentPage("learningRoadmap");
-        }}
-      />
-
-      <Footer />
-    </>
-  );
-} 
-    if (currentPage === "learningRoadmap") {
-      return (
+      currentContent = (
+        <SkillAssessment
+          onBack={() => setCurrentPage("dashboard")}
+        />
+      );
+    } else if (currentPage === "mySkills") {
+      currentContent = (
+        <MySkills
+          onBack={() => setCurrentPage("dashboard")}
+          onLearningRoadmap={(skill) => {
+            setSelectedSkill(skill);
+            setCurrentPage("learningRoadmap");
+          }}
+        />
+      );
+    } else if (currentPage === "learningRoadmap") {
+      currentContent = (
         <LearningRoadmap
           onBack={() => setCurrentPage("dashboard")}
           selectedSkill={selectedSkill}
         />
       );
-    }
-
-
-    if (currentPage === "quiz") {
-      return (
+    } else if (currentPage === "quiz") {
+      currentContent = (
         <Quiz
           onBack={() => setCurrentPage("dashboard")}
           onLearningRoadmap={(skill) => {
@@ -150,66 +152,63 @@ function App() {
           }}
         />
       );
-    }
-
-
-    if (currentPage === "progress") {
-      return (
+    } else if (currentPage === "progress") {
+      currentContent = (
         <Progress
           onBack={() => setCurrentPage("dashboard")}
         />
       );
-    }
-
-
-    if (currentPage === "profile") {
-      return (
+    } else if (currentPage === "profile") {
+      currentContent = (
         <Profile
           onBack={() => setCurrentPage("dashboard")}
           onLogout={handleLogout}
         />
       );
+    } else {
+      currentContent = (
+        <Dashboard
+          onSkillAssessment={() =>
+            setCurrentPage("assessment")
+          }
+          onMySkills={() =>
+            setCurrentPage("mySkills")
+          }
+          onLearningRoadmap={(skill) => {
+            setSelectedSkill(skill);
+            setCurrentPage("learningRoadmap");
+          }}
+          onQuiz={() =>
+            setCurrentPage("quiz")
+          }
+          onProgress={() =>
+            setCurrentPage("progress")
+          }
+          onProfile={() =>
+            setCurrentPage("profile")
+          }
+          onLogout={handleLogout}
+        />
+      );
     }
 
-
     return (
-      <Dashboard
-        onSkillAssessment={() =>
-          setCurrentPage("assessment")
-        }
-
-        onMySkills={() =>
-          setCurrentPage("mySkills")
-        }
-
-        onLearningRoadmap={(skill) => {
-          setSelectedSkill(skill);
-          setCurrentPage("learningRoadmap");
-        }}
-
-        onQuiz={() =>
-          setCurrentPage("quiz")
-        }
-
-        onProgress={() =>
-          setCurrentPage("progress")
-        }
-
-        onProfile={() =>
-          setCurrentPage("profile")
-        }
-
-        onLogout={handleLogout}
-      />
+      <>
+        {currentContent}
+        <Footer />
+      </>
     );
   }
+
+  // ===============================
+  // LOGIN / SIGNUP
+  // ===============================
+
   return (
     <div className="auth-page">
-
       <div className="auth-card">
 
         <div className="brand">
-
           <div className="brand-icon">
             SB
           </div>
@@ -219,12 +218,9 @@ function App() {
           <p>
             Learn smarter. Build stronger skills.
           </p>
-
         </div>
 
-
         <div className="auth-tabs">
-
           <button
             className={isLogin ? "active-tab" : ""}
             onClick={() => setIsLogin(true)}
@@ -238,17 +234,13 @@ function App() {
           >
             Sign Up
           </button>
-
         </div>
 
-
         {isLogin ? (
-
           <form
             onSubmit={handleLogin}
             className="auth-form"
           >
-
             <h2>Welcome Back 👋</h2>
 
             <p className="form-subtitle">
@@ -267,11 +259,9 @@ function App() {
               required
             />
 
-
             <label>Password</label>
 
             <div className="password-box">
-
               <input
                 type={
                   showLoginPassword
@@ -297,9 +287,7 @@ function App() {
               >
                 {showLoginPassword ? "🙈" : "👁️"}
               </button>
-
             </div>
-
 
             <button
               type="submit"
@@ -308,34 +296,25 @@ function App() {
               Login
             </button>
 
-
             <p className="switch-text">
-
               Don't have an account?{" "}
-
               <span
                 onClick={() => setIsLogin(false)}
               >
                 Sign Up
               </span>
-
             </p>
-
           </form>
-
         ) : (
-
           <form
             onSubmit={handleSignup}
             className="auth-form"
           >
-
             <h2>Create Account ✨</h2>
 
             <p className="form-subtitle">
               Start your personalized learning journey.
             </p>
-
 
             <label>Full Name</label>
 
@@ -349,7 +328,6 @@ function App() {
               required
             />
 
-
             <label>Email</label>
 
             <input
@@ -362,11 +340,9 @@ function App() {
               required
             />
 
-
             <label>Password</label>
 
             <div className="password-box">
-
               <input
                 type={
                   showSignupPassword
@@ -392,14 +368,11 @@ function App() {
               >
                 {showSignupPassword ? "🙈" : "👁️"}
               </button>
-
             </div>
-
 
             <label>Confirm Password</label>
 
             <div className="password-box">
-
               <input
                 type={
                   showConfirmPassword
@@ -425,9 +398,7 @@ function App() {
               >
                 {showConfirmPassword ? "🙈" : "👁️"}
               </button>
-
             </div>
-
 
             <button
               type="submit"
@@ -436,24 +407,18 @@ function App() {
               Create Account
             </button>
 
-
             <p className="switch-text">
-
               Already have an account?{" "}
-
               <span
                 onClick={() => setIsLogin(true)}
               >
                 Login
               </span>
-
             </p>
-
           </form>
         )}
 
       </div>
-
     </div>
   );
 }
