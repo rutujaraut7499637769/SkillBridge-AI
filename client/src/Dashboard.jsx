@@ -15,10 +15,19 @@ function Dashboard({
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // User profile information
+  const [user, setUser] = useState(null);
+
+  const API_URL = "http://localhost:5000";
+
+
   useEffect(() => {
     fetchAssessments();
+    fetchProfile();
   }, []);
 
+
+  // Fetch user's assessment results
   const fetchAssessments = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -29,7 +38,7 @@ function Dashboard({
       }
 
       const response = await axios.get(
-        "http://localhost:5000/assessment/all",
+        `${API_URL}/assessment/all`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -49,6 +58,35 @@ function Dashboard({
 
     } finally {
       setLoading(false);
+    }
+  };
+
+
+  // Fetch logged-in user's profile
+  const fetchProfile = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        return;
+      }
+
+      const response = await axios.get(
+        `${API_URL}/profile`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      setUser(response.data.user);
+
+    } catch (error) {
+      console.log(
+        "Error fetching profile:",
+        error
+      );
     }
   };
 
@@ -148,6 +186,22 @@ function Dashboard({
 
     return selectedSkill.strong;
   };
+
+
+  // Profile image URL
+  const profileImage =
+    user?.profileImage
+      ? `${API_URL}${user.profileImage}`
+      : null;
+
+
+  // User's first letter if profile photo is not available
+  const userInitial =
+    user?.name
+      ? user.name
+          .charAt(0)
+          .toUpperCase()
+      : "R";
 
 
   return (
@@ -258,12 +312,23 @@ function Dashboard({
           </div>
 
 
+          {/* Dashboard Profile Photo */}
           <div
             className="profile-circle"
             onClick={onProfile}
             style={{ cursor: "pointer" }}
           >
-            R
+
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="Profile"
+                className="dashboard-profile-image"
+              />
+            ) : (
+              userInitial
+            )}
+
           </div>
 
         </div>
