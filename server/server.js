@@ -876,12 +876,9 @@ app.get(
     }
   }
 );
-
 app.listen(
   5000,
   () => {
-    console.log(
-      "Server running on https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/"
-    );
+    console.log("Server running on port 5000");
   }
 );

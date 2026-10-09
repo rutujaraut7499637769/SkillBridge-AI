@@ -31,17 +31,17 @@ function Progress({ onBack }) {
         quizResponse
       ] = await Promise.all([
         axios.get(
-          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com//activity/streak",
+          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/activity/streak",
           { headers }
         ),
 
         axios.get(
-          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com//assessment/all",
+          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/assessment/all",
           { headers }
         ),
 
         axios.get(
-          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com//quiz/results",
+          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/quiz/results",
           { headers }
         )
       ]);
