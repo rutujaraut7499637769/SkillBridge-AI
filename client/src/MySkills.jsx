@@ -15,7 +15,7 @@ function MySkills({ onBack, onLearningRoadmap }) {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        "http://localhost:5000/assessment/all",
+        "http://https://skillbridge-ai-1-s5wk.onrender.com//assessment/all",
         {
           headers: {
             Authorization: `Bearer ${token}`

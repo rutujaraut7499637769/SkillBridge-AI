@@ -1034,7 +1034,7 @@ function Quiz({ onBack, onLearningRoadmap }) {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        "http://localhost:5000/quiz/result",
+        "http://https://skillbridge-ai-1-s5wk.onrender.com//quiz/result",
         {
           skill: selectedSkill,
           score,

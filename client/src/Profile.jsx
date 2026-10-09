@@ -19,7 +19,7 @@ function Profile({ onBack, onLogout }) {
 
   const token = localStorage.getItem("token");
 
-  const API_URL = "http://localhost:5000";
+  const API_URL = "http://https://skillbridge-ai-1-s5wk.onrender.com/";
 
   useEffect(() => {
     const fetchProfile = async () => {

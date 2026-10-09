@@ -31,17 +31,17 @@ function Progress({ onBack }) {
         quizResponse
       ] = await Promise.all([
         axios.get(
-          "http://localhost:5000/activity/streak",
+          "http://https://skillbridge-ai-1-s5wk.onrender.com//activity/streak",
           { headers }
         ),
 
         axios.get(
-          "http://localhost:5000/assessment/all",
+          "http://https://skillbridge-ai-1-s5wk.onrender.com//assessment/all",
           { headers }
         ),
 
         axios.get(
-          "http://localhost:5000/quiz/results",
+          "http://https://skillbridge-ai-1-s5wk.onrender.com//quiz/results",
           { headers }
         )
       ]);

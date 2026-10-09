@@ -18,7 +18,7 @@ function Dashboard({
   // User profile information
   const [user, setUser] = useState(null);
 
-  const API_URL = "http://localhost:5000";
+  const API_URL = "http://https://skillbridge-ai-1-s5wk.onrender.com/";
 
 
   useEffect(() => {

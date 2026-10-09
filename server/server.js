@@ -881,7 +881,7 @@ app.listen(
   5000,
   () => {
     console.log(
-      "Server running on http://localhost:5000"
+      "Server running on http://https://skillbridge-ai-1-s5wk.onrender.com/"
     );
   }
 );

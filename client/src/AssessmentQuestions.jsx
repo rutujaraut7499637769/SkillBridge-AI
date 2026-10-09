@@ -506,7 +506,7 @@ function AssessmentQuestions({ skill, onBack }) {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        "http://localhost:5000/assessment",
+        "http://https://skillbridge-ai-1-s5wk.onrender.com//assessment",
         {
           skill,
           answers,
