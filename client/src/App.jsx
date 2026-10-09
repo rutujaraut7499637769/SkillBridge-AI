@@ -36,7 +36,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com//signup",
+        "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com//api/auth/signup",
         {
           name,
           email,
@@ -64,7 +64,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com//login",
+        "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com//api/auth/login",
         {
           email: loginEmail,
           password: loginPassword

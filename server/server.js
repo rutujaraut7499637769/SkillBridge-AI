@@ -123,7 +123,7 @@ app.get(
   }
 );
 app.post(
-  "/signup",
+  "/api/auth/signup",
   async (req, res) => {
     try {
       const {
@@ -160,7 +160,7 @@ app.post(
 );
 
 app.post(
-  "/login",
+  "/api/auth/login",
   async (req, res) => {
     try {
       const {
