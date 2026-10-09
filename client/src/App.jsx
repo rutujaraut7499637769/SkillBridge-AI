@@ -26,6 +26,7 @@ function App() {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const [showSignupPassword, setShowSignupPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -36,7 +37,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/api/auth/signup",
+        "https://skillbridge-ai-1-s5wk.onrender.com/api/auth/signup",
         {
           name,
           email,
@@ -59,12 +60,13 @@ function App() {
       );
     }
   };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/api/auth/login",
+        "https://skillbridge-ai-1-s5wk.onrender.com/api/auth/login",
         {
           email: loginEmail,
           password: loginPassword
@@ -87,6 +89,7 @@ function App() {
       );
     }
   };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
 
@@ -99,7 +102,6 @@ function App() {
 
     alert("Logged out successfully");
   };
-
 
   if (isLoggedIn) {
     let currentContent;
