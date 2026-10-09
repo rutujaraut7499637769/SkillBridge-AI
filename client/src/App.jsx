@@ -11,8 +11,16 @@ import Progress from "./Progress";
 import Profile from "./Profile";
 import Footer from "./Footer";
 
-// Global Base URL Set (इथे बेस URL सेट केल्यामुळे सर्व Components मधील Axios 404 Errors बंद होतील)
+
 axios.defaults.baseURL = "https://skillbridge-ai-1-s5wk.onrender.com/api";
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
