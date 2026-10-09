@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./Progress.css";
+// import "./Progress.css";
 
 function Progress({ onBack }) {
   const [streak, setStreak] = useState({
