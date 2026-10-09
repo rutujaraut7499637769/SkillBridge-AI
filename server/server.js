@@ -27,7 +27,6 @@ app.use(
   )
 );
 
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(
@@ -51,7 +50,6 @@ const storage = multer.diskStorage({
     cb(null, fileName);
   }
 });
-
 
 const upload = multer({
   storage,
@@ -83,10 +81,12 @@ const upload = multer({
     }
   }
 });
+
+// MongoDB Connection (Live Cloud DB OR Local fallback)
+const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/skillbridge";
+
 mongoose
-  .connect(
-    "mongodb://localhost:27017/skillbridge"
-  )
+  .connect(mongoURI)
   .then(() => {
     console.log(
       "MongoDB Connected Successfully!"
@@ -98,11 +98,13 @@ mongoose
       error
     );
   });
+
 app.get("/", (req, res) => {
   res.send(
     "SkillBridge AI Backend is Running!"
   );
 });
+
 app.get(
   "/test-user",
   async (req, res) => {
@@ -122,6 +124,7 @@ app.get(
     }
   }
 );
+
 app.post(
   "/api/auth/signup",
   async (req, res) => {
@@ -198,7 +201,7 @@ app.post(
           {
             userId: user._id
           },
-          process.env.JWT_SECRET,
+          process.env.JWT_SECRET || "fallback_secret",
           {
             expiresIn: "1h"
           }
@@ -275,6 +278,7 @@ app.put(
             "Name, email and account type are required"
         });
       }
+
       const allowedAccountTypes = [
         "Student",
         "Instructor",
@@ -307,7 +311,6 @@ app.put(
         });
       }
 
-      // Update profile information
       const updatedUser =
         await User.findByIdAndUpdate(
           req.user.userId,
@@ -485,7 +488,6 @@ app.delete(
   }
 );
 
-
 const recordLearningActivity =
   async (userId) => {
     try {
@@ -520,7 +522,6 @@ const recordLearningActivity =
       );
     }
   };
-
 
 app.post(
   "/assessment",
@@ -564,7 +565,6 @@ app.post(
     }
   }
 );
-
 
 app.post(
   "/quiz/result",
@@ -735,7 +735,6 @@ app.get(
   }
 );
 
-
 app.get(
   "/activity/streak",
   authMiddleware,
@@ -876,9 +875,8 @@ app.get(
     }
   }
 );
-app.listen(
-  5000,
-  () => {
-    console.log("Server running on port 5000");
-  }
-);
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
