@@ -11,6 +11,9 @@ import Progress from "./Progress";
 import Profile from "./Profile";
 import Footer from "./Footer";
 
+// Global Base URL Set (इथे बेस URL सेट केल्यामुळे सर्व Components मधील Axios 404 Errors बंद होतील)
+axios.defaults.baseURL = "https://skillbridge-ai-1-s5wk.onrender.com/api";
+
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,14 +39,11 @@ function App() {
     }
 
     try {
-      const response = await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/api/auth/signup",
-        {
-          name,
-          email,
-          password
-        }
-      );
+      const response = await axios.post("/auth/signup", {
+        name,
+        email,
+        password,
+      });
 
       alert(response.data.message);
 
@@ -54,10 +54,7 @@ function App() {
 
       setIsLogin(true);
     } catch (error) {
-      alert(
-        error.response?.data?.message ||
-        "Signup failed"
-      );
+      alert(error.response?.data?.message || "Signup failed");
     }
   };
 
@@ -65,28 +62,19 @@ function App() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/api/auth/login",
-        {
-          email: loginEmail,
-          password: loginPassword
-        }
-      );
+      const response = await axios.post("/auth/login", {
+        email: loginEmail,
+        password: loginPassword,
+      });
 
       alert(response.data.message);
 
-      localStorage.setItem(
-        "token",
-        response.data.token
-      );
+      localStorage.setItem("token", response.data.token);
 
       setIsLoggedIn(true);
       setCurrentPage("dashboard");
     } catch (error) {
-      alert(
-        error.response?.data?.message ||
-        "Login failed"
-      );
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
@@ -108,9 +96,7 @@ function App() {
 
     if (currentPage === "assessment") {
       currentContent = (
-        <SkillAssessment
-          onBack={() => setCurrentPage("dashboard")}
-        />
+        <SkillAssessment onBack={() => setCurrentPage("dashboard")} />
       );
     } else if (currentPage === "mySkills") {
       currentContent = (
@@ -140,11 +126,7 @@ function App() {
         />
       );
     } else if (currentPage === "progress") {
-      currentContent = (
-        <Progress
-          onBack={() => setCurrentPage("dashboard")}
-        />
-      );
+      currentContent = <Progress onBack={() => setCurrentPage("dashboard")} />;
     } else if (currentPage === "profile") {
       currentContent = (
         <Profile
@@ -155,25 +137,15 @@ function App() {
     } else {
       currentContent = (
         <Dashboard
-          onSkillAssessment={() =>
-            setCurrentPage("assessment")
-          }
-          onMySkills={() =>
-            setCurrentPage("mySkills")
-          }
+          onSkillAssessment={() => setCurrentPage("assessment")}
+          onMySkills={() => setCurrentPage("mySkills")}
           onLearningRoadmap={(skill) => {
             setSelectedSkill(skill);
             setCurrentPage("learningRoadmap");
           }}
-          onQuiz={() =>
-            setCurrentPage("quiz")
-          }
-          onProgress={() =>
-            setCurrentPage("progress")
-          }
-          onProfile={() =>
-            setCurrentPage("profile")
-          }
+          onQuiz={() => setCurrentPage("quiz")}
+          onProgress={() => setCurrentPage("progress")}
+          onProfile={() => setCurrentPage("profile")}
           onLogout={handleLogout}
         />
       );
@@ -190,17 +162,10 @@ function App() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-
         <div className="brand">
-          <div className="brand-icon">
-            SB
-          </div>
-
+          <div className="brand-icon">SB</div>
           <h1>SkillBridge-AI</h1>
-
-          <p>
-            Learn smarter. Build stronger skills.
-          </p>
+          <p>Learn smarter. Build stronger skills.</p>
         </div>
 
         <div className="auth-tabs">
@@ -220,187 +185,122 @@ function App() {
         </div>
 
         {isLogin ? (
-          <form
-            onSubmit={handleLogin}
-            className="auth-form"
-          >
+          <form onSubmit={handleLogin} className="auth-form">
             <h2>Welcome Back 👋</h2>
-
             <p className="form-subtitle">
               Login to continue your learning journey.
             </p>
 
             <label>Email</label>
-
             <input
               type="email"
               placeholder="Enter your email"
               value={loginEmail}
-              onChange={(e) =>
-                setLoginEmail(e.target.value)
-              }
+              onChange={(e) => setLoginEmail(e.target.value)}
               required
             />
 
             <label>Password</label>
-
             <div className="password-box">
               <input
-                type={
-                  showLoginPassword
-                    ? "text"
-                    : "password"
-                }
+                type={showLoginPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 value={loginPassword}
-                onChange={(e) =>
-                  setLoginPassword(e.target.value)
-                }
+                onChange={(e) => setLoginPassword(e.target.value)}
                 required
               />
 
               <button
                 type="button"
                 className="eye-button"
-                onClick={() =>
-                  setShowLoginPassword(
-                    !showLoginPassword
-                  )
-                }
+                onClick={() => setShowLoginPassword(!showLoginPassword)}
               >
                 {showLoginPassword ? "🙈" : "👁️"}
               </button>
             </div>
 
-            <button
-              type="submit"
-              className="main-button"
-            >
+            <button type="submit" className="main-button">
               Login
             </button>
 
             <p className="switch-text">
               Don't have an account?{" "}
-              <span
-                onClick={() => setIsLogin(false)}
-              >
-                Sign Up
-              </span>
+              <span onClick={() => setIsLogin(false)}>Sign Up</span>
             </p>
           </form>
         ) : (
-          <form
-            onSubmit={handleSignup}
-            className="auth-form"
-          >
+          <form onSubmit={handleSignup} className="auth-form">
             <h2>Create Account ✨</h2>
-
             <p className="form-subtitle">
               Start your personalized learning journey.
             </p>
 
             <label>Full Name</label>
-
             <input
               type="text"
               placeholder="Enter your full name"
               value={name}
-              onChange={(e) =>
-                setName(e.target.value)
-              }
+              onChange={(e) => setName(e.target.value)}
               required
             />
 
             <label>Email</label>
-
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
-              onChange={(e) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
 
             <label>Password</label>
-
             <div className="password-box">
               <input
-                type={
-                  showSignupPassword
-                    ? "text"
-                    : "password"
-                }
+                type={showSignupPassword ? "text" : "password"}
                 placeholder="Create a password"
                 value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
 
               <button
                 type="button"
                 className="eye-button"
-                onClick={() =>
-                  setShowSignupPassword(
-                    !showSignupPassword
-                  )
-                }
+                onClick={() => setShowSignupPassword(!showSignupPassword)}
               >
                 {showSignupPassword ? "🙈" : "👁️"}
               </button>
             </div>
 
             <label>Confirm Password</label>
-
             <div className="password-box">
               <input
-                type={
-                  showConfirmPassword
-                    ? "text"
-                    : "password"
-                }
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm your password"
                 value={confirmPassword}
-                onChange={(e) =>
-                  setConfirmPassword(e.target.value)
-                }
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
 
               <button
                 type="button"
                 className="eye-button"
-                onClick={() =>
-                  setShowConfirmPassword(
-                    !showConfirmPassword
-                  )
-                }
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? "🙈" : "👁️"}
               </button>
             </div>
 
-            <button
-              type="submit"
-              className="main-button"
-            >
+            <button type="submit" className="main-button">
               Create Account
             </button>
 
             <p className="switch-text">
               Already have an account?{" "}
-              <span
-                onClick={() => setIsLogin(true)}
-              >
-                Login
-              </span>
+              <span onClick={() => setIsLogin(true)}>Login</span>
             </p>
           </form>
         )}
-
       </div>
     </div>
   );
