@@ -7,7 +7,7 @@ import SkillAssessment from "./SkillAssessment";
 import MySkills from "./MySkills";
 import LearningRoadmap from "./LearningRoadmap";
 import Quiz from "./Quiz";
-import Progress from "./progress";
+import Progress from "./Progress";
 import Profile from "./Profile";
 import Footer from "./Footer";
 
