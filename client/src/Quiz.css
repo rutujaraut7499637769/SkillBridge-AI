@@ -1,9 +1,5 @@
 .quiz-page {
   --quiz-primary: #2459a9;
-  /* =========================================
-   SKILLBRIDGE AI — QUIZ STYLES
-   PART 1: MAIN PAGE + QUESTION PAGE
-========================================= */
   --quiz-primary-dark: #19477f;
   --quiz-text: #172b4d;
   --quiz-muted: #64748b;
@@ -30,8 +26,6 @@
   max-width: 1000px;
   margin: 0 auto;
 }
-
-/* Quiz heading — outside the skill selection card */
 
 .quiz-header {
   position: relative;
@@ -103,8 +97,6 @@
   line-height: 1.8;
 }
 
-/* Skill selection panel */
-
 .quiz-selection {
   padding: 30px;
   border: 1px solid #e1e8f1;
@@ -131,8 +123,6 @@
   font-size: 14px;
   line-height: 1.7;
 }
-
-/* Skill cards */
 
 .skill-grid {
   display: grid;
@@ -200,8 +190,6 @@
   color: #426b9e;
 }
 
-/* Start quiz button */
-
 .start-quiz-button {
   display: flex;
   align-items: center;
@@ -238,8 +226,6 @@
   cursor: not-allowed;
 }
 
-/* Quiz progress */
-
 .quiz-progress-section {
   margin-bottom: 22px;
   padding: 23px 26px;
@@ -275,8 +261,6 @@
   background: linear-gradient(90deg, #245a9d, #5594d8);
   transition: width 0.3s ease;
 }
-
-/* Question card */
 
 .question-card {
   width: 100%;
@@ -316,9 +300,6 @@
   color: #475569;
   line-height: 1.75;
 }
-/* =========================================
-   ANSWER OPTIONS
-========================================= */
 
 .answer-options {
   display: flex;
@@ -394,8 +375,6 @@
   overflow-wrap: anywhere;
 }
 
-/* Previous, Next and Submit */
-
 .quiz-navigation {
   display: flex;
   align-items: center;
@@ -456,10 +435,6 @@
   transform: none;
 }
 
-/* =========================================
-   QUIZ RESULT PAGE
-========================================= */
-
 .quiz-result {
   display: grid;
   grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.5fr);
@@ -502,8 +477,6 @@
   line-height: 1.8;
   overflow-wrap: anywhere;
 }
-
-/* Overall score card */
 
 .result-score {
   display: flex;
@@ -608,8 +581,6 @@
   color: #b33c35;
 }
 
-/* Personalized recommendation */
-
 .quiz-recommendation {
   width: 100%;
   margin-top: auto;
@@ -641,9 +612,6 @@
   font-size: 13px;
   line-height: 1.8;
 }
-/* =========================================
-   TOPIC-WISE PERFORMANCE
-========================================= */
 
 .topic-performance-section {
   grid-column: 1 / -1;
@@ -747,10 +715,6 @@
   background: #df625b;
 }
 
-/* =========================================
-   STRONG AND WEAK TOPICS
-========================================= */
-
 .weak-topics-section,
 .strong-topics-section {
   grid-column: 1 / -1;
@@ -815,9 +779,6 @@
   overflow-wrap: anywhere;
 }
 
-/* =========================================
-   RESULT ACTION BUTTONS
-========================================= */
 
 .result-actions {
   grid-column: 1 / -1;
@@ -862,10 +823,6 @@
   outline: 3px solid rgba(40, 102, 173, 0.3);
   outline-offset: 3px;
 }
-
-/* =========================================
-   TABLET RESPONSIVE
-========================================= */
 
 @media (max-width: 768px) {
   .quiz-page {
@@ -936,10 +893,6 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
-
-/* =========================================
-   MOBILE RESPONSIVE
-========================================= */
 
 @media (max-width: 480px) {
   .quiz-page {
@@ -1318,7 +1271,7 @@
     padding: 16px;
   }
 }
-/* Start page header outside the white card */
+
 
 .quiz-start-header {
   background: transparent !important;
@@ -1332,8 +1285,6 @@
 .quiz-start-header .quiz-back {
   left: 0;
 }
-
-/* Keep skill selection inside its white card */
 
 .quiz-selection {
   background: #ffffff;
