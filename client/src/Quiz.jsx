@@ -50,12 +50,12 @@ const quizBank = {
       answer: 1
     },
     {
-      question: "Which attribute is used to provide alternative text for an image?",
+      question: "Which attribute provides alternative text for an image?",
       options: ["title", "alt", "text", "description"],
       answer: 1
     },
     {
-      question: "Which HTML tag is used to create a table row?",
+      question: "Which HTML tag creates a table row?",
       options: ["<td>", "<th>", "<tr>", "<row>"],
       answer: 2
     }
@@ -118,7 +118,7 @@ const quizBank = {
       answer: 1
     },
     {
-      question: "Which property is used to round corners?",
+      question: "Which property rounds corners?",
       options: [
         "corner-radius",
         "border-radius",
@@ -146,7 +146,7 @@ const quizBank = {
       answer: 2
     },
     {
-      question: "Which method converts JSON string into a JavaScript object?",
+      question: "Which method converts a JSON string into a JavaScript object?",
       options: [
         "JSON.parse()",
         "JSON.convert()",
@@ -166,7 +166,7 @@ const quizBank = {
       answer: 2
     },
     {
-      question: "Which function is used to print something in the console?",
+      question: "Which function prints something in the console?",
       options: ["print()", "console.log()", "log()", "display()"],
       answer: 1
     },
@@ -199,7 +199,7 @@ const quizBank = {
       answer: 1
     },
     {
-      question: "Which function is used to create a React component with state?",
+      question: "Which hook adds state to a function component?",
       options: [
         "useState()",
         "useComponent()",
@@ -229,7 +229,7 @@ const quizBank = {
       answer: 0
     },
     {
-      question: "Which command is commonly used to create a React project with Vite?",
+      question: "Which command commonly creates a React project with Vite?",
       options: [
         "npm create vite@latest",
         "npm create react",
@@ -259,12 +259,12 @@ const quizBank = {
       answer: 0
     },
     {
-      question: "Which syntax is used to render JavaScript inside JSX?",
+      question: "Which syntax renders JavaScript inside JSX?",
       options: ["[]", "()", "{}", "<>"],
       answer: 2
     },
     {
-      question: "What is the purpose of a key when rendering lists?",
+      question: "Why is a key used when rendering lists?",
       options: [
         "For CSS styling",
         "To identify list elements",
@@ -302,7 +302,7 @@ const quizBank = {
       answer: 1
     },
     {
-      question: "Which command is used to add new data?",
+      question: "Which command adds new data?",
       options: ["INSERT", "ADD", "CREATE", "PUT"],
       answer: 0
     },
@@ -370,7 +370,7 @@ const quizBank = {
       answer: 1
     },
     {
-      question: "Which command checks Node.js version?",
+      question: "Which command checks the Node.js version?",
       options: ["node check", "node -v", "node version", "npm node"],
       answer: 1
     },
@@ -400,12 +400,12 @@ const quizBank = {
       answer: 1
     },
     {
-      question: "Which module is commonly used to create a server?",
+      question: "Which module can be used to create a server?",
       options: ["http", "server", "web", "host"],
       answer: 0
     },
     {
-      question: "Node.js uses which programming language?",
+      question: "Node.js primarily uses which programming language?",
       options: ["Python", "Java", "JavaScript", "C++"],
       answer: 2
     },
@@ -483,16 +483,11 @@ const quizBank = {
     },
     {
       question: "Which object is used to send a response?",
-      options: [
-        "req",
-        "res",
-        "responseData",
-        "send"
-      ],
+      options: ["req", "res", "responseData", "send"],
       answer: 1
     },
     {
-      question: "Which method sends JSON response?",
+      question: "Which method sends a JSON response?",
       options: [
         "res.json()",
         "res.data()",
@@ -565,7 +560,7 @@ const quizBank = {
       answer: 0
     },
     {
-      question: "Which library is commonly used to work with MongoDB in Node.js?",
+      question: "Which library commonly connects Node.js applications to MongoDB?",
       options: [
         "Mongoose",
         "MongoNode",
@@ -576,12 +571,7 @@ const quizBank = {
     },
     {
       question: "Which operation retrieves documents?",
-      options: [
-        "find()",
-        "get()",
-        "select()",
-        "read()"
-      ],
+      options: ["find()", "get()", "select()", "read()"],
       answer: 0
     },
     {
@@ -668,7 +658,7 @@ const quizBank = {
       answer: 2
     },
     {
-      question: "Which command downloads changes from a remote repository?",
+      question: "Which command downloads and integrates remote changes?",
       options: [
         "git pull",
         "git download",
@@ -679,12 +669,7 @@ const quizBank = {
     },
     {
       question: "Which platform commonly hosts Git repositories?",
-      options: [
-        "GitHub",
-        "Google",
-        "Chrome",
-        "MongoDB"
-      ],
+      options: ["GitHub", "Google", "Chrome", "MongoDB"],
       answer: 0
     },
     {
@@ -722,32 +707,17 @@ const quizBank = {
     },
     {
       question: "Which structure is used to repeat code?",
-      options: [
-        "Loop",
-        "Variable",
-        "Class",
-        "Object"
-      ],
+      options: ["Loop", "Variable", "Class", "Object"],
       answer: 0
     },
     {
       question: "Which loop is commonly used when the number of iterations is known?",
-      options: [
-        "for",
-        "while",
-        "do-while",
-        "if"
-      ],
+      options: ["for", "while", "do-while", "if"],
       answer: 0
     },
     {
       question: "Which statement is used for decision making?",
-      options: [
-        "if",
-        "loop",
-        "return",
-        "import"
-      ],
+      options: ["if", "loop", "return", "import"],
       answer: 0
     },
     {
@@ -772,22 +742,12 @@ const quizBank = {
     },
     {
       question: "Which data structure follows LIFO?",
-      options: [
-        "Queue",
-        "Stack",
-        "Array",
-        "Tree"
-      ],
+      options: ["Queue", "Stack", "Array", "Tree"],
       answer: 1
     },
     {
       question: "Which data structure follows FIFO?",
-      options: [
-        "Stack",
-        "Queue",
-        "Tree",
-        "Graph"
-      ],
+      options: ["Stack", "Queue", "Tree", "Graph"],
       answer: 1
     },
     {
@@ -813,10 +773,6 @@ const quizBank = {
   ]
 };
 
-/* 
-  Each skill has 5 competency areas.
-  Every area contains 2 questions.
-*/
 const topicMap = {
   HTML: [
     "HTML Fundamentals",
@@ -913,16 +869,16 @@ function Quiz({ onBack, onLearningRoadmap }) {
   };
 
   const handleAnswer = (answerIndex) => {
-    const updatedAnswers = [...answers];
-
-    updatedAnswers[currentQuestion] = answerIndex;
-
-    setAnswers(updatedAnswers);
+    setAnswers((previousAnswers) => {
+      const updatedAnswers = [...previousAnswers];
+      updatedAnswers[currentQuestion] = answerIndex;
+      return updatedAnswers;
+    });
   };
 
   const calculateScore = () => {
-    return questions.reduce((score, question, index) => {
-      return score + (
+    return questions.reduce((total, question, index) => {
+      return total + (
         answers[index] === question.answer ? 1 : 0
       );
     }, 0);
@@ -930,10 +886,9 @@ function Quiz({ onBack, onLearningRoadmap }) {
 
   const score = calculateScore();
 
-  const percentage =
-    questions.length > 0
-      ? Math.round((score / questions.length) * 100)
-      : 0;
+  const percentage = questions.length
+    ? Math.round((score / questions.length) * 100)
+    : 0;
 
   const getLevel = () => {
     if (percentage >= 80) return "Advanced";
@@ -970,12 +925,11 @@ function Quiz({ onBack, onLearningRoadmap }) {
         0
       );
 
-      const topicPercentage =
-        topicQuestions.length > 0
-          ? Math.round(
+      const topicPercentage = topicQuestions.length
+        ? Math.round(
             (topicScore / topicQuestions.length) * 100
           )
-          : 0;
+        : 0;
 
       return {
         topic,
@@ -1028,13 +982,18 @@ function Quiz({ onBack, onLearningRoadmap }) {
   const handleSubmitQuiz = async () => {
     if (savingResult) return;
 
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please log in again to save your quiz result.");
+      return;
+    }
+
     try {
       setSavingResult(true);
 
-      const token = localStorage.getItem("token");
-
       await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/quiz/result",
+        "https://skillbridge-ai-1-s5wk.onrender.com/api/quiz/result",
         {
           skill: selectedSkill,
           score,
@@ -1062,6 +1021,7 @@ function Quiz({ onBack, onLearningRoadmap }) {
       console.error("Quiz result save error:", error);
 
       alert(
+        error.response?.data?.message ||
         "Failed to save quiz result. Please try again."
       );
     } finally {
@@ -1071,7 +1031,7 @@ function Quiz({ onBack, onLearningRoadmap }) {
 
   const handleNext = () => {
     if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+      setCurrentQuestion((previous) => previous + 1);
     } else {
       handleSubmitQuiz();
     }
@@ -1079,7 +1039,7 @@ function Quiz({ onBack, onLearningRoadmap }) {
 
   const handlePrevious = () => {
     if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
+      setCurrentQuestion((previous) => previous - 1);
     }
   };
 
@@ -1090,14 +1050,12 @@ function Quiz({ onBack, onLearningRoadmap }) {
     setAnswers([]);
     setSavingResult(false);
   };
-
-  if (!quizStarted) {
+if (!quizStarted) {
     return (
       <div className="quiz-page">
         <div className="quiz-container">
 
-          <div className="quiz-header">
-
+          <div className="quiz-header quiz-start-header">
             <button
               className="quiz-back"
               onClick={onBack}
@@ -1116,40 +1074,29 @@ function Quiz({ onBack, onLearningRoadmap }) {
               Choose a skill and challenge yourself with a
               competency-focused quiz.
             </p>
-
           </div>
 
           <div className="quiz-selection">
-
             <div className="quiz-selection-header">
-
               <h2>Select a Skill</h2>
-
               <p>
                 Choose the technology you want to practice.
               </p>
-
             </div>
 
             <div className="skill-grid">
-
               {skills.map((skill) => (
                 <button
                   key={skill}
-                  className={`skill-option ${selectedSkill === skill
-                      ? "selected"
-                      : ""
-                    }`}
+                  className={`skill-option ${
+                    selectedSkill === skill ? "selected" : ""
+                  }`}
                   onClick={() => setSelectedSkill(skill)}
                 >
                   <span>{skill}</span>
-
-                  <small>
-                    {quizBank[skill].length} Questions
-                  </small>
+                  <small>{quizBank[skill].length} Questions</small>
                 </button>
               ))}
-
             </div>
 
             <button
@@ -1159,22 +1106,17 @@ function Quiz({ onBack, onLearningRoadmap }) {
             >
               Start Quiz
             </button>
-
           </div>
 
         </div>
       </div>
     );
   }
-
   if (quizCompleted) {
     return (
       <div className="quiz-page">
-
         <div className="quiz-container">
-
           <div className="quiz-header">
-
             <button
               className="quiz-back"
               onClick={onBack}
@@ -1192,21 +1134,15 @@ function Quiz({ onBack, onLearningRoadmap }) {
             <p>
               Here is your performance for {selectedSkill}.
             </p>
-
           </div>
 
           <div className="quiz-result">
-
             <div className="result-score">
               <span>{percentage}%</span>
-
-              <small>
-                Overall Score
-              </small>
+              <small>Overall Score</small>
             </div>
 
             <div className="result-details">
-
               <h2>{getLevel()}</h2>
 
               <p>
@@ -1217,115 +1153,81 @@ function Quiz({ onBack, onLearningRoadmap }) {
                 questions correctly.
               </p>
 
-              <div
-                className={`result-level ${getLevelClass()}`}
-              >
+              <div className={`result-level ${getLevelClass()}`}>
                 {getLevel()}
               </div>
 
               <div className="quiz-recommendation">
-
                 <span className="recommendation-label">
                   PERSONALIZED RECOMMENDATION
                 </span>
 
-                <h3>
-                  {recommendation.title}
-                </h3>
-
-                <p>
-                  {recommendation.text}
-                </p>
-
+                <h3>{recommendation.title}</h3>
+                <p>{recommendation.text}</p>
               </div>
-
             </div>
 
             <div className="topic-performance-section">
-
               <div className="topic-section-header">
-
                 <div>
                   <span className="recommendation-label">
                     COMPETENCY ANALYSIS
                   </span>
 
-                  <h3>
-                    Topic-wise Performance
-                  </h3>
+                  <h3>Topic-wise Performance</h3>
 
                   <p>
                     Your performance is analyzed across
                     different competency areas.
                   </p>
                 </div>
-
               </div>
 
               <div className="topic-performance-list">
-
                 {topicPerformance.map((item) => (
-
                   <div
                     className="topic-performance-card"
                     key={item.topic}
                   >
-
                     <div className="topic-performance-top">
-
-                      <span>
-                        {item.topic}
-                      </span>
-
-                      <strong>
-                        {item.percentage}%
-                      </strong>
-
+                      <span>{item.topic}</span>
+                      <strong>{item.percentage}%</strong>
                     </div>
 
                     <div className="topic-progress-bar">
-
                       <div
-                        className={`topic-progress-fill ${item.percentage >= 80
+                        className={`topic-progress-fill ${
+                          item.percentage >= 80
                             ? "topic-strong"
                             : item.percentage >= 60
                               ? "topic-average"
                               : "topic-weak"
-                          }`}
+                        }`}
                         style={{
                           width: `${item.percentage}%`
                         }}
-                      ></div>
-
+                      />
                     </div>
 
                     <small>
                       {item.score} / {item.total} correct
                     </small>
-
                   </div>
-
                 ))}
-
               </div>
-
             </div>
 
             {weakTopics.length > 0 && (
               <div className="weak-topics-section">
-
                 <div>
                   <span className="recommendation-label">
                     NEEDS ATTENTION
                   </span>
 
-                  <h3>
-                    Topics to Improve
-                  </h3>
+                  <h3>Topics to Improve</h3>
                 </div>
 
                 <div className="weak-topic-list">
-
                   {weakTopics.map((item) => (
                     <div
                       className="weak-topic-item"
@@ -1334,38 +1236,28 @@ function Quiz({ onBack, onLearningRoadmap }) {
                       <span>!</span>
 
                       <div>
-                        <strong>
-                          {item.topic}
-                        </strong>
-
+                        <strong>{item.topic}</strong>
                         <small>
-                          Current score:{" "}
-                          {item.percentage}%
+                          Current score: {item.percentage}%
                         </small>
                       </div>
                     </div>
                   ))}
-
                 </div>
-
               </div>
             )}
 
             {strongTopics.length > 0 && (
               <div className="strong-topics-section">
-
                 <div>
                   <span className="recommendation-label">
                     YOUR STRENGTHS
                   </span>
 
-                  <h3>
-                    Strong Competencies
-                  </h3>
+                  <h3>Strong Competencies</h3>
                 </div>
 
                 <div className="strong-topic-list">
-
                   {strongTopics.map((item) => (
                     <span
                       className="strong-topic-tag"
@@ -1374,14 +1266,11 @@ function Quiz({ onBack, onLearningRoadmap }) {
                       ✓ {item.topic}
                     </span>
                   ))}
-
                 </div>
-
               </div>
             )}
 
             <div className="result-actions">
-
               <button
                 className="secondary-quiz-button"
                 onClick={resetQuiz}
@@ -1398,19 +1287,13 @@ function Quiz({ onBack, onLearningRoadmap }) {
 
               <button
                 className="primary-quiz-button"
-                onClick={() =>
-                  onLearningRoadmap(selectedSkill)
-                }
+                onClick={() => onLearningRoadmap?.(selectedSkill)}
               >
                 View Learning Roadmap →
               </button>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
     );
   }
@@ -1419,11 +1302,8 @@ function Quiz({ onBack, onLearningRoadmap }) {
 
   return (
     <div className="quiz-page">
-
       <div className="quiz-container">
-
         <div className="quiz-header">
-
           <button
             className="quiz-back"
             onClick={onBack}
@@ -1442,95 +1322,67 @@ function Quiz({ onBack, onLearningRoadmap }) {
             Answer each question carefully to measure your
             current understanding.
           </p>
-
         </div>
 
         <div className="quiz-progress-section">
-
           <div className="quiz-progress-info">
-
             <span>
-              Question {currentQuestion + 1} of{" "}
-              {questions.length}
+              Question {currentQuestion + 1} of {questions.length}
             </span>
 
             <span>
               {Math.round(
-                ((currentQuestion + 1) /
-                  questions.length) *
-                100
+                ((currentQuestion + 1) / questions.length) * 100
               )}
               %
             </span>
-
           </div>
 
           <div className="quiz-progress-bar">
-
             <div
               className="quiz-progress-fill"
               style={{
-                width: `${((currentQuestion + 1) /
-                    questions.length) *
-                  100
-                  }%`
+                width: `${
+                  ((currentQuestion + 1) / questions.length) * 100
+                }%`
               }}
-            ></div>
-
+            />
           </div>
-
         </div>
 
         <div className="question-card">
-
           <div className="question-number">
-            QUESTION{" "}
-            {String(currentQuestion + 1).padStart(2, "0")}
+            QUESTION {String(currentQuestion + 1).padStart(2, "0")}
           </div>
 
-          <h2>
-            {question.question}
-          </h2>
+          <h2>{question.question}</h2>
 
           <div className="answer-options">
+            {question.options.map((option, index) => (
+              <button
+                key={option}
+                className={`answer-option ${
+                  answers[currentQuestion] === index
+                    ? "selected"
+                    : ""
+                }`}
+                onClick={() => handleAnswer(index)}
+              >
+                <span className="option-letter">
+                  {String.fromCharCode(65 + index)}
+                </span>
 
-            {question.options.map(
-              (option, index) => (
-
-                <button
-                  key={option}
-                  className={`answer-option ${answers[currentQuestion] === index
-                      ? "selected"
-                      : ""
-                    }`}
-                  onClick={() =>
-                    handleAnswer(index)
-                  }
-                >
-
-                  <span className="option-letter">
-                    {String.fromCharCode(65 + index)}
-                  </span>
-
-                  <span className="option-text">
-                    {option}
-                  </span>
-
-                </button>
-
-              )
-            )}
-
+                <span className="option-text">{option}</span>
+              </button>
+            ))}
           </div>
-
         </div>
 
         <div className="quiz-navigation">
-
           <button
             className="secondary-quiz-button"
             onClick={handlePrevious}
-            disabled={currentQuestion === 0}
+            disabled={currentQuestion === 0 || savingResult}
           >
             ← Previous
           </button>
@@ -1545,16 +1397,12 @@ function Quiz({ onBack, onLearningRoadmap }) {
           >
             {savingResult
               ? "Saving Result..."
-              : currentQuestion ===
-                questions.length - 1
+              : currentQuestion === questions.length - 1
                 ? "Submit Quiz"
                 : "Next Question →"}
           </button>
-
         </div>
-
       </div>
-
     </div>
   );
 }

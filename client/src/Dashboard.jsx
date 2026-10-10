@@ -480,18 +480,19 @@ const API_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
                       <div className="progress-track">
 
                         <div
-                          className={`skill-progress-fill ${
-                            assessment.percentage >= 80
-                              ? "strong"
-                              : assessment.percentage >= 60
-                              ? "good"
-                              : "needs-improvement"
-                          }`}
-                          style={{
-                            width:
-                              `${assessment.percentage}%`
-                          }}
-                        />
+  className={`skill-progress-fill ${
+    assessment.level?.trim().toLowerCase() === "advanced"
+      ? "advanced"
+      : assessment.level?.trim().toLowerCase() === "strong"
+      ? "strong"
+      : assessment.level?.trim().toLowerCase() === "average"
+      ? "average"
+      : "needs-improvement"
+  }`}
+  style={{
+    width: `${assessment.percentage}%`
+  }}
+/>
 
                       </div>
 
