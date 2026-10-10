@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import "./Progress.css";
+import "./Progress.css";
 
 function Progress({ onBack }) {
   const [streak, setStreak] = useState({
@@ -14,65 +14,64 @@ function Progress({ onBack }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProgressData();
-  }, []);
+  fetchProgressData();
+}, []);
 
-  const fetchProgressData = async () => {
-    try {
-      const token = localStorage.getItem("token");
+const fetchProgressData = async () => {
+  try {
+    const token = localStorage.getItem("token");
 
-      const headers = {
-        Authorization: `Bearer ${token}`
-      };
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
 
-      const [
-        streakResponse,
-        assessmentResponse,
-        quizResponse
-      ] = await Promise.all([
-        axios.get(
-          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/activity/streak",
-          { headers }
-        ),
+    const [
+  streakResponse,
+  assessmentResponse,
+  quizResponse
+] = await Promise.all([
+  axios.get(
+    "https://skillbridge-ai-1-s5wk.onrender.com/api/activity/streak",
+    { headers }
+  ),
 
-        axios.get(
-          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/assessment/all",
-          { headers }
-        ),
+  axios.get(
+    "https://skillbridge-ai-1-s5wk.onrender.com/api/assessment/all",
+    { headers }
+  ),
 
-        axios.get(
-          "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/quiz/results",
-          { headers }
-        )
-      ]);
+  axios.get(
+    "https://skillbridge-ai-1-s5wk.onrender.com/api/quiz/results",
+    { headers }
+  )
+]);
 
-      setStreak(streakResponse.data);
-      setAssessments(assessmentResponse.data);
-      setQuizResults(quizResponse.data);
+setStreak(streakResponse.data);
+setAssessments(assessmentResponse.data);
+setQuizResults(quizResponse.data);
 
-    } catch (error) {
-      console.error("Progress data error:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (error) {
+    console.error("Progress data error:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
-  const latestAssessment =
-    assessments.length > 0
-      ? assessments[0]
-      : null;
+const latestAssessment =
+  assessments.length > 0
+    ? assessments[0]
+    : null;
 
-  const overallProgress =
-    assessments.length > 0
-      ? Math.round(
+const overallProgress =
+  assessments.length > 0
+    ? Math.round(
         assessments.reduce(
           (total, assessment) =>
             total + assessment.percentage,
           0
         ) / assessments.length
       )
-      : 0;
-
+    : 0;
   const averageQuizScore =
     quizResults.length > 0
       ? Math.round(
