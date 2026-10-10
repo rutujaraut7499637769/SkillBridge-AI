@@ -18,7 +18,7 @@ function Dashboard({
   // User profile information
   const [user, setUser] = useState(null);
 
-  const API_URL = "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/";
+const API_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
 
 
   useEffect(() => {
@@ -38,7 +38,7 @@ function Dashboard({
       }
 
       const response = await axios.get(
-        `${API_URL}/assessment/all`,
+        `${API_URL}/api/assessment/all`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -72,7 +72,7 @@ function Dashboard({
       }
 
       const response = await axios.get(
-        `${API_URL}/profile`,
+        `${API_URL}/api/profile`,
         {
           headers: {
             Authorization: `Bearer ${token}`

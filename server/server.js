@@ -129,7 +129,7 @@ app.post("/api/auth/login", async (req, res) => {
   }
 });
 
-// PROFILE ROUTES (Added /api prefix)
+
 app.get("/api/profile", authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select("-password");

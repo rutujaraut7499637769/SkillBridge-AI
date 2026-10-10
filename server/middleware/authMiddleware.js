@@ -26,7 +26,10 @@ const token = parts[1];
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(
+  token,
+  process.env.JWT_SECRET || "fallback_secret"
+);
 
     req.user = decoded;
 

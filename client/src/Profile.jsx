@@ -11,6 +11,7 @@ function Profile({ onBack, onLogout }) {
 
   const [editing, setEditing] = useState(false);
   const [message, setMessage] = useState("");
+  const [loadingError, setLoadingError] = useState("");
 
   const [showPhotoMenu, setShowPhotoMenu] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -19,7 +20,8 @@ function Profile({ onBack, onLogout }) {
 
   const token = localStorage.getItem("token");
 
-  const API_URL = "https://skillbridge-ai-1-s5wk.onrender.com/skillbridge-ai-1-s5wk.onrender.com/";
+  const API_URL = "https://skillbridge-ai-1-s5wk.onrender.com/api";
+const BACKEND_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -41,11 +43,14 @@ function Profile({ onBack, onLogout }) {
         setEmail(profileUser.email);
         setAccountType(profileUser.accountType || "Student");
       } catch (error) {
-        console.error(
-          "Profile fetch error:",
-          error
-        );
-      }
+  setLoadingError(
+    error.response?.data?.message ||
+    error.message ||
+    "Failed to fetch profile."
+  );
+
+  console.error("Profile fetch error:", error);
+}
     };
 
     fetchProfile();
@@ -178,7 +183,7 @@ function Profile({ onBack, onLogout }) {
 
   const profileImage =
     user?.profileImage
-      ? `${API_URL}${user.profileImage}`
+      ? `${BACKEND_URL}${user.profileImage}`
       : null;
 
   const userInitial =
@@ -190,12 +195,14 @@ function Profile({ onBack, onLogout }) {
 
 
   if (!user) {
-    return (
-      <div className="profile-loading">
-        Loading profile...
-      </div>
-    );
-  }
+  return (
+    <div className="profile-loading">
+      {loadingError
+        ? `Unable to load profile: ${loadingError}`
+        : "Loading profile..."}
+    </div>
+  );
+}
 
 
   return (
