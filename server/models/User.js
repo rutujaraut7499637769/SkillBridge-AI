@@ -10,7 +10,9 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
+      lowercase: true,
+      trim: true
     },
 
     password: {
@@ -25,12 +27,15 @@ const userSchema = new mongoose.Schema(
 
     accountType: {
       type: String,
-      enum: [
-        "Student",
-        "Instructor",
-        "Learner"
-      ],
+      enum: ["Student", "Instructor", "Learner"],
       default: "Student"
+    },
+
+    // Role-based access control
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user"
     }
   },
   {
@@ -38,7 +43,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model(
-  "User",
-  userSchema
-);
+module.exports = mongoose.model("User", userSchema);
