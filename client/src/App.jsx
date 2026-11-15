@@ -708,234 +708,207 @@ function App() {
     );
   }
   return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <div className="brand">
-          <div className="brand-icon">SB</div>
-          <h1>SkillBridge-AI</h1>
-          <p>Learn smarter. Build stronger skills.</p>
-        </div>
+  <div className="auth-page">
+    <div className="auth-card">
+      <div className="brand">
+        <h1>SkillBridge-AI</h1>
+        <p>Learn smarter. Build stronger skills.</p>
+      </div>
 
-        {!showAdminLogin ? (
-          <>
-            <div className="auth-tabs">
-              <button
-                className={isLogin ? "active-tab" : ""}
-                onClick={() => setIsLogin(true)}
-              >
-                Login
-              </button>
+      <div className="auth-tabs">
+        <button
+          className={!showAdminLogin ? "active-tab" : ""}
+          onClick={() => setShowAdminLogin(false)}
+        >
+          Student
+        </button>
 
-              <button
-                className={!isLogin ? "active-tab" : ""}
-                onClick={() => setIsLogin(false)}
-              >
-                Sign Up
-              </button>
-            </div>
+        <button
+          className={showAdminLogin ? "active-tab" : ""}
+          onClick={() => setShowAdminLogin(true)}
+        >
+          Admin
+        </button>
+      </div>
 
-            {isLogin ? (
-              <form onSubmit={handleLogin} className="auth-form">
-                <h2>Welcome Back 👋</h2>
-                <p className="form-subtitle">
-                  Login to continue your learning journey.
-                </p>
+      {/* STUDENT LOGIN / SIGNUP */}
+      {!showAdminLogin ? (
+        <>
 
-                <label>Email</label>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                  required
-                />
+          {isLogin ? (
+            <form onSubmit={handleLogin} className="auth-form">
+              <h2>Student Login 👋</h2>
+              <p className="form-subtitle">
+                Login to continue your learning journey.
+              </p>
 
-                <label>Password</label>
-                <div className="password-box">
-                  <input
-                    type={showLoginPassword ? "text" : "password"}
-                    placeholder="Enter your password"
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                    required
-                  />
-
-                  <button
-                    type="button"
-                    className="eye-button"
-                    onClick={() =>
-                      setShowLoginPassword(!showLoginPassword)
-                    }
-                  >
-                    {showLoginPassword ? "🙈" : "👁️"}
-                  </button>
-                </div>
-
-                <button type="submit" className="main-button">
-                  Login
-                </button>
-
-                <p className="switch-text">
-                  Don't have an account?{" "}
-                  <span onClick={() => setIsLogin(false)}>
-                    Sign Up
-                  </span>
-                </p>
-              </form>
-            ) : (
-              <form onSubmit={handleSignup} className="auth-form">
-                <h2>Create Account ✨</h2>
-                <p className="form-subtitle">
-                  Start your personalized learning journey.
-                </p>
-
-                <label>Full Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter your full name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-
-                <label>Email</label>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-
-                <label>Password</label>
-                <div className="password-box">
-                  <input
-                    type={showSignupPassword ? "text" : "password"}
-                    placeholder="Create a password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-
-                  <button
-                    type="button"
-                    className="eye-button"
-                    onClick={() =>
-                      setShowSignupPassword(!showSignupPassword)
-                    }
-                  >
-                    {showSignupPassword ? "🙈" : "👁️"}
-                  </button>
-                </div>
-
-                <label>Confirm Password</label>
-                <div className="password-box">
-                  <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    placeholder="Confirm your password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
-
-                  <button
-                    type="button"
-                    className="eye-button"
-                    onClick={() =>
-                      setShowConfirmPassword(!showConfirmPassword)
-                    }
-                  >
-                    {showConfirmPassword ? "🙈" : "👁️"}
-                  </button>
-                </div>
-
-                <button type="submit" className="main-button">
-                  Create Account
-                </button>
-
-                <p className="switch-text">
-                  Already have an account?{" "}
-                  <span onClick={() => setIsLogin(true)}>
-                    Login
-                  </span>
-                </p>
-              </form>
-            )}
-
-            <div
-              style={{
-                textAlign: "center",
-                marginTop: "22px",
-                borderTop: "1px solid #e5e7eb",
-                paddingTop: "16px",
-              }}
-            >
-              <button
-                type="button"
-                onClick={() => setShowAdminLogin(true)}
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  color: "#4f46e5",
-                  fontWeight: "600",
-                  cursor: "pointer",
-                }}
-              >
-                🛡️ Admin Login
-              </button>
-            </div>
-          </>
-        ) : (
-          <form onSubmit={handleAdminLogin} className="auth-form">
-            <h2>Admin Login 🛡️</h2>
-            <p className="form-subtitle">
-              Login to manage SkillBridge-AI platform.
-            </p>
-
-            <label>Admin Email</label>
-            <input
-              type="email"
-              placeholder="Enter admin email"
-              value={adminEmail}
-              onChange={(e) => setAdminEmail(e.target.value)}
-              required
-            />
-
-            <label>Admin Password</label>
-            <div className="password-box">
+              <label>Email</label>
               <input
-                type={showAdminPassword ? "text" : "password"}
-                placeholder="Enter admin password"
-                value={adminPassword}
-                onChange={(e) => setAdminPassword(e.target.value)}
+                type="email"
+                placeholder="Enter your email"
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
                 required
               />
 
-              <button
-                type="button"
-                className="eye-button"
-                onClick={() =>
-                  setShowAdminPassword(!showAdminPassword)
-                }
-              >
-                {showAdminPassword ? "🙈" : "👁️"}
+              <label>Password</label>
+              <div className="password-box">
+                <input
+                  type={showLoginPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  required
+                />
+
+                <button
+                  type="button"
+                  className="eye-button"
+                  onClick={() =>
+                    setShowLoginPassword(!showLoginPassword)
+                  }
+                >
+                  {showLoginPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
+
+              <button type="submit" className="main-button">
+                Login
               </button>
-            </div>
 
-            <button type="submit" className="main-button">
-              Login as Admin
+              <p className="switch-text">
+                Don't have an account?{" "}
+                <span onClick={() => setIsLogin(false)}>
+                  Sign Up
+                </span>
+              </p>
+            </form>
+          ) : (
+            <form onSubmit={handleSignup} className="auth-form">
+              <h2>Create Account ✨</h2>
+              <p className="form-subtitle">
+                Start your personalized learning journey.
+              </p>
+
+              <label>Full Name</label>
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+
+              <label>Email</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+
+              <label>Password</label>
+              <div className="password-box">
+                <input
+                  type={showSignupPassword ? "text" : "password"}
+                  placeholder="Create a password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+
+                <button
+                  type="button"
+                  className="eye-button"
+                  onClick={() =>
+                    setShowSignupPassword(!showSignupPassword)
+                  }
+                >
+                  {showSignupPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
+
+              <label>Confirm Password</label>
+              <div className="password-box">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+
+                <button
+                  type="button"
+                  className="eye-button"
+                  onClick={() =>
+                    setShowConfirmPassword(!showConfirmPassword)
+                  }
+                >
+                  {showConfirmPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
+
+              <button type="submit" className="main-button">
+                Create Account
+              </button>
+
+              <p className="switch-text">
+                Already have an account?{" "}
+                <span onClick={() => setIsLogin(true)}>
+                  Login
+                </span>
+              </p>
+            </form>
+          )}
+        </>
+      ) : (
+        /* ADMIN LOGIN */
+        <form onSubmit={handleAdminLogin} className="auth-form">
+          <h2>Admin Login 🛡️</h2>
+          <p className="form-subtitle">
+            Login to manage SkillBridge-AI platform.
+          </p>
+
+          <label>Admin Email</label>
+          <input
+            type="email"
+            placeholder="Enter admin email"
+            value={adminEmail}
+            onChange={(e) => setAdminEmail(e.target.value)}
+            required
+          />
+
+          <label>Admin Password</label>
+          <div className="password-box">
+            <input
+              type={showAdminPassword ? "text" : "password"}
+              placeholder="Enter admin password"
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
+              required
+            />
+
+            <button
+              type="button"
+              className="eye-button"
+              onClick={() =>
+                setShowAdminPassword(!showAdminPassword)
+              }
+            >
+              {showAdminPassword ? "🙈" : "👁️"}
             </button>
+          </div>
 
-            <p className="switch-text">
-              <span onClick={() => setShowAdminLogin(false)}>
-                ← Back to Student Login
-              </span>
-            </p>
-          </form>
-        )}
-      </div>
+          <button type="submit" className="main-button">
+            Login as Admin
+          </button>
+        </form>
+      )}
     </div>
-  );
+  </div>
+);
 }
 
 export default App;
