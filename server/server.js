@@ -63,7 +63,10 @@ const verifyToken = (req, res, next) => {
 
     req.user = decoded;
     next();
+
   } catch (error) {
+    console.error("JWT VERIFY ERROR:", error.message);
+
     return res.status(401).json({
       message: "Invalid or expired token. Please login again."
     });

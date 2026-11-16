@@ -294,13 +294,6 @@ function LearningRoadmap({ onBack, selectedSkill }) {
 
         <div className="roadmap-header">
 
-          <button
-            className="roadmap-back"
-            onClick={onBack}
-            aria-label="Back"
-          >
-            ←
-          </button>
 
           <span className="roadmap-label">
             SKILLBRIDGE AI • PERSONALIZED PATH

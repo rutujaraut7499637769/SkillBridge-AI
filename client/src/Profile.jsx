@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import {
+  Camera,
+  Trash2,
+  Pencil,
+  ShieldCheck,
+  LogOut,
+  UserRound,
+  Save,
+  X,
+  ImagePlus
+} from "lucide-react";
 import "./Profile.css";
 
 function Profile({ onBack, onLogout }) {
   const [user, setUser] = useState(null);
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [accountType, setAccountType] = useState("Student");
@@ -12,45 +22,35 @@ function Profile({ onBack, onLogout }) {
   const [editing, setEditing] = useState(false);
   const [message, setMessage] = useState("");
   const [loadingError, setLoadingError] = useState("");
-
   const [showPhotoMenu, setShowPhotoMenu] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const fileInputRef = useRef(null);
 
   const token = localStorage.getItem("token");
-
-  const API_URL = "https://skillbridge-ai-1-s5wk.onrender.com/api";
-const BACKEND_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
+  const API_URL = "http://localhost:5000/api";
+  const BACKEND_URL = "http://localhost:5000";
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(
-          `${API_URL}/profile`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-        );
+        const response = await axios.get(`${API_URL}/profile`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
 
-        const profileUser =
-          response.data.user;
+        const profileUser = response.data.user;
 
         setUser(profileUser);
         setName(profileUser.name);
         setEmail(profileUser.email);
         setAccountType(profileUser.accountType || "Student");
       } catch (error) {
-  setLoadingError(
-    error.response?.data?.message ||
-    error.message ||
-    "Failed to fetch profile."
-  );
-
-  console.error("Profile fetch error:", error);
-}
+        setLoadingError(
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch profile."
+        );
+      }
     };
 
     fetchProfile();
@@ -62,15 +62,9 @@ const BACKEND_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
 
       const response = await axios.put(
         `${API_URL}/profile`,
+        { name, email, accountType },
         {
-          name,
-          email,
-          accountType
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+          headers: { Authorization: `Bearer ${token}` }
         }
       );
 
@@ -78,13 +72,8 @@ const BACKEND_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
       setName(response.data.user.name);
       setEmail(response.data.user.email);
       setAccountType(response.data.user.accountType || "Student");
-
       setEditing(false);
-
-      setMessage(
-        "Profile updated successfully."
-      );
-
+      setMessage("Profile updated successfully.");
     } catch (error) {
       setMessage(
         error.response?.data?.message ||
@@ -93,52 +82,43 @@ const BACKEND_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
     }
   };
 
+  const handleCancelEdit = () => {
+    setName(user.name);
+    setEmail(user.email);
+    setAccountType(user.accountType || "Student");
+    setEditing(false);
+    setMessage("");
+  };
 
   const handlePhotoSelect = () => {
     setShowPhotoMenu(false);
-
     fileInputRef.current?.click();
   };
 
-
   const handlePhotoUpload = async (event) => {
-    const file =
-      event.target.files?.[0];
-
+    const file = event.target.files?.[0];
     if (!file) return;
 
     try {
       setMessage("");
 
       const formData = new FormData();
+      formData.append("profileImage", file);
 
-      formData.append(
-        "profileImage",
-        file
+      const response = await axios.post(
+        `${API_URL}/profile/photo`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
       );
-
-      const response =
-        await axios.post(
-          `${API_URL}/profile/photo`,
-          formData,
-          {
-            headers: {
-              Authorization:
-                `Bearer ${token}`
-            }
-          }
-        );
 
       setUser((previousUser) => ({
         ...previousUser,
-        profileImage:
-          response.data.profileImage
+        profileImage: response.data.profileImage
       }));
 
-      setMessage(
-        "Profile photo updated successfully."
-      );
-
+      setMessage("Profile photo updated successfully.");
     } catch (error) {
       setMessage(
         error.response?.data?.message ||
@@ -154,25 +134,16 @@ const BACKEND_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
       setShowPhotoMenu(false);
       setMessage("");
 
-      await axios.delete(
-        `${API_URL}/profile/photo`,
-        {
-          headers: {
-            Authorization:
-              `Bearer ${token}`
-          }
-        }
-      );
+      await axios.delete(`${API_URL}/profile/photo`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
       setUser((previousUser) => ({
         ...previousUser,
         profileImage: ""
       }));
 
-      setMessage(
-        "Profile photo removed."
-      );
-
+      setMessage("Profile photo removed.");
     } catch (error) {
       setMessage(
         error.response?.data?.message ||
@@ -181,403 +152,297 @@ const BACKEND_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
     }
   };
 
-  const profileImage =
-    user?.profileImage
-      ? `${BACKEND_URL}${user.profileImage}`
-      : null;
+  const profileImage = user?.profileImage
+    ? `${BACKEND_URL}${user.profileImage}`
+    : null;
 
-  const userInitial =
-    user?.name
-      ? user.name
-        .charAt(0)
-        .toUpperCase()
-      : "R";
-
+  const userInitial = user?.name
+    ? user.name.charAt(0).toUpperCase()
+    : "R";
 
   if (!user) {
-  return (
-    <div className="profile-loading">
-      {loadingError
-        ? `Unable to load profile: ${loadingError}`
-        : "Loading profile..."}
-    </div>
-  );
-}
-
+    return (
+      <div className="profile-loading">
+        {loadingError
+          ? `Unable to load profile: ${loadingError}`
+          : "Loading profile..."}
+      </div>
+    );
+  }
 
   return (
     <div className="profile-page">
 
-
       <div className="profile-topbar">
-
-        <button
-          className="profile-back-button"
-          onClick={onBack}
-        >
+        <button className="profile-back-button" onClick={onBack}>
           ← Back
         </button>
 
-        <div className="profile-page-title">
-          Profile
-        </div>
+        <div className="profile-page-title">My Profile</div>
 
-        <div className="profile-top-space"></div>
-
+        <div className="profile-top-space" />
       </div>
-
-
-      <div className="profile-cover">
-
-        <div className="profile-header-content">
-
-          <div className="profile-avatar-wrapper">
-
-            {profileImage ? (
-              <img
-                src={profileImage}
-                alt="Profile"
-                className="profile-avatar-image"
-              />
-            ) : (
-              <div className="profile-avatar">
-                {userInitial}
-              </div>
-            )}
-
-            <button
-              className="profile-camera-button"
-              onClick={() =>
-                setShowPhotoMenu(
-                  !showPhotoMenu
-                )
-              }
-            >
-              📷
-            </button>
-
-
-            {showPhotoMenu && (
-              <div className="photo-menu">
-
-                <button
-                  onClick={handlePhotoSelect}
-                >
-                  Change photo
-                </button>
-
-                {profileImage && (
-                  <button
-                    onClick={
-                      handleRemovePhoto
-                    }
-                    className="remove-photo-option"
-                  >
-                    Remove photo
-                  </button>
-                )}
-
-              </div>
-            )}
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/jpeg,image/jpg,image/png,image/webp"
-              onChange={
-                handlePhotoUpload
-              }
-              style={{
-                display: "none"
-              }}
-            />
-
-          </div>
-
-
-          <div className="profile-heading">
-
-            <h1>
-              {user.name}
-            </h1>
-
-            <p>
-              {user.email}
-            </p>
-
-            <span className="profile-role">
-              SkillBridge {user.accountType || "Student"}
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
 
       <div className="profile-content">
 
-
-
         {message && (
-          <div className="profile-message">
-            {message}
-          </div>
+          <div className="profile-message">{message}</div>
         )}
 
+        {/* ONE COMPLETE PROFILE CARD */}
+        <div className="profile-main-card">
 
-        <div className="profile-card">
+          {/* PROFILE PHOTO AND USER DETAILS */}
+          <div className="profile-identity">
 
-          <div className="profile-card-header">
+            <div className="profile-avatar-wrapper">
+              {profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="profile-avatar-image"
+                />
+              ) : (
+                <div className="profile-avatar">
+                  {userInitial}
+                </div>
+              )}
 
-            <div>
-              <h2>
-                Personal Information
-              </h2>
+              <button
+                className="profile-camera-button"
+                onClick={() => setShowPhotoMenu(!showPhotoMenu)}
+                title="Change profile photo"
+              >
+                <Camera size={17} />
+              </button>
 
-              <p>
-                Manage your basic account details.
-              </p>
+              {showPhotoMenu && (
+                <div className="photo-menu">
+                  <button onClick={handlePhotoSelect}>
+                    <ImagePlus size={15} />
+                    Change photo
+                  </button>
+
+                  {profileImage && (
+                    <button
+                      onClick={handleRemovePhoto}
+                      className="remove-photo-option"
+                    >
+                      <Trash2 size={15} />
+                      Remove photo
+                    </button>
+                  )}
+                </div>
+              )}
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/jpg,image/png,image/webp"
+                onChange={handlePhotoUpload}
+                style={{ display: "none" }}
+              />
             </div>
 
-            {!editing && (
-              <button
-                className="edit-profile-button"
-                onClick={() =>
-                  setEditing(true)
-                }
-              >
-                Edit Profile
-              </button>
+            <div className="profile-heading">
+              <h1>{user.name}</h1>
+              <p>{user.email}</p>
+
+              <span className="profile-role">
+                SkillBridge {user.accountType || "Student"}
+              </span>
+            </div>
+
+          </div>
+
+          <div className="profile-section-divider" />
+
+          {/* PERSONAL INFORMATION */}
+          <section className="profile-section">
+
+            <div className="profile-section-header">
+              <div className="profile-section-title">
+                <div className="profile-section-icon">
+                  <UserRound size={19} />
+                </div>
+
+                <div>
+                  <h2>Personal Information</h2>
+                  <p>Manage your basic account details.</p>
+                </div>
+              </div>
+
+              {!editing && (
+                <button
+                  className="edit-profile-button"
+                  onClick={() => setEditing(true)}
+                >
+                  <Pencil size={15} />
+                  Edit
+                </button>
+              )}
+            </div>
+
+            <div className="profile-form">
+
+              <div className="profile-field">
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  value={name}
+                  disabled={!editing}
+                  onChange={(event) => setName(event.target.value)}
+                />
+              </div>
+
+              <div className="profile-field">
+                <label>Account Type</label>
+                <select
+                  value={accountType}
+                  disabled={!editing}
+                  onChange={(event) => setAccountType(event.target.value)}
+                >
+                  <option value="Student">Student</option>
+                  <option value="Instructor">Instructor</option>
+                  <option value="Learner">Learner</option>
+                </select>
+              </div>
+
+              <div className="profile-field">
+                <label>Email Address</label>
+                <input
+                  type="email"
+                  value={email}
+                  disabled={!editing}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </div>
+
+            </div>
+
+            {editing && (
+              <div className="profile-edit-actions">
+                <button
+                  className="cancel-edit-button"
+                  onClick={handleCancelEdit}
+                >
+                  <X size={15} />
+                  Cancel
+                </button>
+
+                <button
+                  className="save-profile-button"
+                  onClick={handleSaveProfile}
+                >
+                  <Save size={15} />
+                  Save Changes
+                </button>
+              </div>
             )}
 
-          </div>
+          </section>
 
+          <div className="profile-section-divider" />
 
-          <div className="profile-form">
+          {/* ACCOUNT INFORMATION */}
+          <section className="profile-section">
 
-            <div className="profile-field">
+            <div className="profile-section-header">
+              <div className="profile-section-title">
+                <div className="profile-section-icon">
+                  <UserRound size={19} />
+                </div>
 
-              <label>
-                Full Name
-              </label>
-
-              <input
-                type="text"
-                value={name}
-                disabled={!editing}
-                onChange={(event) =>
-                  setName(
-                    event.target.value
-                  )
-                }
-              />
-
-            </div>
-            <div className="profile-field">
-              <label>
-                Account Type
-              </label>
-
-              <select
-                value={accountType}
-                disabled={!editing}
-                onChange={(event) =>
-                  setAccountType(
-                    event.target.value
-                  )
-                }
-              >
-                <option value="Student">
-                  Student
-                </option>
-
-                <option value="Instructor">
-                  Instructor
-                </option>
-
-                <option value="Learner">
-                  Learner
-                </option>
-              </select>
+                <div>
+                  <h2>Account Information</h2>
+                  <p>Your SkillBridge account details.</p>
+                </div>
+              </div>
             </div>
 
-            <div className="profile-field">
+            <div className="account-info-grid">
+              <div className="account-info-item">
+                <span>Account Type</span>
+                <strong>{user.accountType || "Student"}</strong>
+              </div>
 
-              <label>
-                Email Address
-              </label>
+              <div className="account-info-item">
+                <span>Platform</span>
+                <strong>SkillBridge AI</strong>
+              </div>
 
-              <input
-                type="email"
-                value={email}
-                disabled={!editing}
-                onChange={(event) =>
-                  setEmail(
-                    event.target.value
-                  )
-                }
-              />
-
+              <div className="account-info-item">
+                <span>Learning Status</span>
+                <strong className="active-status">Active</strong>
+              </div>
             </div>
 
-          </div>
+          </section>
 
+          <div className="profile-section-divider" />
 
-          {editing && (
-            <div className="profile-edit-actions">
+          {/* SECURITY */}
+          <section className="profile-section security-section">
 
-              <button
-                className="cancel-edit-button"
-                onClick={() => {
-                  setName(user.name);
-                  setEmail(user.email);
-                  setAccountType(user.accountType || "Student");
-                  setEditing(false);
-                }}
-              >
-                Cancel
-              </button>
+            <div className="profile-section-title">
+              <div className="profile-section-icon security-icon">
+                <ShieldCheck size={20} />
+              </div>
 
-              <button
-                className="save-profile-button"
-                onClick={
-                  handleSaveProfile
-                }
-              >
-                Save Changes
-              </button>
-
+              <div>
+                <h2>Account Security</h2>
+                <p>
+                  Your account is protected using secure authentication.
+                </p>
+              </div>
             </div>
-          )}
 
-        </div>
+            <div className="security-badge">
+              <ShieldCheck size={15} />
+              Protected
+            </div>
 
+          </section>
 
-        <div className="profile-card">
+          <div className="profile-section-divider" />
 
-          <div className="profile-card-header">
-
+          {/* LOGOUT */}
+          <section className="profile-logout-row">
             <div>
-              <h2>
-                Account Information
-              </h2>
-
-              <p>
-                Your SkillBridge account details.
-              </p>
+              <h2>Logout</h2>
+              <p>Sign out from your SkillBridge account.</p>
             </div>
 
-          </div>
-
-
-          <div className="account-info-grid">
-
-            <div className="account-info-item">
-
-              <span>
-                Account Type
-              </span>
-
-              <strong>
-                {user.accountType || "Student"}
-              </strong>
-
-            </div>
-
-
-            <div className="account-info-item">
-
-              <span>
-                Platform
-              </span>
-
-              <strong>
-                SkillBridge AI
-              </strong>
-
-            </div>
-
-
-            <div className="account-info-item">
-
-              <span>
-                Learning Status
-              </span>
-
-              <strong className="active-status">
-                Active
-              </strong>
-
-            </div>
-
-          </div>
+            <button
+              className="profile-logout-button"
+              onClick={() => setShowLogoutModal(true)}
+            >
+              <LogOut size={16} />
+              Logout
+            </button>
+          </section>
 
         </div>
-
-
-        <div className="profile-card security-card">
-
-          <div>
-
-            <h2>
-              Account Security
-            </h2>
-
-            <p>
-              Your account is protected using
-              secure authentication.
-            </p>
-
-          </div>
-
-          <div className="security-badge">
-            Protected
-          </div>
-
-        </div>
-
-        <div className="profile-logout-section">
-
-          <button
-            className="profile-logout-button"
-            onClick={() =>
-              setShowLogoutModal(true)
-            }
-          >
-            Logout
-          </button>
-
-        </div>
-
       </div>
 
       {showLogoutModal && (
         <div className="logout-modal-overlay">
-
           <div className="logout-modal">
 
             <div className="logout-icon">
-              ↪
+              <LogOut size={23} />
             </div>
 
-            <h2>
-              Logout from SkillBridge?
-            </h2>
+            <h2>Logout from SkillBridge?</h2>
 
             <p>
-              Are you sure you want to logout
-              from your account?
+              Are you sure you want to logout from your account?
             </p>
 
             <div className="logout-modal-actions">
-
               <button
                 className="logout-cancel-button"
-                onClick={() =>
-                  setShowLogoutModal(false)
-                }
+                onClick={() => setShowLogoutModal(false)}
               >
                 Cancel
               </button>
@@ -588,11 +453,9 @@ const BACKEND_URL = "https://skillbridge-ai-1-s5wk.onrender.com";
               >
                 Logout
               </button>
-
             </div>
 
           </div>
-
         </div>
       )}
 

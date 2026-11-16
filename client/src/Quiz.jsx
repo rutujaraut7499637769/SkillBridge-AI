@@ -993,7 +993,7 @@ function Quiz({ onBack, onLearningRoadmap }) {
       setSavingResult(true);
 
       await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/api/quiz/result",
+        "/quiz/result",
         {
           skill: selectedSkill,
           score,
@@ -1056,13 +1056,7 @@ if (!quizStarted) {
         <div className="quiz-container">
 
           <div className="quiz-header quiz-start-header">
-            <button
-              className="quiz-back"
-              onClick={onBack}
-              aria-label="Back"
-            >
-              ←
-            </button>
+        
 
             <span className="quiz-label">
               SKILLBRIDGE AI • SKILL PRACTICE
@@ -1117,13 +1111,6 @@ if (!quizStarted) {
       <div className="quiz-page">
         <div className="quiz-container">
           <div className="quiz-header">
-            <button
-              className="quiz-back"
-              onClick={onBack}
-              aria-label="Back"
-            >
-              ←
-            </button>
 
             <span className="quiz-label">
               SKILLBRIDGE AI • QUIZ RESULT
@@ -1304,13 +1291,7 @@ if (!quizStarted) {
     <div className="quiz-page">
       <div className="quiz-container">
         <div className="quiz-header">
-          <button
-            className="quiz-back"
-            onClick={onBack}
-            aria-label="Back"
-          >
-            ←
-          </button>
+          
 
           <span className="quiz-label">
             SKILLBRIDGE AI • {selectedSkill.toUpperCase()}

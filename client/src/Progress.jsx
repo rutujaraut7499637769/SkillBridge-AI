@@ -31,17 +31,17 @@ const fetchProgressData = async () => {
   quizResponse
 ] = await Promise.all([
   axios.get(
-    "https://skillbridge-ai-1-s5wk.onrender.com/api/activity/streak",
+    "/activity/streak",
     { headers }
   ),
 
   axios.get(
-    "https://skillbridge-ai-1-s5wk.onrender.com/api/assessment/all",
+    "/assessment/all",
     { headers }
   ),
 
   axios.get(
-    "https://skillbridge-ai-1-s5wk.onrender.com/api/quiz/results",
+    "/quiz/results",
     { headers }
   )
 ]);
@@ -309,13 +309,6 @@ const overallProgress =
     <div className="progress-page">
 
       <header className="progress-header">
-
-        <button
-          className="back-button"
-          onClick={onBack}
-        >
-          ←
-        </button>
 
         <div>
           <h1>Your Progress</h1>
@@ -591,163 +584,6 @@ const overallProgress =
 
       </section>
 
-
-
-
-      <section className="progress-section">
-
-        <div className="progress-section-header">
-
-          <div>
-
-            <span className="section-label">
-              SKILL PERFORMANCE
-            </span>
-
-            <h2>Your Skills</h2>
-
-            <p>
-              Performance across your assessed skills.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        {loading ? (
-
-          <p>Loading skill performance...</p>
-
-        ) : assessments.length === 0 ? (
-
-          <div className="empty-state">
-
-            <h3>
-              No skills assessed yet
-            </h3>
-
-            <p>
-              Complete a skill assessment to see
-              your competency progress here.
-            </p>
-
-          </div>
-
-        ) : (
-
-          <div className="skill-performance-grid">
-
-            {assessments.map((assessment) => (
-
-              <div
-                className="skill-performance-card"
-                key={assessment._id}
-              >
-
-                <div className="skill-card-top">
-
-                  <div className="skill-card-title">
-
-                    <div className="skill-mini-icon">
-
-                      {assessment.skill
-                        ? assessment.skill
-                          .charAt(0)
-                          .toUpperCase()
-                        : "S"}
-
-                    </div>
-
-                    <div>
-
-                      <h3>
-                        {assessment.skill}
-                      </h3>
-
-                      <span>
-                        Skill Assessment
-                      </span>
-
-                    </div>
-
-                  </div>
-
-
-                  <div className="skill-score">
-
-                    <strong>
-                      {assessment.percentage}%
-                    </strong>
-
-                  </div>
-
-                </div>
-
-
-                <div className="skill-level-row">
-
-                  <span>
-                    Competency Level
-                  </span>
-
-                  <span className="skill-level-badge">
-                    {assessment.level}
-                  </span>
-
-                </div>
-
-
-                <div className="skill-progress-wrapper">
-
-                  <div className="skill-progress-track">
-
-                    <div
-                      className={`skill-progress-fill ${assessment.percentage >= 80
-                          ? "strong"
-                          : assessment.percentage >= 60
-                            ? "good"
-                            : "needs-improvement"
-                        }`}
-                      style={{
-                        width:
-                          `${assessment.percentage}%`
-                      }}
-                    ></div>
-
-                  </div>
-
-                </div>
-
-
-                <div className="skill-card-footer">
-
-                  <span>
-                    Current performance
-                  </span>
-
-                  <span>
-
-                    {assessment.percentage >= 80
-                      ? "Strong"
-                      : assessment.percentage >= 60
-                        ? "Good"
-                        : "Needs Improvement"}
-
-                  </span>
-
-                </div>
-
-              </div>
-
-            ))}
-
-          </div>
-
-        )}
-
-      </section>
-
       <section className="progress-section">
 
         <div className="progress-section-header">
@@ -959,98 +795,6 @@ const overallProgress =
           </div>
 
         )}
-
-      </section>
-
-      <section className="progress-section">
-
-        <div className="progress-section-header">
-
-          <div>
-
-            <span className="section-label">
-              RECENT ACTIVITY
-            </span>
-
-            <h2>Recent Assessment Results</h2>
-
-            <p>
-              Review your completed skill assessments.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        {assessments.length > 0 ? (
-
-          <div className="assessment-history">
-
-            {assessments
-              .slice(0, 5)
-              .map((assessment) => (
-
-                <div
-                  className="assessment-history-row"
-                  key={assessment._id}
-                >
-
-                  <div>
-
-                    <h3>
-                      {assessment.skill}
-                    </h3>
-
-                    <span>
-                      {assessment.level}
-                    </span>
-
-                  </div>
-
-
-                  <div className="history-score">
-
-                    <strong>
-                      {assessment.percentage}%
-                    </strong>
-
-                  </div>
-
-                </div>
-
-              ))}
-
-          </div>
-
-        ) : (
-
-          <p>
-            No assessment history available.
-          </p>
-
-        )}
-
-      </section>
-
-      <section className="progress-message">
-
-        <div className="message-icon">
-          ✨
-        </div>
-
-        <div>
-
-          <h3>
-            Consistency builds strong skills.
-          </h3>
-
-          <p>
-            Complete an assessment or quiz every day
-            to continue building your learning streak.
-          </p>
-
-        </div>
 
       </section>
 

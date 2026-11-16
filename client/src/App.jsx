@@ -1,7 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./App.css";
+import {
+  ArrowLeft,
+  Users,
+  ClipboardList,
+  Target,
+  ShieldCheck,
+  RefreshCw,
+  Trash2,
+  Eye,
+  EyeOff
+} from "lucide-react";
 
+import "./App.css";
+import chatbot from "./chatbot";
 import Dashboard from "./Dashboard";
 import SkillAssessment from "./SkillAssessment";
 import MySkills from "./MySkills";
@@ -44,20 +56,23 @@ function AdminDashboard({ onLogout }) {
           axios.get("/admin/dashboard"),
           axios.get("/admin/users"),
           axios.get("/admin/assessments"),
-          axios.get("/admin/quizzes"),
+          axios.get("/admin/quizzes")
         ]);
 
       setStats(dashboardRes.data || {});
+
       setUsers(
         Array.isArray(usersRes.data)
           ? usersRes.data
           : usersRes.data.users || []
       );
+
       setAssessments(
         Array.isArray(assessmentsRes.data)
           ? assessmentsRes.data
           : assessmentsRes.data.assessments || []
       );
+
       setQuizzes(
         Array.isArray(quizzesRes.data)
           ? quizzesRes.data
@@ -66,7 +81,7 @@ function AdminDashboard({ onLogout }) {
     } catch (err) {
       setError(
         err.response?.data?.message ||
-          "Unable to load admin dashboard."
+        "Unable to load admin dashboard."
       );
     } finally {
       setLoading(false);
@@ -96,7 +111,8 @@ function AdminDashboard({ onLogout }) {
       loadAdminData();
     } catch (err) {
       alert(
-        err.response?.data?.message || "Unable to delete user."
+        err.response?.data?.message ||
+        "Unable to delete user."
       );
     }
   };
@@ -105,23 +121,23 @@ function AdminDashboard({ onLogout }) {
     {
       title: "Total Users",
       value: stats.totalUsers ?? stats.totalUsersCount ?? users.length,
-      icon: "👥",
+      icon: Users
     },
     {
       title: "Total Assessments",
       value: stats.totalAssessments ?? assessments.length,
-      icon: "📝",
+      icon: ClipboardList
     },
     {
       title: "Total Quizzes",
       value: stats.totalQuizzes ?? quizzes.length,
-      icon: "🎯",
+      icon: Target
     },
     {
       title: "Total Admins",
       value: stats.totalAdmins ?? 0,
-      icon: "🛡️",
-    },
+      icon: ShieldCheck
+    }
   ];
 
   const adminButtonStyle = (tab) => ({
@@ -133,12 +149,15 @@ function AdminDashboard({ onLogout }) {
     color: activeTab === tab ? "#fff" : "#3730a3",
     fontWeight: "600",
     whiteSpace: "nowrap",
+    display: "flex",
+    alignItems: "center",
+    gap: "7px"
   });
 
   const tableStyle = {
     width: "100%",
     borderCollapse: "collapse",
-    minWidth: "550px",
+    minWidth: "550px"
   };
 
   const cellStyle = {
@@ -146,7 +165,7 @@ function AdminDashboard({ onLogout }) {
     borderBottom: "1px solid #e5e7eb",
     textAlign: "left",
     fontSize: "13px",
-    color: "#374151",
+    color: "#374151"
   };
 
   return (
@@ -155,15 +174,10 @@ function AdminDashboard({ onLogout }) {
         minHeight: "100vh",
         background: "#f5f6fc",
         padding: "22px",
-        color: "#1f2937",
+        color: "#1f2937"
       }}
     >
-      <div
-        style={{
-          maxWidth: "1250px",
-          margin: "auto",
-        }}
-      >
+      <div style={{ maxWidth: "1250px", margin: "auto" }}>
         <header
           style={{
             background: "#fff",
@@ -174,13 +188,18 @@ function AdminDashboard({ onLogout }) {
             alignItems: "center",
             flexWrap: "wrap",
             gap: "12px",
-            boxShadow: "0 3px 15px rgba(0,0,0,0.05)",
+            boxShadow: "0 3px 15px rgba(0,0,0,0.05)"
           }}
         >
           <div>
             <h1 style={{ margin: 0, color: "#3730a3" }}>
-              🛡️ SkillBridge-AI Admin
+              <ShieldCheck
+                size={25}
+                style={{ verticalAlign: "middle", marginRight: "8px" }}
+              />
+              SkillBridge-AI Admin
             </h1>
+
             <p style={{ margin: "6px 0 0", color: "#6b7280" }}>
               Manage users and monitor platform activity
             </p>
@@ -195,7 +214,7 @@ function AdminDashboard({ onLogout }) {
               background: "#ef4444",
               color: "#fff",
               cursor: "pointer",
-              fontWeight: "600",
+              fontWeight: "600"
             }}
           >
             Logout
@@ -207,7 +226,7 @@ function AdminDashboard({ onLogout }) {
             display: "flex",
             gap: "10px",
             flexWrap: "wrap",
-            margin: "22px 0",
+            margin: "22px 0"
           }}
         >
           <button
@@ -221,21 +240,21 @@ function AdminDashboard({ onLogout }) {
             style={adminButtonStyle("users")}
             onClick={() => setActiveTab("users")}
           >
-            Users
+            <Users size={17} /> Users
           </button>
 
           <button
             style={adminButtonStyle("assessments")}
             onClick={() => setActiveTab("assessments")}
           >
-            Assessments
+            <ClipboardList size={17} /> Assessments
           </button>
 
           <button
             style={adminButtonStyle("quizzes")}
             onClick={() => setActiveTab("quizzes")}
           >
-            Quizzes
+            <Target size={17} /> Quizzes
           </button>
 
           <button
@@ -243,10 +262,10 @@ function AdminDashboard({ onLogout }) {
             style={{
               ...adminButtonStyle("refresh"),
               background: "#059669",
-              color: "#fff",
+              color: "#fff"
             }}
           >
-            ↻ Refresh
+            <RefreshCw size={16} /> Refresh
           </button>
         </nav>
 
@@ -260,10 +279,11 @@ function AdminDashboard({ onLogout }) {
               background: "#fee2e2",
               color: "#991b1b",
               padding: "16px",
-              borderRadius: "10px",
+              borderRadius: "10px"
             }}
           >
             {error}
+
             <button
               onClick={loadAdminData}
               style={{ marginLeft: "12px", cursor: "pointer" }}
@@ -283,30 +303,34 @@ function AdminDashboard({ onLogout }) {
                     gridTemplateColumns:
                       "repeat(auto-fit, minmax(190px, 1fr))",
                     gap: "16px",
-                    marginTop: "18px",
+                    marginTop: "18px"
                   }}
                 >
-                  {statCards.map((card) => (
-                    <div
-                      key={card.title}
-                      style={{
-                        background: "#fff",
-                        padding: "22px",
-                        borderRadius: "13px",
-                        boxShadow: "0 3px 12px rgba(0,0,0,0.04)",
-                      }}
-                    >
-                      <div style={{ fontSize: "27px" }}>
-                        {card.icon}
+                  {statCards.map((card) => {
+                    const Icon = card.icon;
+
+                    return (
+                      <div
+                        key={card.title}
+                        style={{
+                          background: "#fff",
+                          padding: "22px",
+                          borderRadius: "13px",
+                          boxShadow: "0 3px 12px rgba(0,0,0,0.04)"
+                        }}
+                      >
+                        <Icon size={27} color="#4f46e5" />
+
+                        <p style={{ color: "#6b7280", marginBottom: "7px" }}>
+                          {card.title}
+                        </p>
+
+                        <h2 style={{ margin: 0, color: "#3730a3" }}>
+                          {card.value}
+                        </h2>
                       </div>
-                      <p style={{ color: "#6b7280", marginBottom: "7px" }}>
-                        {card.title}
-                      </p>
-                      <h2 style={{ margin: 0, color: "#3730a3" }}>
-                        {card.value}
-                      </h2>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div
@@ -314,35 +338,37 @@ function AdminDashboard({ onLogout }) {
                     background: "#fff",
                     padding: "20px",
                     borderRadius: "13px",
-                    marginTop: "22px",
+                    marginTop: "22px"
                   }}
                 >
                   <h3>Recent Users</h3>
+
                   {users.slice(0, 5).map((user) => (
                     <div
                       key={user._id}
                       style={{
                         padding: "12px 0",
-                        borderBottom: "1px solid #eee",
+                        borderBottom: "1px solid #eee"
                       }}
                     >
                       <strong>{user.name}</strong>
+
                       <p style={{ margin: "4px 0", color: "#6b7280" }}>
                         {user.email}
                       </p>
                     </div>
                   ))}
+
                   {users.length === 0 && <p>No users found.</p>}
                 </div>
               </>
             )}
-
             {activeTab === "users" && (
               <div
                 style={{
                   background: "#fff",
                   padding: "20px",
-                  borderRadius: "13px",
+                  borderRadius: "13px"
                 }}
               >
                 <h2>Manage Users</h2>
@@ -358,7 +384,7 @@ function AdminDashboard({ onLogout }) {
                     padding: "12px",
                     margin: "10px 0 18px",
                     border: "1px solid #d1d5db",
-                    borderRadius: "8px",
+                    borderRadius: "8px"
                   }}
                 />
 
@@ -372,6 +398,7 @@ function AdminDashboard({ onLogout }) {
                         <th style={cellStyle}>Action</th>
                       </tr>
                     </thead>
+
                     <tbody>
                       {filteredUsers.map((user) => (
                         <tr key={user._id}>
@@ -388,15 +415,17 @@ function AdminDashboard({ onLogout }) {
                                   border: "none",
                                   borderRadius: "6px",
                                   padding: "7px 10px",
-                                  cursor: "pointer",
+                                  cursor: "pointer"
                                 }}
                               >
+                                <Trash2 size={15} />
                                 Delete
                               </button>
                             )}
                           </td>
                         </tr>
                       ))}
+
                       {filteredUsers.length === 0 && (
                         <tr>
                           <td colSpan="4" style={cellStyle}>
@@ -409,12 +438,13 @@ function AdminDashboard({ onLogout }) {
                 </div>
               </div>
             )}
+
             {activeTab === "assessments" && (
               <div
                 style={{
                   background: "#fff",
                   padding: "20px",
-                  borderRadius: "13px",
+                  borderRadius: "13px"
                 }}
               >
                 <h2>Assessment Records</h2>
@@ -429,18 +459,22 @@ function AdminDashboard({ onLogout }) {
                         <th style={cellStyle}>Date</th>
                       </tr>
                     </thead>
+
                     <tbody>
                       {assessments.map((item) => (
                         <tr key={item._id}>
                           <td style={cellStyle}>
                             {item.user?.name || item.userName || "Student"}
                           </td>
+
                           <td style={cellStyle}>
                             {item.skill || item.skillName || "-"}
                           </td>
+
                           <td style={cellStyle}>
                             {item.score ?? item.percentage ?? "-"}
                           </td>
+
                           <td style={cellStyle}>
                             {item.createdAt
                               ? new Date(item.createdAt).toLocaleDateString()
@@ -448,6 +482,7 @@ function AdminDashboard({ onLogout }) {
                           </td>
                         </tr>
                       ))}
+
                       {assessments.length === 0 && (
                         <tr>
                           <td colSpan="4" style={cellStyle}>
@@ -466,7 +501,7 @@ function AdminDashboard({ onLogout }) {
                 style={{
                   background: "#fff",
                   padding: "20px",
-                  borderRadius: "13px",
+                  borderRadius: "13px"
                 }}
               >
                 <h2>Quiz Records</h2>
@@ -481,18 +516,22 @@ function AdminDashboard({ onLogout }) {
                         <th style={cellStyle}>Date</th>
                       </tr>
                     </thead>
+
                     <tbody>
                       {quizzes.map((item) => (
                         <tr key={item._id}>
                           <td style={cellStyle}>
                             {item.user?.name || item.userName || "Student"}
                           </td>
+
                           <td style={cellStyle}>
                             {item.skill || item.quizName || "Quiz"}
                           </td>
+
                           <td style={cellStyle}>
                             {item.score ?? item.percentage ?? "-"}
                           </td>
+
                           <td style={cellStyle}>
                             {item.createdAt
                               ? new Date(item.createdAt).toLocaleDateString()
@@ -500,6 +539,7 @@ function AdminDashboard({ onLogout }) {
                           </td>
                         </tr>
                       ))}
+
                       {quizzes.length === 0 && (
                         <tr>
                           <td colSpan="4" style={cellStyle}>
@@ -544,6 +584,14 @@ function App() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showAdminPassword, setShowAdminPassword] = useState(false);
 
+  // Automatically scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [currentPage]);
+
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -556,7 +604,7 @@ function App() {
       const response = await axios.post("/auth/signup", {
         name,
         email,
-        password,
+        password
       });
 
       alert(response.data.message);
@@ -577,7 +625,7 @@ function App() {
     try {
       const response = await axios.post("/auth/login", {
         email: loginEmail,
-        password: loginPassword,
+        password: loginPassword
       });
 
       localStorage.setItem("token", response.data.token);
@@ -585,6 +633,7 @@ function App() {
       setIsLoggedIn(true);
       setIsAdmin(false);
       setCurrentPage("dashboard");
+
       alert(response.data.message || "Login successful");
     } catch (error) {
       alert(error.response?.data?.message || "Login failed");
@@ -597,7 +646,7 @@ function App() {
     try {
       const response = await axios.post("/admin/login", {
         email: adminEmail,
-        password: adminPassword,
+        password: adminPassword
       });
 
       if (!response.data.token) {
@@ -633,282 +682,338 @@ function App() {
 
     alert("Logged out successfully");
   };
-
   if (isLoggedIn && isAdmin) {
-    return <AdminDashboard onLogout={handleLogout} />;
-  }
+  return <AdminDashboard onLogout={handleLogout} />;
+}
 
-  if (isLoggedIn) {
-    let currentContent;
+if (isLoggedIn) {
+  let currentContent;
 
-    if (currentPage === "assessment") {
-      currentContent = (
-        <SkillAssessment onBack={() => setCurrentPage("dashboard")} />
-      );
-    } else if (currentPage === "mySkills") {
-      currentContent = (
-        <MySkills
-          onBack={() => setCurrentPage("dashboard")}
-          onLearningRoadmap={(skill) => {
-            setSelectedSkill(skill);
-            setCurrentPage("learningRoadmap");
-          }}
-        />
-      );
-    } else if (currentPage === "learningRoadmap") {
-      currentContent = (
-        <LearningRoadmap
-          onBack={() => setCurrentPage("dashboard")}
-          selectedSkill={selectedSkill}
-        />
-      );
-    } else if (currentPage === "quiz") {
-      currentContent = (
-        <Quiz
-          onBack={() => setCurrentPage("dashboard")}
-          onLearningRoadmap={(skill) => {
-            setSelectedSkill(skill);
-            setCurrentPage("learningRoadmap");
-          }}
-        />
-      );
-    } else if (currentPage === "progress") {
-      currentContent = (
-        <Progress onBack={() => setCurrentPage("dashboard")} />
-      );
-    } else if (currentPage === "profile") {
-      currentContent = (
-        <Profile
-          onBack={() => setCurrentPage("dashboard")}
-          onLogout={handleLogout}
-        />
-      );
-    } else {
-      currentContent = (
-        <Dashboard
-          onSkillAssessment={() => setCurrentPage("assessment")}
-          onMySkills={() => setCurrentPage("mySkills")}
-          onLearningRoadmap={(skill) => {
-            setSelectedSkill(skill);
-            setCurrentPage("learningRoadmap");
-          }}
-          onQuiz={() => setCurrentPage("quiz")}
-          onProgress={() => setCurrentPage("progress")}
-          onProfile={() => setCurrentPage("profile")}
-          onLogout={handleLogout}
-        />
-      );
-    }
-
-    return (
-      <>
-        {currentContent}
-        <Footer />
-      </>
+  if (currentPage === "assessment") {
+    currentContent = (
+      <SkillAssessment
+        onBack={() => setCurrentPage("dashboard")}
+      />
+    );
+  } else if (currentPage === "mySkills") {
+    currentContent = (
+      <MySkills
+        onBack={() => setCurrentPage("dashboard")}
+        onLearningRoadmap={(skill) => {
+          setSelectedSkill(skill);
+          setCurrentPage("learningRoadmap");
+        }}
+      />
+    );
+  } else if (currentPage === "learningRoadmap") {
+    currentContent = (
+      <LearningRoadmap
+        onBack={() => setCurrentPage("dashboard")}
+        selectedSkill={selectedSkill}
+      />
+    );
+  } else if (currentPage === "quiz") {
+    currentContent = (
+      <Quiz
+        onBack={() => setCurrentPage("dashboard")}
+        onLearningRoadmap={(skill) => {
+          setSelectedSkill(skill);
+          setCurrentPage("learningRoadmap");
+        }}
+      />
+    );
+  } else if (currentPage === "progress") {
+    currentContent = (
+      <Progress
+        onBack={() => setCurrentPage("dashboard")}
+      />
+    );
+  } else if (currentPage === "profile") {
+    currentContent = (
+      <Profile
+        onBack={() => setCurrentPage("dashboard")}
+        onLogout={handleLogout}
+      />
+    );
+  } else if (currentPage === "chatbot") {
+    currentContent = <Chatbot />;
+  } else {
+    currentContent = (
+      <Dashboard
+        onSkillAssessment={() => setCurrentPage("assessment")}
+        onMySkills={() => setCurrentPage("mySkills")}
+        onLearningRoadmap={(skill) => {
+          setSelectedSkill(skill);
+          setCurrentPage("learningRoadmap");
+        }}
+        onQuiz={() => setCurrentPage("quiz")}
+        onProgress={() => setCurrentPage("progress")}
+        onProfile={() => setCurrentPage("profile")}
+        onLogout={handleLogout}
+        onChatbot={() => setCurrentPage("chatbot")}
+      />
     );
   }
+
   return (
-  <div className="auth-page">
-    <div className="auth-card">
-      <div className="brand">
-        <h1>SkillBridge-AI</h1>
-        <p>Learn smarter. Build stronger skills.</p>
-      </div>
-
-      <div className="auth-tabs">
+    <>
+      {currentPage !== "dashboard" && (
         <button
-          className={!showAdminLogin ? "active-tab" : ""}
-          onClick={() => setShowAdminLogin(false)}
+          onClick={() => setCurrentPage("dashboard")}
+          title="Back to Dashboard"
+          aria-label="Back to Dashboard"
+          style={{
+            position: "fixed",
+            top: "15px",
+            left: "15px",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            gap: "7px",
+            padding: "10px 16px",
+            background: "#4f46e5",
+            color: "#fff",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer"
+          }}
         >
-          Student
+          ← Back
         </button>
+      )}
 
-        <button
-          className={showAdminLogin ? "active-tab" : ""}
-          onClick={() => setShowAdminLogin(true)}
-        >
-          Admin
-        </button>
-      </div>
+      {currentContent}
+      <Footer />
+    </>
+  );
+}
+      
+  return (
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="brand">
+          <h1>SkillBridge-AI</h1>
+          <p>Learn smarter. Build stronger skills.</p>
+        </div>
 
-      {/* STUDENT LOGIN / SIGNUP */}
-      {!showAdminLogin ? (
-        <>
+        <div className="auth-tabs">
+          <button
+            className={!showAdminLogin ? "active-tab" : ""}
+            onClick={() => setShowAdminLogin(false)}
+          >
+            Student
+          </button>
 
-          {isLogin ? (
-            <form onSubmit={handleLogin} className="auth-form">
-              <h2>Student Login 👋</h2>
-              <p className="form-subtitle">
-                Login to continue your learning journey.
-              </p>
+          <button
+            className={showAdminLogin ? "active-tab" : ""}
+            onClick={() => setShowAdminLogin(true)}
+          >
+            Admin
+          </button>
+        </div>
 
-              <label>Email</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-                required
-              />
+        {!showAdminLogin ? (
+          <>
+            {isLogin ? (
+              <form onSubmit={handleLogin} className="auth-form">
+                <h2>Student Login 👋</h2>
 
-              <label>Password</label>
-              <div className="password-box">
+                <p className="form-subtitle">
+                  Login to continue your learning journey.
+                </p>
+
+                <label>Email</label>
+
                 <input
-                  type={showLoginPassword ? "text" : "password"}
-                  placeholder="Enter your password"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
+                  type="email"
+                  placeholder="Enter your email"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
                   required
                 />
 
-                <button
-                  type="button"
-                  className="eye-button"
-                  onClick={() =>
-                    setShowLoginPassword(!showLoginPassword)
-                  }
-                >
-                  {showLoginPassword ? "🙈" : "👁️"}
-                </button>
-              </div>
+                <label>Password</label>
 
-              <button type="submit" className="main-button">
-                Login
-              </button>
+                <div className="password-box">
+                  <input
+                    type={showLoginPassword ? "text" : "password"}
+                    placeholder="Enter your password"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    required
+                  />
 
-              <p className="switch-text">
-                Don't have an account?{" "}
-                <span onClick={() => setIsLogin(false)}>
-                  Sign Up
-                </span>
-              </p>
-            </form>
-          ) : (
-            <form onSubmit={handleSignup} className="auth-form">
-              <h2>Create Account ✨</h2>
-              <p className="form-subtitle">
-                Start your personalized learning journey.
-              </p>
+                  <button
+                    type="button"
+                    className="eye-button"
+                    onClick={() =>
+                      setShowLoginPassword(!showLoginPassword)
+                    }
+                  >
+                    {showLoginPassword ? (
+                      <EyeOff size={19} />
+                    ) : (
+                      <Eye size={19} />
+                    )}
+                  </button>
+                </div>
 
-              <label>Full Name</label>
-              <input
-                type="text"
-                placeholder="Enter your full name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-
-              <label>Email</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-
-              <label>Password</label>
-              <div className="password-box">
-                <input
-                  type={showSignupPassword ? "text" : "password"}
-                  placeholder="Create a password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-
-                <button
-                  type="button"
-                  className="eye-button"
-                  onClick={() =>
-                    setShowSignupPassword(!showSignupPassword)
-                  }
-                >
-                  {showSignupPassword ? "🙈" : "👁️"}
-                </button>
-              </div>
-
-              <label>Confirm Password</label>
-              <div className="password-box">
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm your password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                />
-
-                <button
-                  type="button"
-                  className="eye-button"
-                  onClick={() =>
-                    setShowConfirmPassword(!showConfirmPassword)
-                  }
-                >
-                  {showConfirmPassword ? "🙈" : "👁️"}
-                </button>
-              </div>
-
-              <button type="submit" className="main-button">
-                Create Account
-              </button>
-
-              <p className="switch-text">
-                Already have an account?{" "}
-                <span onClick={() => setIsLogin(true)}>
+                <button type="submit" className="main-button">
                   Login
-                </span>
-              </p>
-            </form>
-          )}
-        </>
-      ) : (
-        /* ADMIN LOGIN */
-        <form onSubmit={handleAdminLogin} className="auth-form">
-          <h2>Admin Login 🛡️</h2>
-          <p className="form-subtitle">
-            Login to manage SkillBridge-AI platform.
-          </p>
+                </button>
 
-          <label>Admin Email</label>
-          <input
-            type="email"
-            placeholder="Enter admin email"
-            value={adminEmail}
-            onChange={(e) => setAdminEmail(e.target.value)}
-            required
-          />
+                <p className="switch-text">
+                  Don't have an account?{" "}
+                  <span onClick={() => setIsLogin(false)}>
+                    Sign Up
+                  </span>
+                </p>
+              </form>
+            ) : (
+              <form onSubmit={handleSignup} className="auth-form">
+                <h2>Create Account ✨</h2>
 
-          <label>Admin Password</label>
-          <div className="password-box">
+                <p className="form-subtitle">
+                  Start your personalized learning journey.
+                </p>
+
+                <label>Full Name</label>
+
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+
+                <label>Email</label>
+
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+
+                <label>Password</label>
+
+                <div className="password-box">
+                  <input
+                    type={showSignupPassword ? "text" : "password"}
+                    placeholder="Create a password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className="eye-button"
+                    onClick={() =>
+                      setShowSignupPassword(!showSignupPassword)
+                    }
+                  >
+                    {showSignupPassword ? (
+                      <EyeOff size={19} />
+                    ) : (
+                      <Eye size={19} />
+                    )}
+                  </button>
+                </div>
+
+                <label>Confirm Password</label>
+
+                <div className="password-box">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Confirm your password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    className="eye-button"
+                    onClick={() =>
+                      setShowConfirmPassword(!showConfirmPassword)
+                    }
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff size={19} />
+                    ) : (
+                      <Eye size={19} />
+                    )}
+                  </button>
+                </div>
+
+                <button type="submit" className="main-button">
+                  Create Account
+                </button>
+
+                <p className="switch-text">
+                  Already have an account?{" "}
+                  <span onClick={() => setIsLogin(true)}>
+                    Login
+                  </span>
+                </p>
+              </form>
+            )}
+          </>
+        ) : (
+          <form onSubmit={handleAdminLogin} className="auth-form">
+            <h2>Admin Login 🛡️</h2>
+
+            <p className="form-subtitle">
+              Login to manage SkillBridge-AI platform.
+            </p>
+
+            <label>Admin Email</label>
+
             <input
-              type={showAdminPassword ? "text" : "password"}
-              placeholder="Enter admin password"
-              value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
+              type="email"
+              placeholder="Enter admin email"
+              value={adminEmail}
+              onChange={(e) => setAdminEmail(e.target.value)}
               required
             />
 
-            <button
-              type="button"
-              className="eye-button"
-              onClick={() =>
-                setShowAdminPassword(!showAdminPassword)
-              }
-            >
-              {showAdminPassword ? "🙈" : "👁️"}
-            </button>
-          </div>
+            <label>Admin Password</label>
 
-          <button type="submit" className="main-button">
-            Login as Admin
-          </button>
-        </form>
-      )}
+            <div className="password-box">
+              <input
+                type={showAdminPassword ? "text" : "password"}
+                placeholder="Enter admin password"
+                value={adminPassword}
+                onChange={(e) => setAdminPassword(e.target.value)}
+                required
+              />
+
+              <button
+                type="button"
+                className="eye-button"
+                onClick={() =>
+                  setShowAdminPassword(!showAdminPassword)
+                }
+              >
+                {showAdminPassword ? (
+                  <EyeOff size={19} />
+                ) : (
+                  <Eye size={19} />
+                )}
+              </button>
+            </div>
+
+            <button type="submit" className="main-button">
+              Login as Admin
+            </button>
+          </form>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default App;

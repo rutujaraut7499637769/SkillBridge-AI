@@ -18,7 +18,7 @@ function MySkills({ onBack, onLearningRoadmap }) {
         }
 
         const response = await axios.get(
-          "https://skillbridge-ai-1-s5wk.onrender.com/api/assessment/all",
+          "/assessment/all",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -156,14 +156,6 @@ function MySkills({ onBack, onLearningRoadmap }) {
     <div className="my-skills-page">
       <div className="my-skills-container">
         <div className="my-skills-header">
-          <button
-            className="dashboard-back"
-            onClick={onBack}
-            aria-label="Back"
-            type="button"
-          >
-            ←
-          </button>
 
           <span className="page-label">
             SKILLBRIDGE AI • PERSONALIZED LEARNING

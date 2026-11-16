@@ -1,37 +1,36 @@
 .progress-page {
   min-height: 100vh;
   background: #f7f8fc;
-  padding: 32px 40px 50px;
+  padding: 20px 28px 30px;
   box-sizing: border-box;
   color: #1f2937;
 }
 
-
 .progress-header {
   display: flex;
   align-items: center;
-  gap: 24px;
-  margin-bottom: 30px;
+  gap: 18px;
+  margin-bottom: 20px;
 }
 
 .progress-header h1 {
   margin: 0;
-  font-size: 32px;
+  font-size: 29px;
   font-weight: 700;
   color: #111827;
 }
 
 .progress-header p {
-  margin: 7px 0 0;
+  margin: 5px 0 0;
   color: #6b7280;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .back-button {
   border: none;
   background: #ffffff;
   color: #374151;
-  padding: 11px 17px;
+  padding: 9px 14px;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -51,7 +50,7 @@
   font-weight: 700;
   letter-spacing: 1.2px;
   color: #6b7280;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 }
 
 .streak-section {
@@ -59,65 +58,65 @@
   box-sizing: border-box;
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 18px;
-  padding: 30px;
-  margin-bottom: 30px;
+  border-radius: 16px;
+  padding: 21px 23px;
+  margin-bottom: 20px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
 .streak-main {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 15px;
 }
 
 .streak-icon {
-  width: 58px;
-  height: 58px;
-  border-radius: 16px;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
   background: #fff4e8;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 29px;
+  font-size: 26px;
   flex-shrink: 0;
 }
 
 .streak-main h2 {
   margin: 0;
-  font-size: 30px;
+  font-size: 27px;
   color: #111827;
 }
 
 .streak-main p {
-  margin: 5px 0 0;
+  margin: 4px 0 0;
   color: #6b7280;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .streak-stats {
   display: flex;
-  gap: 18px;
-  margin-top: 28px;
+  gap: 14px;
+  margin-top: 19px;
 }
 
 .streak-stat {
   flex: 1;
   background: #f8f9fc;
   border: 1px solid #eef0f4;
-  border-radius: 14px;
-  padding: 18px 20px;
+  border-radius: 12px;
+  padding: 13px 16px;
 }
 
 .streak-stat span {
   display: block;
   color: #6b7280;
-  font-size: 13px;
-  margin-bottom: 7px;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 
 .streak-stat strong {
-  font-size: 27px;
+  font-size: 24px;
   color: #111827;
 }
 
@@ -128,8 +127,8 @@
 }
 
 .weekly-activity {
-  margin-top: 28px;
-  padding-top: 25px;
+  margin-top: 19px;
+  padding-top: 17px;
   border-top: 1px solid #eeeeee;
 }
 
@@ -137,12 +136,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 13px;
 }
 
 .weekly-header h3 {
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
   color: #111827;
 }
 
@@ -154,7 +153,7 @@
 .week-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
 
 .day-item {
@@ -165,12 +164,12 @@
   display: block;
   font-size: 12px;
   color: #6b7280;
-  margin-bottom: 9px;
+  margin-bottom: 7px;
 }
 
 .day-circle {
-  width: 38px;
-  height: 38px;
+  width: 35px;
+  height: 35px;
   margin: auto;
   border-radius: 50%;
   border: 1px solid #dfe3e8;
@@ -178,7 +177,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 14px;
   color: #ffffff;
   transition: 0.2s ease;
 }
@@ -189,54 +188,54 @@
 }
 
 .progress-overview {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .progress-title {
-  margin-bottom: 20px;
+  margin-bottom: 13px;
 }
 
 .progress-title h2 {
   margin: 0;
-  font-size: 23px;
+  font-size: 21px;
   color: #111827;
 }
 
 .progress-title p {
-  margin: 6px 0 0;
+  margin: 5px 0 0;
   color: #6b7280;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .progress-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 14px;
 }
 
 .progress-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 23px;
+  border-radius: 14px;
+  padding: 17px 19px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.035);
 }
 
 .progress-card span {
   display: block;
-  font-size: 13px;
+  font-size: 12px;
   color: #6b7280;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 }
 
 .progress-card strong {
   display: block;
-  font-size: 29px;
+  font-size: 26px;
   color: #111827;
 }
 
 .progress-card p {
-  margin: 6px 0 0;
+  margin: 5px 0 0;
   color: #9ca3af;
   font-size: 12px;
 }
@@ -244,28 +243,27 @@
 .progress-section {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 18px;
-  padding: 28px 30px;
-  margin-bottom: 30px;
+  border-radius: 16px;
+  padding: 20px 23px;
+  margin-bottom: 19px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.035);
 }
 
 .progress-section-header {
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .progress-section-header h2 {
   margin: 0;
-  font-size: 22px;
+  font-size: 20px;
   color: #111827;
 }
 
 .progress-section-header p {
-  margin: 6px 0 0;
+  margin: 5px 0 0;
   color: #6b7280;
-  font-size: 14px;
+  font-size: 13px;
 }
-
 
 .latest-skill-card {
   display: flex;
@@ -273,13 +271,13 @@
   justify-content: space-between;
   background: #f8f9fc;
   border: 1px solid #eef0f4;
-  border-radius: 15px;
-  padding: 20px 22px;
+  border-radius: 13px;
+  padding: 15px 18px;
 }
 
 .latest-skill-card h3 {
-  margin: 0 0 7px;
-  font-size: 18px;
+  margin: 0 0 6px;
+  font-size: 17px;
   color: #111827;
 }
 
@@ -299,7 +297,7 @@
 
 .latest-score strong {
   display: block;
-  font-size: 30px;
+  font-size: 27px;
   color: #111827;
 }
 
@@ -308,15 +306,14 @@
   font-size: 12px;
 }
 
-
 .progress-skills-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .progress-skill-row {
-  padding-bottom: 18px;
+  padding-bottom: 13px;
   border-bottom: 1px solid #eeeeee;
 }
 
@@ -329,12 +326,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .progress-skill-info h3 {
-  margin: 0 0 5px;
-  font-size: 16px;
+  margin: 0 0 4px;
+  font-size: 15px;
   color: #111827;
 }
 
@@ -344,7 +341,7 @@
 }
 
 .progress-skill-info strong {
-  font-size: 15px;
+  font-size: 14px;
   color: #111827;
 }
 
@@ -366,14 +363,14 @@
 .skill-performance-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  gap: 14px;
 }
 
 .skill-performance-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 21px;
+  border-radius: 14px;
+  padding: 17px;
   transition: 0.2s ease;
 }
 
@@ -386,31 +383,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .skill-card-title {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .skill-mini-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
   background: #f1f3f5;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: #111827;
 }
 
 .skill-card-title h3 {
   margin: 0 0 4px;
-  font-size: 16px;
+  font-size: 15px;
   color: #111827;
 }
 
@@ -420,7 +417,7 @@
 }
 
 .skill-score strong {
-  font-size: 23px;
+  font-size: 21px;
   color: #111827;
 }
 
@@ -428,8 +425,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
-  margin-bottom: 11px;
+  margin-top: 15px;
+  margin-bottom: 9px;
 }
 
 .skill-level-row > span:first-child {
@@ -479,7 +476,7 @@
 .skill-card-footer {
   display: flex;
   justify-content: space-between;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .skill-card-footer span {
@@ -501,7 +498,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 0;
+  padding: 12px 0;
   border-bottom: 1px solid #eeeeee;
 }
 
@@ -530,10 +527,9 @@
   color: #111827;
 }
 
-
 .empty-state {
   text-align: center;
-  padding: 30px 20px;
+  padding: 22px 18px;
   background: #f8f9fc;
   border-radius: 14px;
 }
@@ -550,106 +546,41 @@
   font-size: 13px;
 }
 
-
 .progress-message {
   display: flex;
   align-items: center;
-  gap: 17px;
+  gap: 14px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 18px;
-  padding: 24px 28px;
-  margin-bottom: 20px;
+  border-radius: 16px;
+  padding: 17px 21px;
+  margin-bottom: 15px;
 }
 
 .message-icon {
-  width: 45px;
-  height: 45px;
-  border-radius: 13px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   background: #f3f4f6;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 21px;
+  font-size: 20px;
   flex-shrink: 0;
 }
 
 .progress-message h3 {
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
   color: #111827;
 }
 
 .progress-message p {
-  margin: 5px 0 0;
+  margin: 4px 0 0;
   color: #6b7280;
   font-size: 13px;
 }
 
-
-@media (max-width: 900px) {
-  .progress-page {
-    padding: 25px 22px 40px;
-  }
-
-  .progress-cards {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 700px) {
-  .skill-performance-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 650px) {
-  .progress-page {
-    padding: 20px 15px 35px;
-  }
-
-  .progress-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .progress-header h1 {
-    font-size: 27px;
-  }
-
-  .streak-section,
-  .progress-section {
-    padding: 22px 18px;
-  }
-
-  .streak-stats {
-    flex-direction: column;
-  }
-
-  .weekly-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .week-days {
-    gap: 5px;
-  }
-
-  .day-circle {
-    width: 34px;
-    height: 34px;
-  }
-
-  .latest-skill-card {
-    gap: 15px;
-  }
-
-  .progress-message {
-    padding: 20px;
-  }
-}
 .quiz-performance-list {
   display: flex;
   flex-direction: column;
@@ -660,7 +591,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 17px 0;
+  padding: 12px 0;
   border-bottom: 1px solid #eeeeee;
 }
 
@@ -702,26 +633,26 @@
 .recommendation-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 15px;
 }
 
 .recommendation-card {
   background: #ffffff;
   border: 1px solid #eeeeee;
   border-radius: 14px;
-  padding: 22px;
+  padding: 17px;
 }
 
 .recommendation-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 15px;
+  gap: 12px;
 }
 
 .recommendation-top h3 {
   margin: 0 0 5px;
-  font-size: 17px;
+  font-size: 16px;
   color: #111827;
 }
 
@@ -756,11 +687,11 @@
 .recommendation-line {
   height: 1px;
   background: #eeeeee;
-  margin: 18px 0;
+  margin: 14px 0;
 }
 
 .recommendation-content h4 {
-  margin: 0 0 14px;
+  margin: 0 0 11px;
   font-size: 13px;
   color: #374151;
 }
@@ -768,20 +699,20 @@
 .recommendation-topics {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .recommendation-topic {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-size: 13px;
   color: #4b5563;
 }
 
 .topic-number {
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #f3f4f6;
   display: flex;
@@ -793,8 +724,98 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .progress-page {
+    padding: 20px 18px 30px;
+  }
+}
+
+@media (max-width: 700px) {
+  .skill-performance-grid,
   .recommendation-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .progress-page {
+    padding: 16px 13px 25px;
+  }
+
+  .progress-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 17px;
+  }
+
+  .progress-header h1 {
+    font-size: 25px;
+  }
+
+  .progress-header p {
+    font-size: 13px;
+  }
+
+  .streak-section,
+  .progress-section {
+    padding: 16px 14px;
+    margin-bottom: 15px;
+  }
+
+  .streak-stats {
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 15px;
+  }
+
+  .streak-stat {
+    padding: 11px 13px;
+  }
+
+  .weekly-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .week-days {
+    gap: 5px;
+  }
+
+  .day-circle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .progress-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .progress-card {
+    padding: 13px;
+  }
+
+  .progress-card strong {
+    font-size: 23px;
+  }
+
+  .progress-title h2 {
+    font-size: 19px;
+  }
+
+  .latest-skill-card {
+    gap: 12px;
+    padding: 13px;
+  }
+
+  .latest-score strong {
+    font-size: 24px;
+  }
+
+  .progress-message {
+    padding: 14px;
+    gap: 11px;
   }
 }

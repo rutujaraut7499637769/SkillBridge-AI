@@ -40,12 +40,7 @@ function SkillAssessment({ onBack }) {
       </div>
 
       <div className="assessment-card">
-        <button
-          className="back-button"
-          onClick={onBack}
-        >
-          &larr;
-        </button>
+        
         <h2>Choose Your Skill</h2>
 
         <p className="assessment-description">

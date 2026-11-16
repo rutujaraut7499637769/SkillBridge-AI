@@ -125,7 +125,7 @@ function AssessmentQuestions({ skill, onBack }) {
 
     try {
       const response = await axios.post(
-        "https://skillbridge-ai-1-s5wk.onrender.com/api/assessment",
+        "/assessment",
         { skill, answers, score, percentage, level },
         {
           headers: {
