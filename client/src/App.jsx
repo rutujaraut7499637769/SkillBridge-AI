@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import {
-  ArrowLeft,
   Users,
   ClipboardList,
   Target,
@@ -13,7 +12,7 @@ import {
 } from "lucide-react";
 
 import "./App.css";
-import chatbot from "./chatbot";
+import Chatbot from "./Chatbot";
 import Dashboard from "./Dashboard";
 import SkillAssessment from "./SkillAssessment";
 import MySkills from "./MySkills";
@@ -363,6 +362,7 @@ function AdminDashboard({ onLogout }) {
                 </div>
               </>
             )}
+
             {activeTab === "users" && (
               <div
                 style={{
@@ -438,7 +438,6 @@ function AdminDashboard({ onLogout }) {
                 </div>
               </div>
             )}
-
             {activeTab === "assessments" && (
               <div
                 style={{
@@ -682,112 +681,110 @@ function App() {
 
     alert("Logged out successfully");
   };
+
   if (isLoggedIn && isAdmin) {
-  return <AdminDashboard onLogout={handleLogout} />;
-}
-
-if (isLoggedIn) {
-  let currentContent;
-
-  if (currentPage === "assessment") {
-    currentContent = (
-      <SkillAssessment
-        onBack={() => setCurrentPage("dashboard")}
-      />
-    );
-  } else if (currentPage === "mySkills") {
-    currentContent = (
-      <MySkills
-        onBack={() => setCurrentPage("dashboard")}
-        onLearningRoadmap={(skill) => {
-          setSelectedSkill(skill);
-          setCurrentPage("learningRoadmap");
-        }}
-      />
-    );
-  } else if (currentPage === "learningRoadmap") {
-    currentContent = (
-      <LearningRoadmap
-        onBack={() => setCurrentPage("dashboard")}
-        selectedSkill={selectedSkill}
-      />
-    );
-  } else if (currentPage === "quiz") {
-    currentContent = (
-      <Quiz
-        onBack={() => setCurrentPage("dashboard")}
-        onLearningRoadmap={(skill) => {
-          setSelectedSkill(skill);
-          setCurrentPage("learningRoadmap");
-        }}
-      />
-    );
-  } else if (currentPage === "progress") {
-    currentContent = (
-      <Progress
-        onBack={() => setCurrentPage("dashboard")}
-      />
-    );
-  } else if (currentPage === "profile") {
-    currentContent = (
-      <Profile
-        onBack={() => setCurrentPage("dashboard")}
-        onLogout={handleLogout}
-      />
-    );
-  } else if (currentPage === "chatbot") {
-    currentContent = <Chatbot />;
-  } else {
-    currentContent = (
-      <Dashboard
-        onSkillAssessment={() => setCurrentPage("assessment")}
-        onMySkills={() => setCurrentPage("mySkills")}
-        onLearningRoadmap={(skill) => {
-          setSelectedSkill(skill);
-          setCurrentPage("learningRoadmap");
-        }}
-        onQuiz={() => setCurrentPage("quiz")}
-        onProgress={() => setCurrentPage("progress")}
-        onProfile={() => setCurrentPage("profile")}
-        onLogout={handleLogout}
-        onChatbot={() => setCurrentPage("chatbot")}
-      />
-    );
+    return <AdminDashboard onLogout={handleLogout} />;
   }
 
-  return (
-    <>
-      {currentPage !== "dashboard" && (
-        <button
-          onClick={() => setCurrentPage("dashboard")}
-          title="Back to Dashboard"
-          aria-label="Back to Dashboard"
-          style={{
-            position: "fixed",
-            top: "15px",
-            left: "15px",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            gap: "7px",
-            padding: "10px 16px",
-            background: "#4f46e5",
-            color: "#fff",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer"
-          }}
-        >
-          ← Back
-        </button>
-      )}
+  if (isLoggedIn) {
+    let currentContent;
 
-      {currentContent}
-      <Footer />
-    </>
-  );
-}
-      
+    if (currentPage === "assessment") {
+      currentContent = (
+        <SkillAssessment
+          onBack={() => setCurrentPage("dashboard")}
+        />
+      );
+    } else if (currentPage === "mySkills") {
+      currentContent = (
+        <MySkills
+          onBack={() => setCurrentPage("dashboard")}
+          onLearningRoadmap={(skill) => {
+            setSelectedSkill(skill);
+            setCurrentPage("learningRoadmap");
+          }}
+        />
+      );
+    } else if (currentPage === "learningRoadmap") {
+      currentContent = (
+        <LearningRoadmap
+          onBack={() => setCurrentPage("dashboard")}
+          selectedSkill={selectedSkill}
+        />
+      );
+    } else if (currentPage === "quiz") {
+      currentContent = (
+        <Quiz
+          onBack={() => setCurrentPage("dashboard")}
+          onLearningRoadmap={(skill) => {
+            setSelectedSkill(skill);
+            setCurrentPage("learningRoadmap");
+          }}
+        />
+      );
+    } else if (currentPage === "progress") {
+      currentContent = (
+        <Progress
+          onBack={() => setCurrentPage("dashboard")}
+        />
+      );
+    } else if (currentPage === "profile") {
+      currentContent = (
+        <Profile
+          onBack={() => setCurrentPage("dashboard")}
+          onLogout={handleLogout}
+        />
+      );
+    } else {
+      currentContent = (
+        <Dashboard
+          onSkillAssessment={() => setCurrentPage("assessment")}
+          onMySkills={() => setCurrentPage("mySkills")}
+          onLearningRoadmap={(skill) => {
+            setSelectedSkill(skill);
+            setCurrentPage("learningRoadmap");
+          }}
+          onQuiz={() => setCurrentPage("quiz")}
+          onProgress={() => setCurrentPage("progress")}
+          onProfile={() => setCurrentPage("profile")}
+          onLogout={handleLogout}
+        />
+      );
+    }
+
+    return (
+      <>
+        {currentPage !== "dashboard" && (
+          <button
+            onClick={() => setCurrentPage("dashboard")}
+            title="Back to Dashboard"
+            aria-label="Back to Dashboard"
+            style={{
+              position: "fixed",
+              top: "15px",
+              left: "15px",
+              zIndex: 9999,
+              display: "flex",
+              alignItems: "center",
+              gap: "7px",
+              padding: "10px 16px",
+              background: "#4f46e5",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              cursor: "pointer"
+            }}
+          >
+            ← Back
+          </button>
+        )}
+
+        {currentContent}
+        <Footer />
+        <Chatbot />
+      </>
+    );
+  }
   return (
     <div className="auth-page">
       <div className="auth-card">
