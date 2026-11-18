@@ -193,3 +193,19 @@ body {
     font-size: 26px;
   }
 }
+html,
+body,
+#root {
+  min-height: 100%;
+  height: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+}
