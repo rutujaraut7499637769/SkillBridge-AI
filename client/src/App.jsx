@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 import "./App.css";
-import Chatbot from "./Chatbot";
+import Chatbot from "./Chatbot.jsx";
 import Dashboard from "./Dashboard";
 import SkillAssessment from "./SkillAssessment";
 import MySkills from "./MySkills";
